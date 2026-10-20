@@ -1,11 +1,28 @@
 /*
- * Patrones compartidos por todas las páginas: cabecera, cabecera fija, menú y pie.
+ * Patrones compartidos por todas las páginas: enlace de salto, cabecera,
+ * cabecera fija, menú y pie.
  * Los comentarios "original: …" marcan valores del sitio publicado que se
  * ajustaron al token más cercano (diferencia de 4px o menos) o que no tienen
  * token propio.
  */
 
 @layer patrones {
+  /* Enlace de salto */
+  .salto-contenido {
+    position: absolute;
+    inset-block-start: var(--espacio-sm);
+    inset-inline-start: var(--espacio-sm);
+    z-index: var(--capa-menu);
+    padding: var(--espacio-sm) var(--espacio-md);
+    background-color: var(--color-blanco);
+    color: var(--color-primario);
+  }
+
+  .salto-contenido:not(:focus) {
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
   /* Botón del menú (cabecera y cabecera fija) */
   .boton-menu {
     display: inline-flex;

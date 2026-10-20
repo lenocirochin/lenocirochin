@@ -22,22 +22,6 @@
   --opacidad-velo-tarjeta-hover: 0.3;
 }
 
-/* Enlace de salto */
-.salto-contenido {
-  position: absolute;
-  inset-block-start: var(--espacio-sm);
-  inset-inline-start: var(--espacio-sm);
-  z-index: var(--capa-menu);
-  padding: var(--espacio-sm) var(--espacio-md);
-  background-color: var(--color-blanco);
-  color: var(--color-primario);
-}
-
-.salto-contenido:not(:focus) {
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 /* Carrusel */
 .carrusel {
   overflow: hidden;
