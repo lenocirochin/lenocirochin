@@ -14,28 +14,21 @@
   --color-blanco: #FFFFFF;
   --color-negro: #000000;
   --color-texto: #212529;           /* color de texto por defecto del tema */
-  --color-titulo-oscuro: #222222;
   --color-fondo-suave: #F4F4F4;
   --color-icono-suave: #E6E6E6;     /* iconos sociales del pie */
-  --color-texto-apagado: #B1B1B1;   /* descripciones del formulario */
+  --color-fondo-modal: color-mix(in srgb, var(--color-primario) 80%, transparent);  /* fondo tras el popup */
+  --color-linea-clara: color-mix(in srgb, var(--color-blanco) 30%, transparent);  /* divisoria de la cabecera */
+  --color-error: #FF0000;           /* mensaje del formulario de contacto */
 
-  /* Familias tipográficas (con el respaldo que declara el sitio)
+  /* Familias tipográficas (cambio deliberado respecto al original)
 
-     Carga prevista, solo los pesos que existen en cada familia y que el sitio usa:
+     Carga, solo los pesos que se usan; Archivo en ancho semiexpandido (112,5 %):
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&family=Kaisei+HarunoUmi&family=Kaisei+Tokumin:wght@400;500&family=Karla:wght@400;500&family=Lora&family=Tenor+Sans">
-
-     Los pesos 100, 200 y 300 que el sitio declara en Kaisei y Lora no existen;
-     el navegador los pinta con 400, que es lo que se carga. */
-  --fuente-sistema: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --fuente-display: "Kaisei Tokumin", sans-serif;
-  --fuente-display-alt: "Kaisei HarunoUmi", sans-serif;
-  --fuente-helvetica: "Helvetica", sans-serif;
-  --fuente-lora: "Lora", sans-serif;
-  --fuente-tenor: "Tenor Sans", sans-serif;
-  --fuente-karla: "Karla", sans-serif;
-  --fuente-exo: "Exo 2", sans-serif;
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112.5,300;112.5,400;112.5,500;112.5,600;112.5,700&family=Work+Sans:wght@400;500&display=swap"> */
+  --fuente-titulos: "Archivo", sans-serif;     /* títulos, navegación, botones y etiquetas */
+  --fuente-texto: "Work Sans", sans-serif;     /* textos, listas, campos y pie */
+  --ancho-fuente-titulos: 112.5%;              /* Archivo semiexpandida */
 
   /* Tamaños de texto */
   --texto-xs: 12px;
@@ -46,14 +39,9 @@
   --texto-xl: 24px;
   --texto-2xl: 30px;
   --texto-3xl: 40px;
-  --texto-4xl: 50px;
-  --texto-5xl: 60px;
   --texto-6xl: 90px;
-  --texto-7xl: 130px;
 
   /* Pesos */
-  --peso-thin: 100;
-  --peso-extralight: 200;
   --peso-light: 300;
   --peso-regular: 400;
   --peso-medium: 500;
@@ -70,8 +58,6 @@
   --interlineado-lista: 1.8;
 
   /* Espaciado entre letras */
-  --tracking-titular: -2px;
-  --tracking-estrecho: -0.5px;
   --tracking-amplio: 0.5px;
   --tracking-extra: 1px;
 
@@ -80,7 +66,6 @@
   --espacio-sm: 10px;
   --espacio-md: 20px;
   --espacio-lg: 30px;
-  --espacio-xl: 40px;
   --espacio-parrafo: 1rem;
 
   /* Espaciado relativo al ancho del contenedor (rellenos de sección) */
@@ -94,10 +79,18 @@
   --espacio-p10: 10%;
   --espacio-p15: 15%;
 
+  /* Grosores de línea y borde */
+  --grosor-fino: 1px;
+  --grosor-grueso: 2px;
+
+  /* Sombras */
+  --sombra-flotante: 0 4px 24px color-mix(in srgb, var(--color-negro) 8%, transparent);  /* cabecera fija */
+
   /* Radios */
   --radio-0: 0;
   --radio-sm: 4px;
   --radio-md: 10px;
+  --radio-circulo: 50%;
 
   /* Contenedor */
   --ancho-contenido: 1140px;
@@ -117,9 +110,18 @@
   --espacio-lista-servicios-pie: 3px;
   --espacio-lista-informacion-pie-movil: 2px;
 
+  /* Popups */
+  --ancho-popup: 1000px;
+  --alto-maximo-popup: 90vh;
+  --ancho-logo-popup: 35%;
+  --ancho-campo-popup: 95%;
+  --relleno-boton-popup: 20%;               /* lateral de "Siguiente" y "Back" */
+  --relleno-boton-enviar: 70px;
+
   /* Capas */
   --capa-cabecera: 2;
-  --capa-salto: 3;
+  --capa-flotante: 3;               /* botón de WhatsApp */
+  --capa-salto: 4;
 
   /* Breakpoints: tablet 1024px y móvil 767px. Las @media usan esos números
      literales: @media (max-width: 1024px) y @media (max-width: 767px). */

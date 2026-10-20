@@ -12,16 +12,15 @@
   --espacio-hero-movil: 20%;              /* relleno inferior del hero en móvil */
   --opacidad-velo-hero: 0.6;
   --capa-contenido: 1;
-  --ancho-carrusel-clientes: 80%;
-  --separacion-carrusel-clientes: 50px;
-  --grosor-divisor: 1px;
+  --separacion-logos-banda: 50px;
+  --alto-logo-banda: 60px;
+  --alto-banda: calc(var(--alto-logo-banda) + 2 * var(--espacio-md));  /* logos más su relleno */
   --alto-nosotros: 100vh;
   --alto-imagen-nosotros-movil: 50vh;
 
   /* Secciones traídas de las páginas Nosotros y Servicios del original */
   --color-marino-profundo: #051B34;
   --color-fondo-principios: #F5F7FF;
-  --color-borde-acordeon: #D5D8DC;
   --color-cargo-equipo: #3B4855;
   --sombra-pestanas: 0 0 10px rgba(0, 0, 0, 0.5);
   --espacio-15: 15px;
@@ -33,22 +32,12 @@
   --espacio-125: 125px;
   --espacio-140: 140px;
   --espacio-150: 150px;
-  --ancho-tarjeta-principios: 86.14%;
-  --ancho-decoracion-principios: 13.816%;
-  --ancho-imagen-principios: 460px;
-  --ancho-imagen-principios-tablet: 250px;
-  --arriba-imagen-principios: 67px;
-  --arriba-imagen-principios-tablet: 136px;
-  --izquierda-imagen-principios: -238px;
-  --izquierda-imagen-principios-tablet: -149px;
   --relleno-texto-principios: 25%;
-  --relleno-acordeon-principios: 27%;
   --ancho-foto-equipo: 264px;
   --alto-foto-equipo: 250px;
-  --ancho-titulo-solicitud: 28.772%;
-  --ancho-titulo-solicitud-tablet: 40%;
+  --ancho-titulo-solicitud: 34%;          /* cabe "Solicita Atención" en una línea (347px) desde 1025px */
+  --ancho-titulo-solicitud-tablet: 50%;
   --alto-boton-solicitud: 60px;
-  --grosor-borde-boton-solicitud: 2px;
   --alto-cabecera-servicios: 40vh;
   --alto-panel-servicio: 60vh;
   --texto-titulo-servicio-tablet: 35px;
@@ -84,6 +73,8 @@
   gap: var(--espacio-md);
   min-height: var(--alto-hero);
   padding: var(--espacio-p6);
+  /* El lema queda siempre por encima de la parte de la banda que monta sobre el hero */
+  padding-block-end: max(var(--espacio-p6), calc(var(--alto-banda) / 2 + var(--espacio-lg)));
   overflow: hidden;
 }
 
@@ -112,48 +103,57 @@
 }
 
 .hero__titulo {
-  font-family: var(--fuente-helvetica);
   font-size: var(--texto-base);
   font-weight: var(--peso-light);
 }
 
 .hero__lema {
   margin: 0;
-  font-family: var(--fuente-display);
+  font-family: var(--fuente-titulos);
+  font-stretch: var(--ancho-fuente-titulos);
   font-size: var(--texto-6xl);
   font-weight: var(--peso-regular);
-  letter-spacing: var(--tracking-titular);
 }
 
-/* Clientes */
-.clientes {
+/* Banda de logos: tarjeta del ancho de la de Nosotros que monta sobre el hero la
+   mitad de su alto. Sigue en el flujo, así que la sección siguiente empieza
+   justo debajo de la parte que sobresale. Cambio deliberado respecto al original. */
+.banda {
+  position: relative;
+  z-index: var(--capa-contenido);
   display: flex;
-  flex-direction: column;
-  gap: var(--espacio-md);
-  padding: var(--espacio-p6) 0 var(--espacio-p4);
-}
-
-.clientes__titulo {
-  color: var(--color-negro);
-  font-family: var(--fuente-helvetica);
-  font-size: var(--texto-md);
-  font-weight: var(--peso-light);
-  text-align: center;
-}
-
-.clientes__carrusel {
-  --carrusel-por-vista: 5;
-  --carrusel-separacion: var(--separacion-carrusel-clientes);
-  align-self: center;
-  width: var(--ancho-carrusel-clientes);
-}
-
-.clientes__carrusel .carrusel__pista {
   align-items: center;
+  gap: var(--espacio-lg);
+  min-height: var(--alto-banda);
+  margin: calc(-0.5 * var(--alto-banda)) var(--espacio-p4) 0;
+  padding: var(--espacio-md);
+  border-radius: var(--radio-md);
+  background-color: var(--color-fondo-suave);
 }
 
-.clientes__carrusel img {
-  margin-inline: auto;
+.banda__texto {
+  flex: none;
+  margin: 0;
+  font-size: var(--texto-sm);
+}
+
+.banda__carrusel {
+  --carrusel-por-vista: 5;
+  --carrusel-separacion: var(--separacion-logos-banda);
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.banda__carrusel .carrusel__diapositiva {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--alto-logo-banda);
+}
+
+.banda__carrusel img {
+  width: auto;
+  max-height: 100%;
 }
 
 /* Nosotros: tarjeta a dos columnas, foto y texto.
@@ -186,20 +186,11 @@
   gap: var(--espacio-md);
   padding: var(--espacio-p10);
   background-color: var(--color-blanco);
-  text-align: center;
-}
-
-.nosotros__titulo {
-  color: var(--color-negro);
-  font-family: var(--fuente-tenor);
-  font-size: var(--texto-3xl);
-  font-weight: var(--peso-bold);
 }
 
 .nosotros__texto {
   margin: 0;
   color: var(--color-marino-profundo);
-  font-family: var(--fuente-lora);
   font-size: var(--texto-md); /* original: 17px */
   line-height: var(--interlineado-base);
 }
@@ -216,89 +207,58 @@
   margin-inline: auto;
 }
 
-.principios__contenido {
-  display: flex;
-}
-
 .principios__tarjeta {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-md);
-  width: var(--ancho-tarjeta-principios);
   padding: var(--espacio-140) var(--espacio-60) var(--espacio-125);
   background-color: var(--color-fondo-principios);
 }
 
 .principios__titulo {
   padding-block-end: var(--espacio-45);
-  font-family: var(--fuente-tenor);
-  font-size: var(--texto-2xl); /* original: 32px */
-  font-weight: var(--peso-regular);
 }
 
 .principios__texto {
   padding-inline-end: var(--relleno-texto-principios);
-  font-family: var(--fuente-lora);
 }
 
-.principios__acordeon {
-  padding-inline-end: var(--relleno-acordeon-principios);
+/* Un principio por columna: 4 en escritorio, 2 en tablet y 1 en móvil */
+.principios__lista {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--espacio-lg);
 }
 
-.principios__decoracion {
-  position: relative;
-  width: var(--ancho-decoracion-principios);
-}
-
-.principios__decoracion img {
-  position: absolute;
-  inset-block-start: var(--arriba-imagen-principios);
-  inset-inline-start: var(--izquierda-imagen-principios);
-  width: var(--ancho-imagen-principios);
-}
-
-/* Acordeón */
-.acordeon__item {
-  border: var(--grosor-divisor) solid var(--color-borde-acordeon);
-}
-
-.acordeon__item + .acordeon__item {
-  border-block-start: 0;
-}
-
-.acordeon__titulo {
+.principio {
   display: flex;
-  align-items: center;
-  padding: var(--espacio-15) var(--espacio-md);
-  font-family: var(--fuente-tenor);
+  flex-direction: column;
+  gap: var(--espacio-sm);
+}
+
+/* Íconos de trazo fino: el grosor no escala con el tamaño del ícono */
+.principio__icono {
+  width: var(--texto-3xl);
+  height: var(--texto-3xl);
+  fill: none;
+  stroke: var(--color-acento);
+  stroke-width: var(--grosor-grueso);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.principio__icono * {
+  vector-effect: non-scaling-stroke;
+}
+
+.principio__titulo {
+  font-size: var(--texto-lg);
   font-weight: var(--peso-bold);
-  line-height: var(--interlineado-titulo);
-  list-style: none;
-  cursor: pointer;
 }
 
-.acordeon__titulo::-webkit-details-marker {
-  display: none;
-}
-
-.acordeon__icono {
-  flex: none;
-  width: 1em;
-  height: 1em;
-  margin-inline-end: calc(0.5em + var(--espacio-sm)); /* icono de 1.5em de ancho más su margen de 12px (original) */
-  fill: currentColor;
-}
-
-.acordeon__item[open] .acordeon__icono--cerrado,
-.acordeon__item:not([open]) .acordeon__icono--abierto {
-  display: none;
-}
-
-.acordeon__contenido {
-  padding: var(--espacio-15) var(--espacio-md);
-  border-block-start: var(--grosor-divisor) solid var(--color-borde-acordeon);
-  font-family: var(--fuente-lora);
-  font-size: var(--texto-sm);
+.principio__texto {
+  margin: 0;
+  font-size: var(--texto-base);
 }
 
 /* Equipo */
@@ -310,13 +270,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio-50);
-}
-
-.equipo__titulo {
-  font-family: var(--fuente-tenor);
-  font-size: var(--texto-2xl); /* original: 32px */
-  font-weight: var(--peso-regular);
-  text-align: center;
 }
 
 .equipo__miembros {
@@ -371,10 +324,6 @@
 
 .solicitud__titulo {
   flex: 0 0 var(--ancho-titulo-solicitud);
-  color: var(--color-blanco);
-  font-family: var(--fuente-tenor);
-  font-size: var(--texto-2xl); /* original: 32px */
-  font-weight: var(--peso-regular);
   line-height: var(--interlineado-ajustado);
 }
 
@@ -390,7 +339,7 @@
   width: 100%;
   height: var(--alto-boton-solicitud);
   padding: var(--espacio-sm) var(--espacio-lg);
-  border: var(--grosor-borde-boton-solicitud) solid var(--color-blanco);
+  border: var(--grosor-grueso) solid var(--color-blanco);
   border-radius: var(--radio-sm);
   background: none;
   color: var(--color-blanco);
@@ -408,19 +357,14 @@
 /* Servicios: cabecera de la página original */
 .servicios-cabecera {
   display: flex;
-  justify-content: center;
   align-items: center;
   min-height: var(--alto-cabecera-servicios);
+  padding-inline: var(--espacio-sm); /* el mismo borde que las pestañas */
   background-color: var(--color-primario);
 }
 
 .servicios-cabecera__titulo {
   padding: var(--espacio-p5) 0 0;
-  color: var(--color-blanco);
-  font-family: var(--fuente-tenor);
-  font-size: var(--texto-2xl); /* original: 34px */
-  font-weight: var(--peso-regular);
-  text-align: center;
 }
 
 /* Pestañas de servicios */
@@ -446,7 +390,6 @@
   padding: var(--espacio-sm) var(--espacio-md);
   border: 0;
   background: none;
-  font-family: var(--fuente-tenor);
   font-weight: var(--peso-bold);
 }
 
@@ -495,7 +438,6 @@
 }
 
 .panel-servicio__titulo {
-  font-family: var(--fuente-tenor);
   font-size: var(--texto-2xl); /* original: 32px */
   font-weight: var(--peso-regular);
   line-height: var(--interlineado-titulo-servicio);
@@ -503,7 +445,6 @@
 
 .panel-servicio__descripcion {
   margin: 0;
-  font-family: var(--fuente-lora);
   line-height: var(--interlineado-amplio); /* original: 28px sobre 16px (1.75) */
 }
 
@@ -511,7 +452,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio-xs); /* original: 6px */
-  font-family: var(--fuente-lora);
   font-size: var(--texto-sm);
 }
 
@@ -534,7 +474,7 @@
 
 /* Tablet */
 @media (max-width: 1024px) {
-  .clientes__carrusel {
+  .banda__carrusel {
     --carrusel-por-vista: 2;
   }
 
@@ -543,13 +483,11 @@
   }
 
   .principios__tarjeta {
-    padding: var(--espacio-50) 0 var(--espacio-50) var(--espacio-md);
+    padding: var(--espacio-50) var(--espacio-md);
   }
 
-  .principios__decoracion img {
-    inset-block-start: var(--arriba-imagen-principios-tablet);
-    inset-inline-start: var(--izquierda-imagen-principios-tablet);
-    width: var(--ancho-imagen-principios-tablet);
+  .principios__lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .equipo {
@@ -586,7 +524,7 @@
   }
 
   .servicios-cabecera {
-    padding: var(--espacio-150) var(--espacio-lg);
+    padding-block: var(--espacio-150);
   }
 
   .panel-servicio__titulo {
@@ -600,7 +538,7 @@
 @media (max-width: 767px) {
   .hero {
     min-height: var(--alto-hero-movil);
-    padding: 0 var(--espacio-p6) var(--espacio-hero-movil);
+    padding: 0 var(--espacio-p6) max(var(--espacio-hero-movil), calc(var(--alto-banda) / 2 + var(--espacio-lg)));
   }
 
   .hero__titulo {
@@ -609,12 +547,29 @@
 
   .hero__lema {
     font-size: var(--texto-3xl);
-    letter-spacing: 0;
   }
 
-  .clientes__carrusel {
+  /* El texto pasa encima de los logos; el alto cuenta una línea de texto.
+     En :root para que el hero use el mismo valor. */
+  :root {
+    --alto-banda: calc(var(--alto-logo-banda) + 2 * var(--espacio-md) + var(--espacio-sm) + var(--texto-xs) * var(--interlineado-base));
+  }
+
+  .banda {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--espacio-sm);
+    margin-inline: var(--espacio-p6);
+  }
+
+  .banda__texto {
+    font-size: var(--texto-xs);
+  }
+
+  .banda__carrusel {
+    flex: none;
     --carrusel-por-vista: 3;
-    --carrusel-separacion: var(--espacio-lg); /* original: 32px */
+    --carrusel-separacion: var(--espacio-lg);
   }
 
   /* La foto arriba y el texto debajo, sin alto mínimo */
@@ -632,7 +587,6 @@
     font-size: var(--texto-xl); /* original: 22px */
   }
 
-  .principios__contenido,
   .solicitud__contenido,
   .equipo__miembros,
   .panel-servicio {
@@ -640,24 +594,11 @@
   }
 
   .principios__tarjeta {
-    width: auto;
     padding: var(--espacio-50) var(--espacio-sm);
   }
 
-  .principios__decoracion {
-    display: none;
-  }
-
-  .acordeon__titulo {
-    padding: var(--espacio-sm) var(--espacio-15); /* original: 12px 15px */
-  }
-
-  .acordeon__icono {
-    margin-inline-end: calc(0.2em + var(--espacio-sm)); /* icono de 1.2em de ancho en móvil */
-  }
-
-  .acordeon__contenido {
-    padding: var(--espacio-xs) var(--espacio-15); /* original: 7px 15px */
+  .principios__lista {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .equipo__contenido {

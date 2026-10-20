@@ -54,7 +54,7 @@
 
   /* Elementos */
   body {
-    font-family: var(--fuente-sistema);
+    font-family: var(--fuente-texto);
     font-size: var(--texto-base);
     font-weight: var(--peso-regular);
     line-height: var(--interlineado-base);
@@ -71,6 +71,17 @@
     font-size: inherit;
     font-weight: inherit;
     line-height: var(--interlineado-titulo);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  button {
+    font-family: var(--fuente-titulos);
+    font-stretch: var(--ancho-fuente-titulos);
   }
 
   p {

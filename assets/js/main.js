@@ -109,3 +109,82 @@ function iniciarPestanas(pestanas) {
 }
 
 document.querySelectorAll('[data-pestanas]').forEach(iniciarPestanas);
+
+// Popups: los abre cualquier botón con data-abrir-popup="<id del dialog>". Se cierran con su
+// botón, con Escape (nativo de <dialog>) o con un clic fuera del contenido; al cerrar, el foco
+// vuelve al botón que los abrió.
+document.querySelectorAll('[data-abrir-popup]').forEach((boton) => {
+  const popup = document.getElementById(boton.dataset.abrirPopup);
+  boton.addEventListener('click', () => {
+    popup.showModal();
+    popup.addEventListener('close', () => boton.focus(), { once: true });
+  });
+});
+
+document.querySelectorAll('[data-popup]').forEach((popup) => {
+  popup.addEventListener('click', (evento) => {
+    if (evento.target === popup || evento.target.closest('[data-cerrar-popup]')) popup.close();
+  });
+});
+
+// TODO: definir a dónde llegan los datos del formulario de contacto.
+const ENDPOINT_FORMULARIO = '';
+
+// Envío del formulario de contacto. Mientras no haya destino, avisa en el popup y no envía nada.
+async function enviarFormulario(formulario) {
+  const mensaje = formulario.querySelector('[data-mensaje]');
+  if (!ENDPOINT_FORMULARIO) {
+    mensaje.textContent = 'El envío del formulario aún no está configurado. Tus datos no se han enviado.';
+    mensaje.hidden = false;
+    return;
+  }
+  await fetch(ENDPOINT_FORMULARIO, { method: 'POST', body: new FormData(formulario) });
+}
+
+// Máscara de entrada, como en el original: cada 9 de la máscara es un dígito
+function aplicarMascara(campo) {
+  const digitos = campo.value.replace(/\D/g, '');
+  let valor = '';
+  let i = 0;
+  for (const caracter of campo.dataset.mascara) {
+    if (i >= digitos.length) break;
+    valor += caracter === '9' ? digitos[i++] : caracter;
+  }
+  campo.value = valor;
+}
+
+document.querySelectorAll('[data-mascara]').forEach((campo) => {
+  campo.addEventListener('input', () => aplicarMascara(campo));
+});
+
+// Formulario por pasos: "Siguiente" se activa cuando los campos del paso son válidos, como en el original
+function iniciarFormulario(formulario) {
+  const pasos = [...formulario.querySelectorAll('[data-paso]')];
+  let actual = 0;
+
+  const esValido = () => [...pasos[actual].querySelectorAll('input, textarea, select')].every((campo) => campo.checkValidity());
+  const actualizarBotones = () => {
+    pasos[actual].querySelectorAll('[data-siguiente]').forEach((boton) => { boton.disabled = !esValido(); });
+  };
+  const mostrar = (indice) => {
+    pasos[actual].hidden = true;
+    actual = indice;
+    pasos[actual].hidden = false;
+    actualizarBotones();
+    pasos[actual].querySelector('input, textarea, select, button')?.focus();
+  };
+
+  formulario.addEventListener('input', actualizarBotones);
+  formulario.addEventListener('click', (evento) => {
+    if (evento.target.closest('[data-siguiente]')) mostrar(actual + 1);
+    if (evento.target.closest('[data-anterior]')) mostrar(actual - 1);
+  });
+  // Solo se envía desde el último paso
+  formulario.addEventListener('submit', (evento) => {
+    evento.preventDefault();
+    if (actual === pasos.length - 1) enviarFormulario(formulario);
+  });
+  actualizarBotones();
+}
+
+document.querySelectorAll('[data-formulario]').forEach(iniciarFormulario);

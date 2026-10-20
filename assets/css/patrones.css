@@ -37,7 +37,7 @@
   .cabecera__barra {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--espacio-md);
+    gap: var(--espacio-sm) var(--espacio-md);
     padding: var(--espacio-sm);
   }
 
@@ -65,9 +65,14 @@
     align-items: flex-end;
   }
 
+  /* La línea divisoria es el borde superior de la navegación: mide lo mismo que
+     ella y queda a --espacio-sm del logo (hueco de la rejilla) y de los enlaces */
   .cabecera__nav {
     grid-column: 1 / -1;
+    grid-row: 2;
     justify-self: center;
+    padding-block-start: var(--espacio-sm);
+    border-block-start: var(--grosor-fino) solid var(--color-linea-clara);
   }
 
   .boton-contacto {
@@ -76,7 +81,6 @@
     border-radius: var(--radio-sm);
     background-color: var(--color-blanco);
     color: var(--color-primario);
-    font-family: var(--fuente-display-alt);
     font-size: var(--texto-base);
     line-height: var(--interlineado-titulo);
     transition: background-color var(--duracion-lenta);
@@ -96,10 +100,45 @@
     display: block;
     padding: var(--espacio-xs) var(--espacio-md);
     color: var(--color-blanco);
-    font-family: var(--fuente-display);
+    font-family: var(--fuente-titulos);
+    font-stretch: var(--ancho-fuente-titulos);
     font-size: var(--texto-md);
     font-weight: var(--peso-regular);
     white-space: nowrap;
+    position: relative;
+  }
+
+  /* Línea inferior que crece de izquierda a derecha, alineada con el texto */
+  .nav-principal__enlace::after {
+    content: "";
+    position: absolute;
+    inset-inline: var(--espacio-md);
+    inset-block-end: var(--espacio-xs);
+    height: var(--grosor-fino);
+    background-color: var(--color-acento);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duracion-base);
+  }
+
+  .nav-principal__enlace:hover::after,
+  .nav-principal__enlace:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Título de sección: todos los h2 de sección; sobre fondos oscuros, la variante --claro */
+  .sp-titulo-seccion {
+    color: var(--color-primario);
+    font-family: var(--fuente-titulos);
+    font-stretch: var(--ancho-fuente-titulos);
+    font-size: var(--texto-3xl);
+    font-weight: var(--peso-medium);
+    letter-spacing: normal;
+    text-align: start;
+  }
+
+  .sp-titulo-seccion--claro {
+    color: var(--color-blanco);
   }
 
   /* Cabecera fija: espera fuera de pantalla hasta pasar 500px de scroll */
@@ -116,13 +155,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--espacio-md);
-    padding: var(--espacio-p1) var(--espacio-p2);
+    gap: var(--espacio-lg); /* entre la navegación y "Contáctanos" */
+    padding: var(--espacio-sm) var(--espacio-p2);
+    border-radius: var(--radio-md);
     background-color: var(--color-primario);
+    box-shadow: var(--sombra-flotante);
   }
 
   .cabecera-fija__logo img {
     width: var(--ancho-logo-cabecera-fija);
+  }
+
+  /* La navegación se pega al botón "Contáctanos", a la derecha */
+  .cabecera-fija__nav {
+    margin-inline-start: auto;
   }
 
   /* Pie: tarjeta azul separada de los bordes y barra de créditos debajo.
@@ -169,7 +215,6 @@
   .pie__texto {
     margin: var(--espacio-p5) var(--espacio-p15) var(--espacio-p5) 0;
     color: var(--color-blanco);
-    font-family: var(--fuente-lora);
     font-size: var(--texto-sm);
     font-weight: var(--peso-regular);
     line-height: var(--interlineado-amplio);
@@ -200,21 +245,17 @@
   .pie__titulo {
     margin-block-end: var(--espacio-p6);
     color: var(--color-blanco);
-    font-family: var(--fuente-tenor);
     font-size: var(--texto-xl);
     font-weight: var(--peso-bold);
     line-height: var(--interlineado-compacto);
-    text-transform: uppercase;
   }
 
   .pie__subtitulo {
     margin-inline-start: var(--espacio-p5);
     color: var(--color-blanco);
-    font-family: var(--fuente-tenor);
     font-size: var(--texto-lg);
     font-weight: var(--peso-regular);
     line-height: var(--interlineado-compacto);
-    text-transform: uppercase;
   }
 
   .pie__subtitulo--email {
@@ -225,7 +266,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    font-family: var(--fuente-lora);
     font-size: var(--texto-sm);
     line-height: var(--interlineado-lista);
   }
@@ -261,6 +301,8 @@
     padding: 0;
     border: 0;
     background: none;
+    font-family: inherit; /* se lee como un enlace más de la lista */
+    font-stretch: inherit;
     line-height: inherit;
     letter-spacing: inherit;
     text-align: start;
@@ -270,7 +312,6 @@
     display: flex;
     align-items: center;
     width: 100%;
-    font-family: var(--fuente-lora);
     font-size: var(--texto-base);
   }
 
@@ -305,6 +346,205 @@
     line-height: var(--interlineado-titulo);
   }
 
+  /* Botón flotante de WhatsApp: siempre visible abajo a la derecha. Los popups
+     quedan encima porque <dialog> abierto con showModal va en la capa superior. */
+  .whatsapp-flotante {
+    position: fixed;
+    inset-block-end: var(--espacio-md);
+    inset-inline-end: var(--espacio-md);
+    z-index: var(--capa-flotante);
+    display: flex;
+    padding: var(--espacio-sm);
+    border-radius: var(--radio-circulo);
+    background-color: var(--color-acento);
+    fill: var(--color-blanco);
+  }
+
+  .whatsapp-flotante svg {
+    width: var(--texto-2xl);
+    height: var(--texto-2xl);
+  }
+
+  /* Popup de contacto: caja centrada a dos columnas sobre un fondo azul translúcido.
+     Cambio deliberado respecto al original (pantalla completa). Si el contenido
+     pasa del alto máximo, solo se desplaza la columna del formulario. */
+  .popup {
+    width: 100%;
+    max-width: min(var(--ancho-popup), 100% - 2 * var(--espacio-md));
+    max-height: var(--alto-maximo-popup);
+    padding: 0;
+    border: 0;
+    border-radius: var(--radio-md);
+    background: none;
+    overflow: hidden;
+  }
+
+  .popup::backdrop {
+    background-color: var(--color-fondo-modal);
+  }
+
+  .popup__contenido {
+    position: relative;
+    display: flex;
+    max-height: var(--alto-maximo-popup);
+  }
+
+  .popup__cerrar {
+    position: absolute;
+    inset-block-start: var(--espacio-md);
+    inset-inline-end: var(--espacio-md);
+    padding: 0;
+    border: 0;
+    background: none;
+    fill: var(--color-primario);
+  }
+
+  .popup__cerrar svg {
+    width: var(--texto-2xl); /* original: 27px */
+    height: var(--texto-2xl);
+  }
+
+  .popup__lateral,
+  .popup__formulario {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: var(--espacio-lg);
+  }
+
+  .popup__lateral {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-md);
+    background-color: var(--color-primario);
+  }
+
+  .popup__formulario {
+    overflow-y: auto;
+    background-color: var(--color-blanco);
+  }
+
+  .popup__logo {
+    width: var(--ancho-logo-popup);
+  }
+
+  .popup__datos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-sm);
+  }
+
+  .popup__dato {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-sm);
+    color: var(--color-blanco);
+    fill: var(--color-blanco);
+    transition: color var(--duracion-base), fill var(--duracion-base);
+  }
+
+  .popup__dato:hover {
+    color: var(--color-acento);
+    fill: var(--color-acento);
+  }
+
+  .popup__dato svg {
+    width: var(--texto-base);
+    height: var(--texto-base);
+  }
+
+  /* Contorno de foco propio, solo al navegar con teclado */
+  .popup :focus {
+    outline: none;
+  }
+
+  .popup :focus-visible {
+    outline: var(--grosor-grueso) solid var(--color-acento);
+    outline-offset: var(--grosor-grueso);
+  }
+
+  /* Formulario de contacto por pasos */
+  .formulario__campos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-md);
+  }
+
+  .formulario__campo {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .formulario__etiqueta {
+    display: block;
+    color: var(--color-primario);
+    font-family: var(--fuente-titulos);
+    font-stretch: var(--ancho-fuente-titulos);
+    font-size: var(--texto-xl);
+  }
+
+  .formulario__control {
+    display: block;
+    width: var(--ancho-campo-popup);
+    margin-block-start: var(--espacio-xs); /* original: 5px */
+    border: 0;
+    border-block-end: var(--grosor-grueso) solid var(--color-primario);
+    border-radius: var(--radio-0);
+    background: none;
+    color: var(--color-primario);
+    font-size: var(--texto-lg); /* original: 21px */
+    appearance: none;
+  }
+
+  /* Los botones de paso miden sus rellenos sobre el ancho de su caja, como en el original */
+  .formulario__acciones {
+    display: flex;
+    align-items: center;
+    padding-block-start: var(--espacio-sm);
+  }
+
+  .formulario__boton {
+    margin: var(--espacio-p8);
+    padding: var(--espacio-p5) var(--relleno-boton-popup);
+    background-color: var(--color-acento);
+    color: var(--color-primario);
+    font-size: var(--texto-md);
+    font-weight: var(--peso-bold);
+  }
+
+  .formulario__boton:hover {
+    background-color: var(--color-secundario);
+  }
+
+  .formulario__boton--anterior:hover {
+    background-color: var(--color-primario);
+    color: var(--color-acento);
+  }
+
+  .formulario__enviar {
+    display: block;
+    width: 100%;
+    padding: var(--espacio-xs) var(--relleno-boton-enviar); /* original: 5px 70px */
+    border: 0;
+    border-radius: var(--radio-md);
+    background-color: var(--color-primario);
+    color: var(--color-blanco); /* cambio deliberado: en el original, negro */
+    font-size: var(--texto-lg);
+    font-weight: var(--peso-semibold);
+  }
+
+  .formulario__enviar:hover {
+    background-color: var(--color-secundario);
+    color: var(--color-primario);
+  }
+
+  .formulario__mensaje {
+    margin: var(--espacio-md) 0 0;
+    padding: var(--espacio-md);
+    border: var(--grosor-fino) solid var(--color-error);
+    color: var(--color-error);
+    text-align: center;
+  }
+
   /* Tablet */
   @media (max-width: 1024px) {
     .pie__texto {
@@ -335,6 +575,10 @@
 
   /* Móvil */
   @media (max-width: 767px) {
+    .sp-titulo-seccion {
+      font-size: var(--texto-2xl);
+    }
+
     .cabecera {
       padding: var(--espacio-p1) var(--espacio-p1) 0;
     }
@@ -356,11 +600,16 @@
       grid-column: 1;
       grid-row: 3;
       align-items: stretch;
+      margin-block-start: var(--espacio-sm); /* con el hueco de la rejilla, los 20px de antes */
       padding: 0;
     }
 
     .nav-principal__enlace {
       padding-inline: var(--espacio-xs);
+    }
+
+    .nav-principal__enlace::after {
+      inset-inline: var(--espacio-xs);
     }
 
     .cabecera-fija {
@@ -371,11 +620,18 @@
     .cabecera-fija__barra {
       flex-direction: column;
       align-items: flex-start;
+      gap: var(--espacio-md);
       padding: var(--espacio-p5);
     }
 
     .cabecera-fija__nav {
       align-self: center;
+      margin-inline-start: 0;
+    }
+
+    /* En móvil el contacto lo cubre el botón flotante de WhatsApp */
+    .cabecera-fija__accion {
+      display: none;
     }
 
     .cabecera-fija__logo img {
@@ -448,6 +704,38 @@
 
     .pie__copyright {
       text-align: center;
+    }
+
+    /* Popup a pantalla completa: arriba el logo y el título, debajo el formulario */
+    .popup {
+      max-width: none;
+      max-height: none;
+      height: 100%;
+      border-radius: var(--radio-0);
+    }
+
+    .popup__contenido {
+      flex-direction: column;
+      max-height: none;
+      height: 100%;
+    }
+
+    .popup__lateral,
+    .popup__formulario {
+      flex: none;
+    }
+
+    .popup__formulario {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .popup__datos {
+      display: none;
+    }
+
+    .popup__cerrar {
+      fill: var(--color-blanco);
     }
   }
 }

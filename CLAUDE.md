@@ -57,10 +57,11 @@
   No lo corrijas.
 
 ## Verificación
-- No hagas comprobaciones repetidas ni ciclos de validación por tu cuenta.
-  Ejecuta la tarea una vez y reporta.
-- Para cambios visuales, la revisión la hace el equipo. No abras el navegador
-  para valorar cómo se ve algo.
+- En cambios de diseño, toma una sola ronda de capturas de la sección tocada
+  (390, 768 y 1440px), evalúalas contra el brief y haz como máximo una pasada de
+  corrección. Después reporta, aunque quede algo por pulir: dilo en el reporte.
+- No hagas más rondas de capturas ni ciclos de validación por tu cuenta.
+  La revisión final la hace el equipo.
 - Para diagnosticar un fallo reportado, sí levanta el servidor y mide en el
   navegador. No deduzcas la causa leyendo el CSS: repróducela.
 - Si detectas un error real que impide que la tarea funcione, repórtalo.

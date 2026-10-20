@@ -12,10 +12,10 @@
   <meta property="og:description" content="Lenoci &amp; Rochin, somos una firma legal mexicana con presencia en todo México, preparados para darle solución a tus problemas.">
   <meta property="og:url" content="https://lenocirochin.com/">
   <meta property="og:site_name" content="Lenoci &amp; Rochin">
-  <meta property="og:image" content="https://lenocirochin.com/assets/img/law.png">
-  <meta property="og:image:width" content="1920">
-  <meta property="og:image:height" content="1080">
-  <meta property="og:image:type" content="image/png">
+  <meta property="og:image" content="https://lenocirochin.com/assets/img/law.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="/assets/img/cropped-lenoci-favicon-32x32.png" sizes="32x32">
@@ -24,7 +24,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&family=Kaisei+HarunoUmi&family=Kaisei+Tokumin:wght@400;500&family=Karla:wght@400;500&family=Lora&family=Tenor+Sans">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112.5,300;112.5,400;112.5,500;112.5,600;112.5,700&family=Work+Sans:wght@400;500&display=swap">
 
   <link rel="stylesheet" href="/assets/css/tokens.css">
   <link rel="stylesheet" href="/assets/css/base.css">
@@ -39,48 +39,62 @@
   <header class="cabecera">
     <div class="cabecera__barra">
       <div class="cabecera__logo">
-        <a href="/"><img src="/assets/img/lenoci-white.png" alt="Lenoci &amp; Rochin" width="6992" height="1339"></a>
+        <a href="/"><img src="/assets/img/lenoci-white.webp" alt="Lenoci &amp; Rochin" width="644" height="124"></a>
       </div>
       <nav class="nav-principal cabecera__nav" aria-label="Principal">
         <ul class="nav-principal__lista">
           <li><a class="nav-principal__enlace" href="#nosotros">Nosotros</a></li>
           <li><a class="nav-principal__enlace" href="#servicios">Servicios</a></li>
-          <li><a class="nav-principal__enlace" href="/contacto/">Contacto</a></li>
+          <li><a class="nav-principal__enlace" href="#contacto">Contacto</a></li>
         </ul>
       </nav>
       <div class="cabecera__accion">
-        <!-- Abre el popup de contacto (aún no construido) -->
-        <button class="boton-contacto" type="button">Contáctanos</button>
+        <button class="boton-contacto" type="button" data-abrir-popup="popup-contacto">Contáctanos</button>
       </div>
     </div>
   </header>
 
   <header class="cabecera-fija" data-cabecera-fija>
     <div class="cabecera-fija__barra">
-      <a class="cabecera-fija__logo" href="/"><img src="/assets/img/lenoci-white.png" alt="Lenoci &amp; Rochin" width="6992" height="1339"></a>
+      <a class="cabecera-fija__logo" href="/"><img src="/assets/img/lenoci-white.webp" alt="Lenoci &amp; Rochin" width="644" height="124" loading="lazy" decoding="async"></a>
       <nav class="nav-principal cabecera-fija__nav" aria-label="Principal">
         <ul class="nav-principal__lista">
           <li><a class="nav-principal__enlace" href="#nosotros">Nosotros</a></li>
           <li><a class="nav-principal__enlace" href="#servicios">Servicios</a></li>
-          <li><a class="nav-principal__enlace" href="/contacto/">Contacto</a></li>
+          <li><a class="nav-principal__enlace" href="#contacto">Contacto</a></li>
         </ul>
       </nav>
+      <button class="boton-contacto cabecera-fija__accion" type="button" data-abrir-popup="popup-contacto">Contáctanos</button>
     </div>
   </header>
 
   <main id="contenido">
     <section class="hero">
-      <video class="hero__video" src="/assets/video/hero.mp4" autoplay muted playsinline loop aria-hidden="true"></video>
+      <video class="hero__video" src="/assets/video/hero.mp4" poster="/assets/img/hero-poster.webp" preload="metadata" autoplay muted playsinline loop aria-hidden="true"></video>
       <h1 class="hero__titulo">Despacho Jurídico en Ciudad de México.</h1>
       <p class="hero__lema">Estrategia clara, <br>resultados contundentes</p>
     </section>
 
+    <section class="banda" aria-label="Clientes">
+      <p class="banda__texto">+10 años como aliados de nuestros clientes...</p>
+      <div class="carrusel banda__carrusel" aria-roledescription="carousel" aria-label="Carrusel de imágenes" data-carrusel data-intervalo="5000">
+        <div class="carrusel__pista">
+          <figure class="carrusel__diapositiva"><img src="/assets/img/mesa-de-trabajo-1mura.webp" alt="Mesa de trabajo 1mura" width="339" height="180"></figure>
+          <figure class="carrusel__diapositiva"><img src="/assets/img/logo-navidad-blanco-1.webp" alt="Logo-Navidad-Blanco" width="770" height="587"></figure>
+          <figure class="carrusel__diapositiva"><img src="/assets/img/mesa-de-trabajo-3mura.webp" alt="Mesa de trabajo 3mura" width="339" height="180"></figure>
+          <figure class="carrusel__diapositiva"><img src="/assets/img/mesa-de-trabajo-4mura.webp" alt="Mesa de trabajo 4mura" width="339" height="180"></figure>
+          <figure class="carrusel__diapositiva"><img src="/assets/img/mesa-de-trabajo-5mura.webp" alt="Mesa de trabajo 5mura" width="339" height="180"></figure>
+          <figure class="carrusel__diapositiva"><img src="/assets/img/mesa-de-trabajo-2mura.webp" alt="Mesa de trabajo 2mura" width="339" height="180"></figure>
+        </div>
+      </div>
+    </section>
+
     <section class="nosotros" id="nosotros">
       <div class="nosotros__imagen">
-        <img src="/assets/img/photo-1436450412740-6b988f486c6b.jpg" alt="" width="2070" height="1380">
+        <img src="/assets/img/photo-1436450412740-6b988f486c6b.webp" alt="" width="2070" height="1380">
       </div>
       <div class="nosotros__contenido">
-        <h2 class="nosotros__titulo">Nosotros</h2>
+        <h2 class="sp-titulo-seccion">Nosotros</h2>
         <p class="nosotros__texto">En Lenoci &amp; Rochin, Abogados somos una firma legal mexicana, comprometidos en anticipar y solucionar las necesidades de nuestro cliente, a través de un servicio eficaz y personalizado. Nos caracterizamos por generar soluciones innovadoras, integrales y eficaces en procedimientos vinculados con diferentes áreas del derecho para nuestros representados.</p>
       </div>
     </section>
@@ -88,91 +102,54 @@
     <section class="principios">
       <div class="principios__contenido">
         <div class="principios__tarjeta">
-          <h2 class="principios__titulo">Nuestros Principios</h2>
+          <h2 class="sp-titulo-seccion principios__titulo">Nuestros Principios</h2>
           <p class="principios__texto">En Lenoci &amp; Rochin, en aras de obtener las mejores soluciones para nuestros clientes, desempeñamos nuestra labor, siempre en apego a los principios y valores con los que se fundó esta firma legal.</p>
-          <div class="acordeon principios__acordeon">
-            <details class="acordeon__item" name="principios" open>
-              <summary class="acordeon__titulo">
-                <svg class="acordeon__icono acordeon__icono--cerrado" viewBox="0 0 448 512" aria-hidden="true"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></svg>
-                <svg class="acordeon__icono acordeon__icono--abierto" viewBox="0 0 448 512" aria-hidden="true"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></svg>
-                Excelencia
-              </summary>
-              <div class="acordeon__contenido">
-                <p>En Lenoci &amp; Rochin, nos comprometemos a brindar a nuestros clientes un servicio de excelencia, con la finalidad de que obtengan la mejor atención y solución a sus problemas jurídicos.</p>
-              </div>
-            </details>
-            <details class="acordeon__item" name="principios">
-              <summary class="acordeon__titulo">
-                <svg class="acordeon__icono acordeon__icono--cerrado" viewBox="0 0 448 512" aria-hidden="true"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></svg>
-                <svg class="acordeon__icono acordeon__icono--abierto" viewBox="0 0 448 512" aria-hidden="true"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></svg>
-                Confianza
-              </summary>
-              <div class="acordeon__contenido">
-                <p>En Lenoci &amp; Rochin, valoramos en demasía la confianza que nuestros clientes depositan en nosotros para atender sus problemas, por lo que a fin de respaldar dicha confianza, buscamos en todo momento tenerlos informados respecto al avance de los procedimientos y/o asuntos encomendados a nuestra firma; para con ello, otorgarles mayor tranquilidad.</p>
-              </div>
-            </details>
-            <details class="acordeon__item" name="principios">
-              <summary class="acordeon__titulo">
-                <svg class="acordeon__icono acordeon__icono--cerrado" viewBox="0 0 448 512" aria-hidden="true"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></svg>
-                <svg class="acordeon__icono acordeon__icono--abierto" viewBox="0 0 448 512" aria-hidden="true"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></svg>
-                Responsabilidad
-              </summary>
-              <div class="acordeon__contenido">
-                <p>En Lenoci &amp; Rochin, entendemos la relevancia e importancia de los asuntos de todos y cada uno de nuestros clientes, por lo que en todo momento atendemos de manera oportuna y responsable los asuntos encomendados a nuestra firma.</p>
-              </div>
-            </details>
-            <details class="acordeon__item" name="principios">
-              <summary class="acordeon__titulo">
-                <svg class="acordeon__icono acordeon__icono--cerrado" viewBox="0 0 448 512" aria-hidden="true"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></svg>
-                <svg class="acordeon__icono acordeon__icono--abierto" viewBox="0 0 448 512" aria-hidden="true"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></svg>
-                Eficacia
-              </summary>
-              <div class="acordeon__contenido">
-                <p>En Lenoci &amp; Rochin, analizamos y buscamos la solución que resulte más eficaz, pronta e integral para las necesidades de nuestros clientes.</p>
-              </div>
-            </details>
-          </div>
-        </div>
-        <div class="principios__decoracion">
-          <img src="/assets/img/about-value.jpg" srcset="/assets/img/about-value.jpg 558w, /assets/img/about-value-279x300.jpg 279w" sizes="(max-width: 558px) 100vw, 558px" alt="" width="558" height="600">
+          <ul class="principios__lista">
+            <li class="principio">
+              <svg class="principio__icono" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="15" r="5.5"/><circle cx="12" cy="15" r="2.5"/><path d="M9 10.3 6 3h4l2 4 2-4h4l-3 7.3"/></svg>
+              <h3 class="principio__titulo">Excelencia</h3>
+              <p class="principio__texto">En Lenoci &amp; Rochin, nos comprometemos a brindar a nuestros clientes un servicio de excelencia, con la finalidad de que obtengan la mejor atención y solución a sus problemas jurídicos.</p>
+            </li>
+            <li class="principio">
+              <svg class="principio__icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 11.5 5.5 8l3 1 3.5-2 4 2.5h2.5l3.5 3"/><path d="M8.5 9 12 12.5a1.4 1.4 0 0 0 2-2"/><path d="M5.5 8 4 15l4 3.5 2.5 1.5a1.5 1.5 0 0 0 2-.5L19 13"/></svg>
+              <h3 class="principio__titulo">Confianza</h3>
+              <p class="principio__texto">En Lenoci &amp; Rochin, valoramos en demasía la confianza que nuestros clientes depositan en nosotros para atender sus problemas, por lo que a fin de respaldar dicha confianza, buscamos en todo momento tenerlos informados respecto al avance de los procedimientos y/o asuntos encomendados a nuestra firma; para con ello, otorgarles mayor tranquilidad.</p>
+            </li>
+            <li class="principio">
+              <svg class="principio__icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5.5c0 4.3-2.9 7.7-7 9.5-4.1-1.8-7-5.2-7-9.5V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg>
+              <h3 class="principio__titulo">Responsabilidad</h3>
+              <p class="principio__texto">En Lenoci &amp; Rochin, entendemos la relevancia e importancia de los asuntos de todos y cada uno de nuestros clientes, por lo que en todo momento atendemos de manera oportuna y responsable los asuntos encomendados a nuestra firma.</p>
+            </li>
+            <li class="principio">
+              <svg class="principio__icono" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/><path d="m12 12 8-8"/><path d="M17 4h3v3"/></svg>
+              <h3 class="principio__titulo">Eficacia</h3>
+              <p class="principio__texto">En Lenoci &amp; Rochin, analizamos y buscamos la solución que resulte más eficaz, pronta e integral para las necesidades de nuestros clientes.</p>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
 
     <section class="equipo">
       <div class="equipo__contenido">
-        <h2 class="equipo__titulo">Nuestro Equipo</h2>
+        <h2 class="sp-titulo-seccion">Nuestro Equipo</h2>
         <div class="equipo__miembros">
           <article class="miembro">
-            <img class="miembro__foto" src="/assets/img/whatsapp-image-2021-10-25-at-10-17-36.jpeg" srcset="/assets/img/whatsapp-image-2021-10-25-at-10-17-36.jpeg 603w, /assets/img/whatsapp-image-2021-10-25-at-10-17-36-300x298.jpeg 300w, /assets/img/whatsapp-image-2021-10-25-at-10-17-36-150x150.jpeg 150w" sizes="(max-width: 603px) 100vw, 603px" alt="WhatsApp Image 2021-10-25 at 10.17.36" width="603" height="598">
+            <img class="miembro__foto" src="/assets/img/whatsapp-image-2021-10-25-at-10-17-36.webp" alt="WhatsApp Image 2021-10-25 at 10.17.36" width="603" height="598" loading="lazy" decoding="async">
             <h3 class="miembro__nombre">Maximiliano Lenoci</h3>
-            <p class="miembro__cargo">SOCIO FUNDADOR</p>
+            <p class="miembro__cargo">Socio fundador</p>
           </article>
           <article class="miembro">
-            <img class="miembro__foto" src="/assets/img/whatsapp-image-2021-10-25-at-10-18-03.jpeg" srcset="/assets/img/whatsapp-image-2021-10-25-at-10-18-03.jpeg 821w, /assets/img/whatsapp-image-2021-10-25-at-10-18-03-300x300.jpeg 300w, /assets/img/whatsapp-image-2021-10-25-at-10-18-03-150x150.jpeg 150w, /assets/img/whatsapp-image-2021-10-25-at-10-18-03-768x770.jpeg 768w, /assets/img/whatsapp-image-2021-10-25-at-10-18-03-500x500.jpeg 500w" sizes="(max-width: 821px) 100vw, 821px" alt="WhatsApp Image 2021-10-25 at 10.18.03" width="821" height="823">
+            <img class="miembro__foto" src="/assets/img/whatsapp-image-2021-10-25-at-10-18-03.webp" alt="WhatsApp Image 2021-10-25 at 10.18.03" width="821" height="823" loading="lazy" decoding="async">
             <h3 class="miembro__nombre">Rafael Rochin</h3>
-            <p class="miembro__cargo">SOCIO FUNDADOR</p>
+            <p class="miembro__cargo">Socio fundador</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="clientes">
-      <h2 class="clientes__titulo">+10 años como aliados de nuestros clientes...</h2>
-      <div class="carrusel clientes__carrusel" aria-roledescription="carousel" aria-label="Carrusel de imágenes" data-carrusel data-intervalo="5000">
-        <div class="carrusel__pista">
-          <figure class="carrusel__diapositiva"><img src="/assets/img/mesa-de-trabajo-1mura.jpg" alt="Mesa de trabajo 1mura" width="339" height="180"></figure>
-          <figure class="carrusel__diapositiva"><img src="/assets/img/logo-navidad-blanco-1.png" alt="Logo-Navidad-Blanco" width="1650" height="1257"></figure>
-          <figure class="carrusel__diapositiva"><img src="/assets/img/mesa-de-trabajo-3mura.jpg" alt="Mesa de trabajo 3mura" width="339" height="180"></figure>
-          <figure class="carrusel__diapositiva"><img src="/assets/img/mesa-de-trabajo-4mura.jpg" alt="Mesa de trabajo 4mura" width="339" height="180"></figure>
-          <figure class="carrusel__diapositiva"><img src="/assets/img/mesa-de-trabajo-5mura.jpg" alt="Mesa de trabajo 5mura" width="339" height="180"></figure>
-          <figure class="carrusel__diapositiva"><img src="/assets/img/mesa-de-trabajo-2mura.jpg" alt="Mesa de trabajo 2mura" width="339" height="180"></figure>
         </div>
       </div>
     </section>
 
     <section class="servicios-cabecera" id="servicios">
-      <h2 class="servicios-cabecera__titulo">Nuestros Servicios</h2>
+      <h2 class="sp-titulo-seccion sp-titulo-seccion--claro servicios-cabecera__titulo">Nuestros Servicios</h2>
     </section>
 
     <section class="pestanas" data-pestanas>
@@ -225,12 +202,12 @@
               </div>
             </div>
             <div class="panel-servicio__imagen panel-servicio__imagen--arriba">
-              <img src="/assets/img/penal-1.png" alt="" width="500" height="500">
+              <img src="/assets/img/penal-1.webp" alt="" width="500" height="500" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="pestanas__panel panel-servicio" role="tabpanel" id="panel-laboral" aria-labelledby="pestana-laboral" hidden data-panel>
             <div class="panel-servicio__imagen panel-servicio__imagen--centro">
-              <img src="/assets/img/laboral-1.png" alt="" width="500" height="500">
+              <img src="/assets/img/laboral-1.webp" alt="" width="500" height="500" loading="lazy" decoding="async">
             </div>
             <div class="panel-servicio__texto">
               <div class="panel-servicio__contenido">
@@ -267,12 +244,12 @@
               </div>
             </div>
             <div class="panel-servicio__imagen panel-servicio__imagen--arriba">
-              <img src="/assets/img/familiar-1.png" alt="" width="500" height="500">
+              <img src="/assets/img/familiar-1.webp" alt="" width="500" height="500" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="pestanas__panel panel-servicio" role="tabpanel" id="panel-mercantil" aria-labelledby="pestana-mercantil" hidden data-panel>
             <div class="panel-servicio__imagen panel-servicio__imagen--centro">
-              <img src="/assets/img/mercantil-1.png" alt="" width="500" height="500">
+              <img src="/assets/img/mercantil-1.webp" alt="" width="500" height="500" loading="lazy" decoding="async">
             </div>
             <div class="panel-servicio__texto">
               <div class="panel-servicio__contenido">
@@ -308,12 +285,12 @@
               </div>
             </div>
             <div class="panel-servicio__imagen panel-servicio__imagen--centro">
-              <img src="/assets/img/civil-1.png" alt="" width="500" height="500">
+              <img src="/assets/img/civil-1.webp" alt="" width="500" height="500" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="pestanas__panel panel-servicio" role="tabpanel" id="panel-corporativa" aria-labelledby="pestana-corporativa" hidden data-panel>
             <div class="panel-servicio__imagen panel-servicio__imagen--arriba">
-              <img src="/assets/img/asesoria-corporativa-1.png" alt="" width="500" height="500">
+              <img src="/assets/img/asesoria-corporativa-1.webp" alt="" width="500" height="500" loading="lazy" decoding="async">
             </div>
             <div class="panel-servicio__texto">
               <div class="panel-servicio__contenido">
@@ -333,7 +310,7 @@
           </div>
           <div class="pestanas__panel panel-servicio" role="tabpanel" id="panel-inmobiliaria" aria-labelledby="pestana-inmobiliaria" hidden data-panel>
             <div class="panel-servicio__imagen panel-servicio__imagen--arriba">
-              <img src="/assets/img/inmobiliaria.png" alt="" width="500" height="500">
+              <img src="/assets/img/inmobiliaria.webp" alt="" width="500" height="500" loading="lazy" decoding="async">
             </div>
             <div class="panel-servicio__texto">
               <div class="panel-servicio__contenido">
@@ -352,13 +329,12 @@
       </div>
     </section>
 
-    <section class="solicitud">
+    <section class="solicitud" id="contacto">
       <div class="solicitud__contenido">
-        <h2 class="solicitud__titulo">Solicita Atención <br>Personalizada</h2>
+        <h2 class="sp-titulo-seccion sp-titulo-seccion--claro solicitud__titulo">Solicita Atención <br>Personalizada</h2>
         <div class="solicitud__accion">
           <div class="solicitud__accion-interior">
-            <!-- Abre el popup de contacto (aún no construido) -->
-            <button class="boton-solicitud" type="button">ENVIAR SOLICITUD</button>
+            <button class="boton-solicitud" type="button" data-abrir-popup="popup-contacto">Enviar solicitud</button>
           </div>
         </div>
       </div>
@@ -369,7 +345,7 @@
     <div class="pie__principal">
       <div class="pie__columnas">
         <div class="pie__columna pie__columna--marca">
-          <a class="pie__logo" href="/"><img src="/assets/img/lenoci-white.png" alt="Lenoci &amp; Rochin" width="6992" height="1339"></a>
+          <a class="pie__logo" href="/"><img src="/assets/img/lenoci-white.webp" alt="Lenoci &amp; Rochin" width="644" height="124" loading="lazy" decoding="async"></a>
           <p class="pie__texto">Lenoci &amp; Rochin Abogados es un despacho jurídico mexicano comprometido en anticipar y solucionar las necesidades de nuestro cliente, a través de un servicio eficaz y personalizado.</p>
           <ul class="redes">
             <li>
@@ -388,7 +364,7 @@
               </a>
             </li>
             <li>
-              <a class="redes__enlace" href="http://walink.co/035689" target="_blank" aria-label="Whatsapp">
+              <a class="redes__enlace" href="https://wa.me/525539726224" target="_blank" aria-label="Whatsapp">
                 <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
               </a>
             </li>
@@ -409,9 +385,9 @@
         </div>
 
         <div class="pie__columna pie__columna--contacto">
-          <h2 class="pie__titulo">CONTÁCTANOS</h2>
+          <h2 class="pie__titulo">Contáctanos</h2>
           <h3 class="pie__subtitulo">Llámanos</h3>
-          <a class="pie__dato pie__dato--telefono" href="http://walink.co/035689">
+          <a class="pie__dato pie__dato--telefono" href="https://wa.me/525539726224" target="_blank">
             <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
             <span>55 3972 6224</span>
           </a>
@@ -436,12 +412,98 @@
 
     <div class="pie__legal">
       <a class="pie__firma" href="http://scndal.com" target="_blank">
-        <img src="/assets/img/black-webtag-1024x125.png" srcset="/assets/img/black-webtag-1024x125.png 1024w, /assets/img/black-webtag-300x37.png 300w, /assets/img/black-webtag-768x94.png 768w, /assets/img/black-webtag-1536x187.png 1536w, /assets/img/black-webtag.png 1814w" sizes="(max-width: 1024px) 100vw, 1024px" alt="" width="1024" height="125">
+        <img src="/assets/img/black-webtag.webp" alt="" width="400" height="49" loading="lazy" decoding="async">
       </a>
       <p class="pie__copyright">LenociRochin© Copyright 2025. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- Aquí va el widget de chat de WhatsApp (Joinchat) del original. No se replica. -->
+  <dialog class="popup" id="popup-contacto" aria-labelledby="popup-contacto-titulo" data-popup>
+    <div class="popup__contenido">
+      <button class="popup__cerrar" type="button" aria-label="Cerrar" data-cerrar-popup>
+        <svg viewBox="0 0 1000 1000" aria-hidden="true"><path d="M742 167L500 408 258 167C246 154 233 150 217 150 196 150 179 158 167 167 154 179 150 196 150 212 150 229 154 242 171 254L408 500 167 742C138 771 138 800 167 829 196 858 225 858 254 829L496 587 738 829C750 842 767 846 783 846 800 846 817 842 829 829 842 817 846 804 846 783 846 767 842 750 829 737L588 500 833 258C863 229 863 200 833 171 804 137 775 137 742 167Z"/></svg>
+      </button>
+      <div class="popup__lateral">
+        <img class="popup__logo" src="/assets/img/lenoci-white.webp" alt="" width="644" height="124" loading="lazy" decoding="async">
+        <h2 class="sp-titulo-seccion sp-titulo-seccion--claro" id="popup-contacto-titulo">Contáctanos.</h2>
+        <ul class="popup__datos">
+          <li>
+            <a class="popup__dato" href="https://wa.me/525539726224" target="_blank">
+              <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+              <span>55 3972 6224</span>
+            </a>
+          </li>
+          <li>
+            <a class="popup__dato" href="mailto:contacto@lenocirochin.com">
+              <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+              <span>contacto@lenocirochin.com</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="popup__formulario">
+        <form class="formulario" novalidate data-formulario>
+          <div class="formulario__paso" data-paso>
+            <div class="formulario__campos">
+              <div class="formulario__campo">
+                <label class="formulario__etiqueta" for="contacto-nombre">Déjanos tu nombre completo*</label>
+                <input class="formulario__control" id="contacto-nombre" name="Nombre" type="text" placeholder="Nombre y Apellido." required>
+              </div>
+              <div class="formulario__campo">
+                <label class="formulario__etiqueta" for="contacto-correo">¿Cuál es tu correo electrónico?*</label>
+                <input class="formulario__control" id="contacto-correo" name="Correo Electrónico" type="email" placeholder="Correo Electrónico" required>
+              </div>
+            </div>
+            <div class="formulario__acciones">
+              <div>
+                <button class="formulario__boton" type="button" data-siguiente>Siguiente...</button>
+              </div>
+            </div>
+          </div>
+          <div class="formulario__paso" hidden data-paso>
+            <label class="formulario__etiqueta" for="contacto-telefono">Déjanos un número de teléfono.*</label>
+            <input class="formulario__control" id="contacto-telefono" name="Teléfono" type="tel" pattern="\(\+\d{2}\) \d{2}-\d{4}-\d{4}" required data-mascara="(+99) 99-9999-9999">
+            <div class="formulario__acciones">
+              <div>
+                <button class="formulario__boton formulario__boton--anterior" type="button" data-anterior>Atrás</button>
+                <button class="formulario__boton" type="button" data-siguiente>Siguiente...</button>
+              </div>
+            </div>
+          </div>
+          <div class="formulario__paso" hidden data-paso>
+            <label class="formulario__etiqueta" for="contacto-mensaje">Déjanos saber para qué nos necesitas.*</label>
+            <textarea class="formulario__control" id="contacto-mensaje" name="Mensaje" required></textarea>
+            <div class="formulario__acciones">
+              <div>
+                <button class="formulario__boton" type="button" data-siguiente>Siguiente...</button>
+              </div>
+            </div>
+          </div>
+          <div class="formulario__paso" hidden data-paso>
+            <label class="formulario__etiqueta" for="contacto-medio">¿Cómo te enteraste de nosotros?*</label>
+            <select class="formulario__control" id="contacto-medio" name="marketing" required>
+              <option value="Eventos">Eventos</option>
+              <option value="Redes sociales">Redes sociales</option>
+              <option value="Google">Google</option>
+              <option value="Recomendación">Recomendación</option>
+            </select>
+            <div class="formulario__acciones">
+              <div>
+                <button class="formulario__boton" type="button" data-siguiente>Siguiente</button>
+              </div>
+            </div>
+          </div>
+          <div class="formulario__paso" hidden data-paso>
+            <button class="formulario__enviar" type="submit">Enviar</button>
+          </div>
+          <p class="formulario__mensaje" role="status" hidden data-mensaje></p>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <a class="whatsapp-flotante" href="https://wa.me/525539726224" target="_blank" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+  </a>
 </body>
 </html>
