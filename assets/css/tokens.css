@@ -1,0 +1,131 @@
+@layer base, patrones;
+
+/*
+ * Valores de diseño extraídos del CSS publicado en lenocirochin.com
+ * (kit de Elementor 7, plantillas 20, 32, 506, 517, 609 y 1162, y tema JupiterX).
+ * Solo se declaran los valores que el sitio usa.
+ */
+
+:root {
+  /* Colores */
+  --color-primario: #173248;        /* fondo de cabecera, pie y popup; texto de botones */
+  --color-secundario: #54595F;      /* hover de botones del formulario */
+  --color-acento: #FF914D;          /* hover de enlaces, iconos y botones */
+  --color-blanco: #FFFFFF;
+  --color-negro: #000000;
+  --color-texto: #212529;           /* color de texto por defecto del tema */
+  --color-titulo-oscuro: #222222;
+  --color-fondo-suave: #F4F4F4;
+  --color-icono-suave: #E6E6E6;     /* iconos sociales del pie */
+  --color-texto-apagado: #B1B1B1;   /* descripciones del formulario */
+
+  /* Familias tipográficas (con el respaldo que declara el sitio)
+
+     Carga prevista, solo los pesos que existen en cada familia y que el sitio usa:
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&family=Kaisei+HarunoUmi&family=Kaisei+Tokumin:wght@400;500&family=Karla:wght@400;500&family=Lora&family=Tenor+Sans">
+
+     Los pesos 100, 200 y 300 que el sitio declara en Kaisei y Lora no existen;
+     el navegador los pinta con 400, que es lo que se carga. */
+  --fuente-sistema: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --fuente-display: "Kaisei Tokumin", sans-serif;
+  --fuente-display-alt: "Kaisei HarunoUmi", sans-serif;
+  --fuente-helvetica: "Helvetica", sans-serif;
+  --fuente-lora: "Lora", sans-serif;
+  --fuente-tenor: "Tenor Sans", sans-serif;
+  --fuente-karla: "Karla", sans-serif;
+  --fuente-exo: "Exo 2", sans-serif;
+
+  /* Tamaños de texto */
+  --texto-xs: 12px;
+  --texto-sm: 14px;
+  --texto-base: 16px;
+  --texto-md: 18px;
+  --texto-lg: 20px;
+  --texto-xl: 24px;
+  --texto-2xl: 30px;
+  --texto-3xl: 40px;
+  --texto-4xl: 50px;
+  --texto-5xl: 60px;
+  --texto-6xl: 90px;
+  --texto-7xl: 130px;
+
+  /* Pesos */
+  --peso-thin: 100;
+  --peso-extralight: 200;
+  --peso-light: 300;
+  --peso-regular: 400;
+  --peso-medium: 500;
+  --peso-semibold: 600;
+  --peso-bold: 700;
+
+  /* Interlineado */
+  --interlineado-titulo: 1;         /* títulos de Elementor */
+  --interlineado-compacto: 1.2;      /* títulos del pie */
+  --interlineado-ajustado: 1.3;
+  --interlineado-base: 1.5;
+  --interlineado-texto: 1.6;
+  --interlineado-amplio: 1.7;
+  --interlineado-lista: 1.8;
+
+  /* Espaciado entre letras */
+  --tracking-titular: -2px;
+  --tracking-estrecho: -0.5px;
+  --tracking-amplio: 0.5px;
+  --tracking-extra: 1px;
+
+  /* Espaciado fijo */
+  --espacio-xs: 8px;
+  --espacio-sm: 10px;
+  --espacio-md: 20px;
+  --espacio-lg: 30px;
+  --espacio-xl: 40px;
+  --espacio-parrafo: 1rem;
+
+  /* Espaciado relativo al ancho del contenedor (rellenos de sección) */
+  --espacio-p1: 1%;
+  --espacio-p2: 2%;
+  --espacio-p3: 3%;
+  --espacio-p4: 4%;
+  --espacio-p5: 5%;
+  --espacio-p6: 6%;
+  --espacio-p8: 8%;
+  --espacio-p10: 10%;
+  --espacio-p15: 15%;
+
+  /* Radios */
+  --radio-0: 0;
+  --radio-md: 10px;
+
+  /* Contenedor */
+  --ancho-contenido: 1140px;
+
+  /* Cabecera */
+  --ancho-logo-cabecera: 250px;
+  --ancho-logo-cabecera-movil: 70%;
+  --ancho-menu-cabecera-movil: 20%;
+  --ancho-logo-cabecera-fija: 147px;
+  --ancho-logo-cabecera-fija-movil: 160px;
+  --posicion-cabecera-fija-oculta: -1000%;  /* fuera de pantalla hasta pasar 500px de scroll */
+
+  /* Pie */
+  --ancho-columna-pie: 25%;
+  --ancho-logo-pie: 80%;
+  --ancho-firma-agencia: 200px;
+  --espacio-columna-pie-movil: 25px;
+  --sangria-subtitulo-pie: 50px;            /* tablet */
+  --espacio-lista-servicios-pie: 3px;
+  --espacio-lista-informacion-pie-movil: 2px;
+
+  /* Capas */
+  --capa-cabecera: 2;
+  --capa-menu: 3;
+
+  /* Breakpoints: tablet 1024px y móvil 767px. Las @media usan esos números
+     literales: @media (max-width: 1024px) y @media (max-width: 767px). */
+
+  /* Transiciones */
+  --duracion-base: 0.3s;
+  --duracion-lenta: 0.5s;           /* botón de contacto, cabecera fija y carruseles */
+}

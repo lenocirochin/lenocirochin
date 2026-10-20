@@ -1,0 +1,17 @@
+/* Clases de estado que activa assets/js/main.js */
+
+.menu-movil.esta-abierto {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Baja desde fuera de pantalla; al ocultarse vuelve sin transición, como en el original */
+.cabecera-fija.esta-visible {
+  inset-block-start: 0;
+  visibility: visible;
+  transition: inset-block-start var(--duracion-lenta) ease-in-out;
+}
+
+.carrusel__pista.sin-transicion {
+  transition: none;
+}
