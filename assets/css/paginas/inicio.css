@@ -17,12 +17,12 @@
   --alto-banda: calc(var(--alto-logo-banda) + 2 * var(--espacio-md));  /* logos más su relleno */
   --alto-nosotros: 100vh;
   --alto-imagen-nosotros-movil: 50vh;
+  --proporcion-imagen-servicio-apilada: 16 / 9;  /* tablet y móvil */
 
   /* Secciones traídas de las páginas Nosotros y Servicios del original */
   --color-marino-profundo: #051B34;
   --color-fondo-principios: #F5F7FF;
   --color-cargo-equipo: #3B4855;
-  --sombra-pestanas: 0 0 10px rgba(0, 0, 0, 0.5);
   --espacio-15: 15px;
   --espacio-25: 25px;
   --espacio-45: 45px;
@@ -31,19 +31,12 @@
   --espacio-100: 100px;
   --espacio-125: 125px;
   --espacio-140: 140px;
-  --espacio-150: 150px;
   --relleno-texto-principios: 25%;
   --ancho-foto-equipo: 264px;
   --alto-foto-equipo: 250px;
   --ancho-titulo-solicitud: 34%;          /* cabe "Solicita Atención" en una línea (347px) desde 1025px */
   --ancho-titulo-solicitud-tablet: 50%;
   --alto-boton-solicitud: 60px;
-  --alto-cabecera-servicios: 40vh;
-  --alto-panel-servicio: 60vh;
-  --texto-titulo-servicio-tablet: 35px;
-  --interlineado-titulo-servicio: 1.375;  /* 44px sobre 32px */
-  --desplazamiento-pestana: 25px;
-  --curva-pestana: cubic-bezier(0.26, 0.69, 0.37, 0.96);
 }
 
 /* Carrusel */
@@ -354,113 +347,66 @@
   color: var(--color-primario);
 }
 
-/* Servicios: cabecera de la página original */
-.servicios-cabecera {
-  display: flex;
-  align-items: center;
-  min-height: var(--alto-cabecera-servicios);
-  padding-inline: var(--espacio-sm); /* el mismo borde que las pestañas */
+/* Servicios: sección azul con un área por tarjeta en un carrusel automático.
+   Cambio deliberado respecto al original (franja y pestañas). Todas las tarjetas
+   miden lo que la más alta, porque la pista estira sus diapositivas. */
+.servicios {
+  padding: var(--espacio-p5) 0;
   background-color: var(--color-primario);
 }
 
-.servicios-cabecera__titulo {
-  padding: var(--espacio-p5) 0 0;
-}
-
-/* Pestañas de servicios */
-.pestanas {
+.servicios__contenido {
   display: flex;
   flex-direction: column;
-  padding: var(--espacio-sm);
+  gap: var(--espacio-lg);
+  max-width: var(--ancho-contenido);
+  margin-inline: auto;
 }
 
-.pestanas__lista {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: var(--color-blanco);
-  box-shadow: var(--sombra-pestanas);
+.servicios__carrusel {
+  --carrusel-por-vista: 1;
+  --carrusel-separacion: var(--espacio-lg);
 }
 
-.pestanas__boton {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-  gap: var(--espacio-xs); /* original: 5px */
-  padding: var(--espacio-sm) var(--espacio-md);
-  border: 0;
-  background: none;
-  font-weight: var(--peso-bold);
-}
-
-.pestanas__boton:hover {
-  color: var(--color-acento);
-}
-
-.pestanas__icono {
-  width: var(--texto-md);
-  height: var(--texto-md);
-  fill: currentColor;
-}
-
-.pestanas__paneles {
+.tarjeta-servicio {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   overflow: hidden;
+  border-radius: var(--radio-md);
   background-color: var(--color-blanco);
-  transition: height var(--duracion-base); /* original: 0.25s */
 }
 
-.pestanas__panel {
-  padding: var(--espacio-sm);
-}
-
-.panel-servicio {
-  display: flex;
-  min-height: var(--alto-panel-servicio);
-}
-
-.panel-servicio__texto,
-.panel-servicio__imagen {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.panel-servicio__texto {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.panel-servicio__contenido {
+.tarjeta-servicio__contenido {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-md);
-  padding: 0 var(--espacio-p15);
+  padding: var(--espacio-50);
 }
 
-.panel-servicio__titulo {
-  font-size: var(--texto-2xl); /* original: 32px */
-  font-weight: var(--peso-regular);
-  line-height: var(--interlineado-titulo-servicio);
+.tarjeta-servicio__titulo {
+  color: var(--color-primario);
+  font-size: var(--texto-2xl);
+  font-weight: var(--peso-medium);
 }
 
-.panel-servicio__descripcion {
+.tarjeta-servicio__texto {
   margin: 0;
-  line-height: var(--interlineado-amplio); /* original: 28px sobre 16px (1.75) */
+  line-height: var(--interlineado-amplio);
 }
 
-.panel-servicio__lista {
+.tarjeta-servicio__lista {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-xs); /* original: 6px */
+  gap: var(--espacio-xs);
   font-size: var(--texto-sm);
 }
 
-.panel-servicio__imagen {
+/* La imagen cubre toda la columna, al alto de la tarjeta */
+.tarjeta-servicio__imagen {
   position: relative;
-  min-height: var(--espacio-50);
 }
 
-.panel-servicio__imagen img {
+.tarjeta-servicio__imagen img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -468,8 +414,75 @@
   object-fit: cover;
 }
 
-.panel-servicio__imagen--arriba img {
-  object-position: top center;
+.servicios__controles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-md);
+}
+
+.servicios__flechas {
+  display: flex;
+  gap: var(--espacio-sm);
+}
+
+.servicios__flecha {
+  display: flex;
+  padding: var(--espacio-sm);
+  border: var(--grosor-fino) solid var(--color-linea-clara);
+  border-radius: var(--radio-circulo);
+  background: none;
+  stroke: var(--color-blanco);
+  transition: border-color var(--duracion-base), stroke var(--duracion-base);
+}
+
+.servicios__flecha:hover {
+  border-color: var(--color-acento);
+  stroke: var(--color-acento);
+}
+
+.servicios__flecha svg {
+  width: var(--texto-xl);
+  height: var(--texto-xl);
+  fill: none;
+  stroke-width: var(--grosor-grueso);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.servicios__flecha svg * {
+  vector-effect: non-scaling-stroke;
+}
+
+.servicios__indicadores {
+  display: flex;
+}
+
+/* El punto es pequeño; el botón deja un área de pulsación mayor */
+.servicios__indicador {
+  padding: var(--espacio-xs);
+  border: 0;
+  background: none;
+}
+
+.servicios__indicador::before {
+  content: "";
+  display: block;
+  width: var(--espacio-sm);
+  height: var(--espacio-sm);
+  border-radius: var(--radio-circulo);
+  background-color: var(--color-linea-clara);
+  transition: background-color var(--duracion-base);
+}
+
+.servicios__indicador[aria-current="true"]::before {
+  background-color: var(--color-acento);
+}
+
+.servicios__flecha:focus-visible,
+.servicios__indicador:focus-visible {
+  outline: var(--grosor-grueso) solid var(--color-acento);
+  outline-offset: var(--grosor-grueso);
 }
 
 /* Tablet */
@@ -523,14 +536,23 @@
     padding: 0;
   }
 
-  .servicios-cabecera {
-    padding-block: var(--espacio-150);
+  .servicios {
+    padding: var(--espacio-100) var(--espacio-lg);
   }
 
-  .panel-servicio__titulo {
-    padding-block-end: var(--espacio-sm);
-    font-size: var(--texto-titulo-servicio-tablet);
-    line-height: var(--interlineado-compacto);
+  /* La imagen arriba (16:9) y el contenido debajo, como en móvil */
+  .tarjeta-servicio {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  .tarjeta-servicio__imagen {
+    order: -1;
+    aspect-ratio: var(--proporcion-imagen-servicio-apilada);
+  }
+
+  .tarjeta-servicio__contenido {
+    padding: var(--espacio-lg);
   }
 }
 
@@ -588,8 +610,7 @@
   }
 
   .solicitud__contenido,
-  .equipo__miembros,
-  .panel-servicio {
+  .equipo__miembros {
     flex-direction: column;
   }
 
@@ -620,12 +641,13 @@
     width: 100%;
   }
 
-  .panel-servicio {
-    min-height: 0;
+  /* Los controles centrados */
+  .servicios__controles {
+    flex-direction: column;
   }
 
-  .panel-servicio__texto,
-  .panel-servicio__imagen {
-    flex: none;
+  /* Puntos más cómodos de pulsar con el dedo (40px de área) */
+  .servicios__indicador {
+    padding: var(--espacio-15);
   }
 }

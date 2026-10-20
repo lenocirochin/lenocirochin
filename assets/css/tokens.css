@@ -100,6 +100,7 @@
   --ancho-logo-cabecera-fija: 147px;
   --ancho-logo-cabecera-fija-movil: 160px;
   --posicion-cabecera-fija-oculta: -1000%;  /* fuera de pantalla hasta pasar 500px de scroll */
+  --alto-cabecera-fija: 63px;               /* enlaces de 43px más --espacio-sm arriba y abajo */
 
   /* Pie */
   --ancho-columna-pie: 25%;
@@ -128,5 +129,13 @@
 
   /* Transiciones */
   --duracion-base: 0.3s;
-  --duracion-lenta: 0.5s;           /* botón de contacto, cabecera fija y carruseles */
+  --duracion-lenta: 0.5s;
+  --duracion-minima: 0.01ms;        /* "reducir movimiento": casi instantáneo, pero los eventos de fin siguen llegando */           /* botón de contacto, cabecera fija y carruseles */
+}
+
+/* En móvil la cabecera fija tiene dos filas: logo arriba y navegación debajo */
+@media (max-width: 767px) {
+  :root {
+    --alto-cabecera-fija: 130px;
+  }
 }
