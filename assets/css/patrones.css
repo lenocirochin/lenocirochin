@@ -126,14 +126,14 @@
   }
 
   /* Pie: tarjeta azul separada de los bordes y barra de créditos debajo.
-     Cambio deliberado respecto al original; el margen sigue el relleno de la
-     sección de servicios para que la tarjeta quede alineada con ella. */
+     Cambio deliberado respecto al original. */
   .pie {
+    display: flow-root; /* el margen superior de la tarjeta queda dentro del fondo suave */
     background-color: var(--color-fondo-suave);
   }
 
   .pie__principal {
-    margin: 0 var(--espacio-p4) var(--espacio-p4);
+    margin: var(--espacio-p4);
     padding: var(--espacio-p3) var(--espacio-p5);
     border-radius: var(--radio-md);
     background-color: var(--color-primario);
@@ -383,7 +383,7 @@
     }
 
     .pie__principal {
-      margin: 0 var(--espacio-p6) var(--espacio-p6);
+      margin: var(--espacio-p6);
     }
 
     .pie__columna {
