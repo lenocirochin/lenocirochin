@@ -38,14 +38,16 @@
 
   <header class="cabecera">
     <div class="cabecera__barra">
-      <div class="cabecera__menu">
-        <button class="boton-menu" type="button" aria-label="Abrir menú" aria-controls="menu-movil" aria-expanded="false" data-menu-abrir>
-          <svg class="boton-menu__icono" viewBox="0 0 448 512" aria-hidden="true"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
-        </button>
-      </div>
       <div class="cabecera__logo">
         <a href="/"><img src="/assets/img/lenoci-white.png" alt="Lenoci &amp; Rochin" width="6992" height="1339"></a>
       </div>
+      <nav class="nav-principal cabecera__nav" aria-label="Principal">
+        <ul class="nav-principal__lista">
+          <li><a class="nav-principal__enlace" href="/nosotros/">Nosotros</a></li>
+          <li><a class="nav-principal__enlace" href="/servicios/">Servicios</a></li>
+          <li><a class="nav-principal__enlace" href="/contacto/">Contacto</a></li>
+        </ul>
+      </nav>
       <div class="cabecera__accion">
         <!-- Abre el popup de contacto (aún no construido) -->
         <button class="boton-contacto" type="button">Contáctanos</button>
@@ -56,20 +58,15 @@
   <header class="cabecera-fija" data-cabecera-fija>
     <div class="cabecera-fija__barra">
       <a class="cabecera-fija__logo" href="/"><img src="/assets/img/lenoci-white.png" alt="Lenoci &amp; Rochin" width="6992" height="1339"></a>
-      <button class="boton-menu" type="button" aria-label="Abrir menú" aria-controls="menu-movil" aria-expanded="false" data-menu-abrir>
-        <svg class="boton-menu__icono" viewBox="0 0 448 512" aria-hidden="true"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
-      </button>
+      <nav class="nav-principal cabecera-fija__nav" aria-label="Principal">
+        <ul class="nav-principal__lista">
+          <li><a class="nav-principal__enlace" href="/nosotros/">Nosotros</a></li>
+          <li><a class="nav-principal__enlace" href="/servicios/">Servicios</a></li>
+          <li><a class="nav-principal__enlace" href="/contacto/">Contacto</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
-
-  <nav class="menu-movil" id="menu-movil" aria-label="Menú principal" data-menu>
-    <button class="menu-movil__cerrar" type="button" aria-label="Cerrar menú" data-menu-cerrar>×</button>
-    <ul class="menu-movil__lista">
-      <li><a class="menu-movil__enlace" href="/nosotros/">Nosotros</a></li>
-      <li><a class="menu-movil__enlace" href="/servicios/">Servicios</a></li>
-      <li><a class="menu-movil__enlace" href="/contacto/">Contacto</a></li>
-    </ul>
-  </nav>
 
   <main id="contenido">
     <section class="hero">

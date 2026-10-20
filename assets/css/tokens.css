@@ -96,6 +96,7 @@
 
   /* Radios */
   --radio-0: 0;
+  --radio-sm: 4px;
   --radio-md: 10px;
 
   /* Contenedor */
@@ -103,8 +104,6 @@
 
   /* Cabecera */
   --ancho-logo-cabecera: 250px;
-  --ancho-logo-cabecera-movil: 70%;
-  --ancho-menu-cabecera-movil: 20%;
   --ancho-logo-cabecera-fija: 147px;
   --ancho-logo-cabecera-fija-movil: 160px;
   --posicion-cabecera-fija-oculta: -1000%;  /* fuera de pantalla hasta pasar 500px de scroll */
@@ -120,7 +119,7 @@
 
   /* Capas */
   --capa-cabecera: 2;
-  --capa-menu: 3;
+  --capa-salto: 3;
 
   /* Breakpoints: tablet 1024px y móvil 767px. Las @media usan esos números
      literales: @media (max-width: 1024px) y @media (max-width: 767px). */

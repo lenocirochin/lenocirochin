@@ -1,20 +1,3 @@
-// Menú a pantalla completa
-const menu = document.querySelector('[data-menu]');
-const botonesAbrir = document.querySelectorAll('[data-menu-abrir]');
-
-function cambiarMenu(abierto) {
-  menu.classList.toggle('esta-abierto', abierto);
-  botonesAbrir.forEach((boton) => boton.setAttribute('aria-expanded', String(abierto)));
-}
-
-if (menu) {
-  botonesAbrir.forEach((boton) => boton.addEventListener('click', () => cambiarMenu(true)));
-  menu.querySelector('[data-menu-cerrar]').addEventListener('click', () => cambiarMenu(false));
-  document.addEventListener('keydown', (evento) => {
-    if (evento.key === 'Escape') cambiarMenu(false);
-  });
-}
-
 // Cabecera fija: aparece al pasar 500px de desplazamiento, como en el tema original
 // (JupiterX añade la clase jupiterx-header-sticked con ese mismo umbral)
 const cabeceraFija = document.querySelector('[data-cabecera-fija]');

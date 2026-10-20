@@ -1,6 +1,6 @@
 /*
  * Patrones compartidos por todas las páginas: enlace de salto, cabecera,
- * cabecera fija, menú y pie.
+ * cabecera fija, navegación y pie.
  * Los comentarios "original: …" marcan valores del sitio publicado que se
  * ajustaron al token más cercano (diferencia de 4px o menos) o que no tienen
  * token propio.
@@ -12,7 +12,7 @@
     position: absolute;
     inset-block-start: var(--espacio-sm);
     inset-inline-start: var(--espacio-sm);
-    z-index: var(--capa-menu);
+    z-index: var(--capa-salto);
     padding: var(--espacio-sm) var(--espacio-md);
     background-color: var(--color-blanco);
     color: var(--color-primario);
@@ -23,24 +23,9 @@
     white-space: nowrap;
   }
 
-  /* Botón del menú (cabecera y cabecera fija) */
-  .boton-menu {
-    display: inline-flex;
-    padding: var(--espacio-sm);
-    border: 0;
-    background-color: var(--color-blanco);
-    color: var(--color-texto);
-    font-size: var(--texto-2xl);
-    line-height: var(--interlineado-titulo);
-  }
-
-  .boton-menu__icono {
-    width: auto;
-    height: 1em;
-    fill: currentColor;
-  }
-
-  /* Cabecera sobre el hero */
+  /* Cabecera sobre el hero.
+     Cambio deliberado respecto al original: sin menú modal; la navegación va
+     centrada debajo del logo. */
   .cabecera {
     position: absolute;
     inset-block-start: 0;
@@ -50,27 +35,23 @@
   }
 
   .cabecera__barra {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--espacio-md);
     padding: var(--espacio-sm);
   }
 
-  .cabecera__menu,
   .cabecera__logo,
   .cabecera__accion {
     display: flex;
-    flex: 1 1 0;
-    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    grid-row: 1;
     padding: var(--espacio-sm);
   }
 
-  .cabecera__menu {
-    align-items: center;
-  }
-
   .cabecera__logo {
-    flex-direction: column;
-    justify-content: center;
+    grid-column: 2;
     padding-block: var(--espacio-p1); /* original: 0.5% */
   }
 
@@ -80,15 +61,19 @@
   }
 
   .cabecera__accion {
-    flex-direction: column;
-    justify-content: center;
+    grid-column: 3;
     align-items: flex-end;
+  }
+
+  .cabecera__nav {
+    grid-column: 1 / -1;
+    justify-self: center;
   }
 
   .boton-contacto {
     padding: var(--espacio-sm) var(--espacio-md); /* original: 12px 24px */
     border: 0;
-    border-radius: var(--radio-0);
+    border-radius: var(--radio-sm);
     background-color: var(--color-blanco);
     color: var(--color-primario);
     font-family: var(--fuente-display-alt);
@@ -99,6 +84,22 @@
 
   .boton-contacto:hover {
     background-color: var(--color-acento);
+  }
+
+  /* Navegación de las dos cabeceras: tipografía y color del antiguo menú
+     modal, con un solo tamaño en todas las pantallas */
+  .nav-principal__lista {
+    display: flex;
+  }
+
+  .nav-principal__enlace {
+    display: block;
+    padding: var(--espacio-xs) var(--espacio-md);
+    color: var(--color-blanco);
+    font-family: var(--fuente-display);
+    font-size: var(--texto-md);
+    font-weight: var(--peso-regular);
+    white-space: nowrap;
   }
 
   /* Cabecera fija: espera fuera de pantalla hasta pasar 500px de scroll */
@@ -122,54 +123,6 @@
 
   .cabecera-fija__logo img {
     width: var(--ancho-logo-cabecera-fija);
-  }
-
-  /* Menú a pantalla completa */
-  .menu-movil {
-    position: fixed;
-    inset: 0;
-    z-index: var(--capa-menu);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    background-color: var(--color-primario);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--duracion-base), visibility var(--duracion-base); /* original: 0.25s */
-  }
-
-  .menu-movil__lista {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .menu-movil__enlace {
-    display: flex;
-    justify-content: flex-start;
-    padding: var(--espacio-xs) var(--espacio-lg); /* original: 8px 32px */
-    color: var(--color-blanco);
-    font-family: var(--fuente-display);
-    font-size: var(--texto-4xl);
-    font-weight: var(--peso-regular);
-  }
-
-  .menu-movil__cerrar {
-    position: absolute;
-    inset-block-start: var(--espacio-sm);
-    inset-inline-end: var(--espacio-sm);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1em;
-    height: 1em;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: var(--color-blanco);
-    font-size: var(--texto-2xl); /* original: 32px */
-    line-height: var(--interlineado-titulo);
   }
 
   /* Pie: tarjeta azul separada de los bordes y barra de créditos debajo.
@@ -384,46 +337,47 @@
 
   /* Móvil */
   @media (max-width: 767px) {
-    .boton-menu {
-      padding: var(--espacio-sm); /* original: 14px */
-      color: var(--color-primario);
-    }
-
     .cabecera {
       padding: var(--espacio-p1) var(--espacio-p1) 0;
     }
 
     .cabecera__barra {
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-
-    .cabecera__menu {
-      flex: 0 0 var(--ancho-menu-cabecera-movil);
-      padding: 0;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .cabecera__logo {
-      flex: 0 0 var(--ancho-logo-cabecera-movil);
+      grid-column: 1;
       padding-inline: 0;
     }
 
-    .cabecera__logo img {
-      margin-inline: auto 0;
+    .cabecera__nav {
+      grid-row: 2;
     }
 
     .cabecera__accion {
-      flex: 0 0 100%;
+      grid-column: 1;
+      grid-row: 3;
       align-items: stretch;
       padding: 0;
+    }
+
+    .nav-principal__enlace {
+      padding-inline: var(--espacio-xs);
     }
 
     .cabecera-fija {
       padding: var(--espacio-p4) var(--espacio-p4) 0;
     }
 
+    /* El logo y la navegación no caben en una línea: la nav baja debajo del logo */
     .cabecera-fija__barra {
+      flex-direction: column;
+      align-items: flex-start;
       padding: var(--espacio-p5);
+    }
+
+    .cabecera-fija__nav {
+      align-self: center;
     }
 
     .cabecera-fija__logo img {
