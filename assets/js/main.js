@@ -78,3 +78,34 @@ function iniciarCarrusel(carrusel) {
 }
 
 document.querySelectorAll('[data-carrusel]').forEach(iniciarCarrusel);
+
+// Pestañas: al cambiar de pestaña, el contenedor de paneles anima su altura
+function iniciarPestanas(pestanas) {
+  const botones = [...pestanas.querySelectorAll('[data-pestana]')];
+  const contenedor = pestanas.querySelector('[data-paneles]');
+
+  const activar = (boton) => {
+    const altoAnterior = contenedor.offsetHeight;
+    contenedor.style.height = '';
+    botones.forEach((otro) => {
+      const activo = otro === boton;
+      const panel = document.getElementById(otro.getAttribute('aria-controls'));
+      otro.classList.toggle('esta-activa', activo);
+      otro.setAttribute('aria-selected', String(activo));
+      panel.classList.toggle('esta-activa', activo);
+      panel.hidden = !activo;
+    });
+    const altoNuevo = contenedor.offsetHeight;
+    if (altoNuevo === altoAnterior) return;
+    contenedor.style.height = `${altoAnterior}px`;
+    contenedor.offsetHeight; // fuerza el cálculo antes de animar
+    contenedor.style.height = `${altoNuevo}px`;
+  };
+
+  contenedor.addEventListener('transitionend', (evento) => {
+    if (evento.target === contenedor) contenedor.style.height = '';
+  });
+  botones.forEach((boton) => boton.addEventListener('click', () => activar(boton)));
+}
+
+document.querySelectorAll('[data-pestanas]').forEach(iniciarPestanas);

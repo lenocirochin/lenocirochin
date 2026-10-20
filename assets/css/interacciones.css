@@ -10,3 +10,23 @@
 .carrusel__pista.sin-transicion {
   transition: none;
 }
+
+/* Pestañas de servicios: la activa en color de acento y su panel entra subiendo, como en el original */
+.pestanas__boton.esta-activa {
+  color: var(--color-acento);
+}
+
+.pestanas__panel[hidden] {
+  display: none;
+}
+
+.pestanas__panel.esta-activa {
+  animation: entrada-pestana var(--duracion-lenta) var(--curva-pestana);
+}
+
+@keyframes entrada-pestana {
+  from {
+    opacity: 0;
+    transform: translateY(var(--desplazamiento-pestana));
+  }
+}

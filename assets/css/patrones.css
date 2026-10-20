@@ -142,7 +142,6 @@
   .pie__columnas {
     display: flex;
     flex-wrap: wrap;
-    margin: var(--espacio-sm);
     padding: var(--espacio-p1) var(--espacio-p2);
   }
 
@@ -151,7 +150,6 @@
     flex-direction: column;
     align-items: flex-start;
     width: var(--ancho-columna-pie);
-    padding: var(--espacio-sm);
   }
 
   .pie__columna--marca,
