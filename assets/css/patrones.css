@@ -98,7 +98,7 @@
     color: var(--color-blanco);
     font-family: var(--fuente-titulos);
     font-stretch: var(--ancho-fuente-titulos);
-    font-size: var(--texto-md);
+    font-size: var(--texto-base);
     white-space: nowrap;
   }
 
@@ -134,12 +134,20 @@
   }
 
   /* Antetítulo: línea corta sobre un título */
+  /* Pastilla del ancho de su texto; fit-content la mantiene así también como
+     hijo de un flex en columna, donde inline-block no basta */
   .sp-eyebrow {
+    display: inline-block;
+    width: fit-content;
     margin: 0;
-    color: var(--color-acento);
+    padding: var(--espacio-xs) var(--espacio-sm);
+    border-radius: var(--radio-pastilla);
+    background-color: var(--color-acento);
+    color: var(--color-primario);
     font-family: var(--fuente-titulos);
     font-stretch: var(--ancho-fuente-titulos);
     font-size: var(--texto-sm);
+    font-weight: var(--peso-medium);
   }
 
   /* Tarjeta: todo bloque con fondo propio. Mismo borde exterior, radio y relleno

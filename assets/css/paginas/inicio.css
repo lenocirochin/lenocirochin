@@ -87,7 +87,7 @@
 
 .hero__lema {
   color: var(--color-blanco);
-  font-size: var(--texto-6xl);
+  font-size: var(--texto-display);
 }
 
 /* Banda de logos: tarjeta del ancho de la de Nosotros que monta sobre el hero la
@@ -511,10 +511,6 @@
   .hero {
     min-height: var(--alto-hero-movil);
     padding: 0 calc(var(--margen-pagina) + var(--relleno-tarjeta)) max(var(--espacio-hero-movil), calc(var(--alto-banda) / 2 + var(--espacio-lg)));
-  }
-
-  .hero__lema {
-    font-size: var(--texto-3xl);
   }
 
   /* El texto pasa encima de los logos; el alto cuenta una línea de texto.

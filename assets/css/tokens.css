@@ -41,7 +41,7 @@
   --texto-xl: 24px;
   --texto-2xl: 30px;
   --texto-3xl: 40px;
-  --texto-6xl: 90px;
+  --texto-display: clamp(var(--texto-2xl), 5vw, 72px);  /* titular del hero: 72px a 1440 y escala con la pantalla */
 
   /* Pesos */
   --peso-regular: 400;
@@ -87,6 +87,7 @@
   --radio-sm: 4px;
   --radio-md: 10px;
   --radio-circulo: 50%;
+  --radio-pastilla: 999px;
 
   /* Bloques: borde exterior, relleno de tarjeta, separación entre bloques y ancho
      máximo del contenido dentro de una tarjeta */
