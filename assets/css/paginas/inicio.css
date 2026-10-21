@@ -308,18 +308,28 @@
   margin-block-start: var(--espacio-sm);
 }
 
-/* Mismo botón principal que el del modal, en blanco (CTA y cierre de Servicios) */
+/* Botón de la página: principal (azul, cierre de Servicios) y claro (blanco, CTA) */
+.boton-principal,
 .boton-claro {
   min-height: var(--alto-minimo-toque);
   padding: 0 var(--espacio-lg);
   border: 0;
   border-radius: var(--radio-sm);
-  background-color: var(--color-blanco);
-  color: var(--color-primario);
   font-weight: var(--peso-medium);
   transition: background-color var(--duracion-base), color var(--duracion-base);
 }
 
+.boton-principal {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+}
+
+.boton-claro {
+  background-color: var(--color-blanco);
+  color: var(--color-primario);
+}
+
+.boton-principal:hover,
 .boton-claro:hover {
   background-color: var(--color-acento);
   color: var(--color-blanco);
@@ -441,7 +451,7 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .banda__carrusel {
-    --carrusel-por-vista: 2;
+    --carrusel-por-vista: 3;
   }
 
   .principios__lista {
@@ -477,7 +487,6 @@
   }
 
   .banda__carrusel {
-    --carrusel-por-vista: 3;
     --carrusel-separacion: var(--espacio-lg);
   }
 
@@ -505,5 +514,10 @@
   .servicios__encabezado,
   .servicios__areas {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Alineadas al borde del encabezado; la de cierre conserva el relleno por su fondo */
+  .area:not(.area--cierre) {
+    padding-inline: 0;
   }
 }

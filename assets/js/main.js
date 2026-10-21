@@ -12,8 +12,6 @@ if (cabeceraFija) {
 
 // Carruseles infinitos con avance automático. Se clona el juego completo de
 // diapositivas antes y después; al salir del juego central se salta sin transición.
-// Controles opcionales en un elemento con data-controles-de="<id del carrusel>":
-// botones data-anterior, data-siguiente y un data-indicador por diapositiva.
 // Con "reducir movimiento" no avanza solo ni desliza.
 const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -22,8 +20,6 @@ function iniciarCarrusel(carrusel) {
   const originales = [...pista.children];
   const total = originales.length;
   const intervalo = Number(carrusel.dataset.intervalo);
-  const controles = carrusel.id ? document.querySelector(`[data-controles-de="${carrusel.id}"]`) : null;
-  const indicadores = controles ? [...controles.querySelectorAll('[data-indicador]')] : [];
   let indice = total;
   let temporizador;
 
@@ -38,15 +34,9 @@ function iniciarCarrusel(carrusel) {
   // Con decimales: offsetLeft redondea y el error se acumula diapositiva a diapositiva
   const paso = () => pista.children[1].getBoundingClientRect().left - pista.children[0].getBoundingClientRect().left;
 
-  const marcarIndicador = () => {
-    const activo = (((indice - total) % total) + total) % total;
-    indicadores.forEach((punto, i) => punto.setAttribute('aria-current', String(i === activo)));
-  };
-
   const mover = (animado = true) => {
     pista.classList.toggle('sin-transicion', !animado);
     pista.style.transform = `translateX(${-indice * paso()}px)`;
-    marcarIndicador();
   };
 
   // Vuelve al juego central sin transición
@@ -72,21 +62,13 @@ function iniciarCarrusel(carrusel) {
   };
   const detener = () => clearInterval(temporizador);
 
-  // Pausa con el ratón encima o el foco dentro (del carrusel o de sus controles)
-  [carrusel, controles].filter(Boolean).forEach((zona) => {
-    zona.addEventListener('mouseenter', detener);
-    zona.addEventListener('mouseleave', iniciar);
-    zona.addEventListener('focusin', detener);
-    zona.addEventListener('focusout', (evento) => {
-      if (!zona.contains(evento.relatedTarget)) iniciar();
-    });
+  // Pausa con el ratón encima o el foco dentro
+  carrusel.addEventListener('mouseenter', detener);
+  carrusel.addEventListener('mouseleave', iniciar);
+  carrusel.addEventListener('focusin', detener);
+  carrusel.addEventListener('focusout', (evento) => {
+    if (!carrusel.contains(evento.relatedTarget)) iniciar();
   });
-
-  if (controles) {
-    controles.querySelector('[data-anterior]')?.addEventListener('click', () => irA(indice - 1));
-    controles.querySelector('[data-siguiente]')?.addEventListener('click', () => irA(indice + 1));
-    indicadores.forEach((punto, i) => punto.addEventListener('click', () => irA(total + i)));
-  }
 
   // Arrastre con el dedo o el ratón; al tocar se pausa y al soltar se reanuda
   let inicioX = null;
