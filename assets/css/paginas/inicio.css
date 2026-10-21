@@ -9,7 +9,7 @@
   --capa-contenido: 1;
   --separacion-logos-banda: 50px;
   --alto-logo-banda: 60px;
-  --alto-banda: calc(var(--alto-logo-banda) + 2 * var(--espacio-md));  /* logos más su relleno */
+  --alto-banda: calc(var(--alto-logo-banda) + 2 * (var(--relleno-tarjeta) + var(--grosor-fino)));  /* logos, relleno y borde */
   --alto-nosotros: 100vh;
   --alto-imagen-nosotros-movil: 50vh;
   --proporcion-imagen-servicio-apilada: 16 / 9;  /* tablet y móvil */
@@ -17,21 +17,18 @@
   --ancho-contenido-cta: 600px;
   --color-velo-cta: color-mix(in srgb, var(--color-primario) 85%, transparent);
 
-  /* Nosotros, Principios y Equipo */
-  --color-marino-profundo: #051B34;
-  --color-fondo-principios: #F5F7FF;
-  --color-cargo-equipo: #3B4855;
+  /* Principios, Equipo y Servicios */
   --espacio-15: 15px;
-  --espacio-25: 25px;
-  --espacio-45: 45px;
-  --espacio-50: 50px;
-  --espacio-60: 60px;
-  --espacio-100: 100px;
-  --espacio-125: 125px;
-  --espacio-140: 140px;
-  --relleno-texto-principios: 25%;
   --ancho-foto-equipo: 264px;
-  --alto-foto-equipo: 250px;
+  --ancho-texto-principios: 65ch;
+  /* Encuadre de cada ilustración de Servicios en el formato 16:9 apilado */
+  --encuadre-penal: center 65%;
+  --encuadre-laboral: center 50%;
+  --encuadre-familiar: center 65%;
+  --encuadre-mercantil: center 70%;
+  --encuadre-civil: center 50%;
+  --encuadre-corporativa: center 45%;
+  --encuadre-inmobiliaria: center 25%;
 }
 
 /* Carrusel */
@@ -60,7 +57,7 @@
   align-items: flex-start;
   gap: var(--espacio-md);
   min-height: var(--alto-hero);
-  padding: var(--espacio-p6);
+  padding: var(--espacio-p6) calc(var(--margen-pagina) + var(--relleno-tarjeta));
   /* El lema queda siempre por encima de la parte de la banda que monta sobre el hero */
   padding-block-end: max(var(--espacio-p6), calc(var(--alto-banda) / 2 + var(--espacio-lg)));
   overflow: hidden;
@@ -82,23 +79,14 @@
   opacity: var(--opacidad-velo-hero);
 }
 
-.hero__titulo,
+.hero__antetitulo,
 .hero__lema {
   position: relative;
   z-index: var(--capa-contenido);
-  color: var(--color-blanco);
-  line-height: var(--interlineado-titulo);
-}
-
-.hero__titulo {
-  font-size: var(--texto-base);
-  font-weight: var(--peso-light);
 }
 
 .hero__lema {
-  margin: 0;
-  font-family: var(--fuente-titulos);
-  font-stretch: var(--ancho-fuente-titulos);
+  color: var(--color-blanco);
   font-size: var(--texto-6xl);
 }
 
@@ -112,10 +100,9 @@
   align-items: center;
   gap: var(--espacio-lg);
   min-height: var(--alto-banda);
-  margin: calc(-0.5 * var(--alto-banda)) var(--espacio-p2) 0; /* mismo margen lateral que el pie */
-  padding: var(--espacio-md);
-  border-radius: var(--radio-md);
-  background-color: var(--color-fondo-suave);
+  margin-block-start: calc(-0.5 * var(--alto-banda));
+  border: var(--grosor-fino) solid var(--color-gris-claro);
+  background-color: var(--color-blanco);
 }
 
 .banda__texto {
@@ -143,14 +130,13 @@
   max-height: 100%;
 }
 
-/* Nosotros: tarjeta a dos columnas, foto y texto, con el margen lateral del pie */
+/* Nosotros: tarjeta a dos columnas; la foto llega al borde y el relleno va en el texto */
 .nosotros {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   min-height: var(--alto-nosotros);
-  margin: var(--espacio-p4) var(--espacio-p2);
+  padding: 0;
   overflow: hidden;
-  border-radius: var(--radio-sm);
 }
 
 .nosotros__imagen {
@@ -170,42 +156,28 @@
   flex-direction: column;
   justify-content: center;
   gap: var(--espacio-md);
-  padding: var(--espacio-p10);
+  padding: var(--relleno-tarjeta);
   background-color: var(--color-blanco);
 }
 
 .nosotros__texto {
   margin: 0;
-  color: var(--color-marino-profundo);
+  color: var(--color-texto);
   font-size: var(--texto-md);
   line-height: var(--interlineado-base);
 }
 
 /* Principios */
 .principios {
-  padding: var(--espacio-p5) 0;
-}
-
-.principios__tarjeta,
-.equipo__contenido {
-  max-width: var(--ancho-contenido);
-  margin-inline: auto;
-}
-
-.principios__tarjeta {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-md);
-  padding: var(--espacio-140) var(--espacio-60) var(--espacio-125);
-  background-color: var(--color-fondo-principios);
-}
-
-.principios__titulo {
-  padding-block-end: var(--espacio-45);
+  background-color: var(--color-fondo-suave);
 }
 
 .principios__texto {
-  padding-inline-end: var(--relleno-texto-principios);
+  max-width: var(--ancho-texto-principios);
+  margin: 0;
 }
 
 /* Un principio por columna: 4 en escritorio, 2 en tablet y 1 en móvil */
@@ -246,66 +218,56 @@
   font-size: var(--texto-base);
 }
 
-/* Equipo */
+/* Equipo: sin fondo; su contenido se alinea al borde interior de las tarjetas */
 .equipo {
-  padding: var(--espacio-p4) 0;
-}
-
-.equipo__contenido {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-50);
+  gap: var(--espacio-lg);
+  margin-block-start: var(--espacio-seccion);
+  padding-inline: calc(var(--margen-pagina) + var(--relleno-tarjeta));
 }
 
 .equipo__miembros {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-lg);
 }
 
 .miembro {
   display: flex;
-  flex: 1 1 0;
   flex-direction: column;
-  align-items: center;
-  padding: var(--espacio-sm) var(--espacio-sm) calc(var(--espacio-sm) + var(--espacio-25));
-}
-
-.miembro + .miembro {
-  padding: 0 0 var(--espacio-25) var(--espacio-15);
+  gap: var(--espacio-xs);
 }
 
 .miembro__foto {
-  width: var(--ancho-foto-equipo);
-  height: var(--alto-foto-equipo);
+  width: 100%;
+  max-width: var(--ancho-foto-equipo);
+  aspect-ratio: 1;
+  margin-block-end: var(--espacio-sm);
   object-fit: cover;
+  background-color: var(--color-fondo-suave);
 }
 
 .miembro__nombre {
-  align-self: stretch;
-  padding-block-start: var(--espacio-15);
-  color: var(--color-negro);
+  color: var(--color-primario);
   font-size: var(--texto-lg);
   font-weight: var(--peso-medium);
   line-height: var(--interlineado-compacto);
-  text-align: center;
 }
 
-/* Espacio bajo el cargo antes del final de la tarjeta */
 .miembro__cargo {
-  margin: 0 0 var(--espacio-md);
-  color: var(--color-cargo-equipo);
-  text-align: center;
+  margin: 0;
+  color: var(--color-gris-medio);
 }
 
 /* Llamada final: tarjeta con la foto del hero bajo un velo azul y el contenido a
-   la izquierda. Mismo margen lateral y radio que la tarjeta del pie. */
+   la izquierda */
 .cta {
   position: relative;
   display: flex;
   align-items: center;
   min-height: var(--alto-minimo-cta);
-  margin: var(--espacio-p4) var(--espacio-p2) 0;
   overflow: hidden;
-  border-radius: var(--radio-md);
 }
 
 .cta__fondo {
@@ -329,16 +291,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio-md);
-  max-width: calc(var(--ancho-contenido-cta) + 4 * var(--espacio-xl));
-  padding: var(--espacio-xl) calc(2 * var(--espacio-xl));
-}
-
-.cta__antetitulo {
-  margin: 0;
-  color: var(--color-acento);
-  font-family: var(--fuente-titulos);
-  font-stretch: var(--ancho-fuente-titulos);
-  font-size: var(--texto-sm);
+  max-width: var(--ancho-contenido-cta);
 }
 
 .cta__texto {
@@ -388,16 +341,10 @@
    Todas las tarjetas miden lo que la más alta, porque la pista estira sus
    diapositivas. */
 .servicios {
-  padding: var(--espacio-p5) 0;
-  background-color: var(--color-primario);
-}
-
-.servicios__contenido {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-lg);
-  max-width: var(--ancho-contenido);
-  margin-inline: auto;
+  background-color: var(--color-primario);
 }
 
 .servicios__carrusel {
@@ -417,7 +364,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio-md);
-  padding: var(--espacio-50);
+  padding: var(--relleno-tarjeta);
 }
 
 .tarjeta-servicio__titulo {
@@ -528,50 +475,13 @@
     --carrusel-por-vista: 2;
   }
 
-  .principios {
-    padding: var(--espacio-100) var(--espacio-lg) 0;
-  }
-
-  .principios__tarjeta {
-    padding: var(--espacio-50) var(--espacio-md);
-  }
-
   .principios__lista {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .equipo {
-    padding: 0 var(--espacio-lg) var(--espacio-100);
-  }
-
-  .equipo__contenido {
-    padding: 0 var(--espacio-sm) 0 0;
-  }
-
-  .miembro {
-    padding: 0 var(--espacio-sm) var(--espacio-50) 0;
-  }
-
-  .miembro + .miembro {
-    margin-inline-end: var(--espacio-sm);
-    padding: 0 0 var(--espacio-50);
-  }
-
-  .miembro__foto {
-    width: 100%;
   }
 
   /* El mínimo de 60vh es solo de escritorio */
   .cta {
     min-height: 0;
-  }
-
-  .cta__contenido {
-    padding: var(--espacio-xl);
-  }
-
-  .servicios {
-    padding: var(--espacio-100) var(--espacio-lg);
   }
 
   /* La imagen arriba (16:9) y el contenido debajo, como en móvil */
@@ -585,20 +495,20 @@
     aspect-ratio: var(--proporcion-imagen-servicio-apilada);
   }
 
-  .tarjeta-servicio__contenido {
-    padding: var(--espacio-lg);
-  }
+  .tarjeta-servicio__foto--penal { object-position: var(--encuadre-penal); }
+  .tarjeta-servicio__foto--laboral { object-position: var(--encuadre-laboral); }
+  .tarjeta-servicio__foto--familiar { object-position: var(--encuadre-familiar); }
+  .tarjeta-servicio__foto--mercantil { object-position: var(--encuadre-mercantil); }
+  .tarjeta-servicio__foto--civil { object-position: var(--encuadre-civil); }
+  .tarjeta-servicio__foto--corporativa { object-position: var(--encuadre-corporativa); }
+  .tarjeta-servicio__foto--inmobiliaria { object-position: var(--encuadre-inmobiliaria); }
 }
 
 /* Móvil */
 @media (max-width: 767px) {
   .hero {
     min-height: var(--alto-hero-movil);
-    padding: 0 var(--espacio-p6) max(var(--espacio-hero-movil), calc(var(--alto-banda) / 2 + var(--espacio-lg)));
-  }
-
-  .hero__titulo {
-    font-size: var(--texto-sm);
+    padding: 0 calc(var(--margen-pagina) + var(--relleno-tarjeta)) max(var(--espacio-hero-movil), calc(var(--alto-banda) / 2 + var(--espacio-lg)));
   }
 
   .hero__lema {
@@ -608,7 +518,7 @@
   /* El texto pasa encima de los logos; el alto cuenta una línea de texto.
      En :root para que el hero use el mismo valor. */
   :root {
-    --alto-banda: calc(var(--alto-logo-banda) + 2 * var(--espacio-md) + var(--espacio-sm) + var(--texto-xs) * var(--interlineado-base));
+    --alto-banda: calc(var(--alto-logo-banda) + 2 * (var(--relleno-tarjeta) + var(--grosor-fino)) + var(--espacio-sm) + var(--texto-xs) * var(--interlineado-base));
   }
 
   .banda {
@@ -631,48 +541,18 @@
   .nosotros {
     grid-template-columns: minmax(0, 1fr);
     min-height: 0;
-    margin-block: var(--espacio-p6);
   }
 
   .nosotros__imagen {
     height: var(--alto-imagen-nosotros-movil);
   }
 
-  .nosotros__texto {
-    font-size: var(--texto-xl);
-  }
-
+  .principios__lista,
   .equipo__miembros {
-    flex-direction: column;
-  }
-
-  .principios__tarjeta {
-    padding: var(--espacio-50) var(--espacio-sm);
-  }
-
-  .principios__lista {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .equipo__contenido {
-    padding: 0;
-  }
-
-  .miembro,
-  .miembro + .miembro {
-    margin: 0;
-    padding: 0 0 var(--espacio-50);
-  }
-
   /* El botón a todo el ancho y el enlace de WhatsApp debajo */
-  .cta {
-    margin-block-start: var(--espacio-p6);
-  }
-
-  .cta__contenido {
-    padding: var(--espacio-xl) var(--espacio-lg);
-  }
-
   .cta__acciones {
     flex-direction: column;
     align-items: stretch;

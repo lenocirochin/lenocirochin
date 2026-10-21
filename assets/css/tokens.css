@@ -44,7 +44,6 @@
   --texto-6xl: 90px;
 
   /* Pesos */
-  --peso-light: 300;
   --peso-regular: 400;
   --peso-medium: 500;
   --peso-bold: 700;
@@ -72,7 +71,6 @@
   /* Espaciado relativo al ancho del contenedor (rellenos de sección) */
   --espacio-p1: 1%;
   --espacio-p2: 2%;
-  --espacio-p3: 3%;
   --espacio-p4: 4%;
   --espacio-p5: 5%;
   --espacio-p6: 6%;
@@ -92,8 +90,10 @@
   --radio-md: 10px;
   --radio-circulo: 50%;
 
-  /* Contenedor */
-  --ancho-contenido: 1140px;
+  /* Bloques: borde exterior, relleno de tarjeta y separación entre bloques */
+  --margen-pagina: var(--espacio-p2);
+  --relleno-tarjeta: var(--espacio-xl);
+  --espacio-seccion: calc(2 * var(--espacio-xl));
 
   /* Cabecera */
   --ancho-logo-cabecera: 250px;
@@ -142,5 +142,7 @@
 @media (max-width: 767px) {
   :root {
     --alto-cabecera-fija: 130px;
+    --relleno-tarjeta: var(--espacio-lg);
+    --espacio-seccion: var(--espacio-xl);
   }
 }

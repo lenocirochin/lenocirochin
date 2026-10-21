@@ -133,13 +133,30 @@
     color: var(--color-blanco);
   }
 
+  /* Antetítulo: línea corta sobre un título */
+  .sp-eyebrow {
+    margin: 0;
+    color: var(--color-acento);
+    font-family: var(--fuente-titulos);
+    font-stretch: var(--ancho-fuente-titulos);
+    font-size: var(--texto-sm);
+  }
+
+  /* Tarjeta: todo bloque con fondo propio. Mismo borde exterior, radio y relleno
+     en toda la página, y --espacio-seccion por encima */
+  .sp-tarjeta {
+    margin: var(--espacio-seccion) var(--margen-pagina) 0;
+    padding: var(--relleno-tarjeta);
+    border-radius: var(--radio-md);
+  }
+
   /* Cabecera fija: espera fuera de pantalla hasta pasar 500px de scroll */
   .cabecera-fija {
     position: fixed;
     inset-block-start: var(--posicion-cabecera-fija-oculta);
     inset-inline: 0;
     z-index: var(--capa-cabecera);
-    padding: var(--espacio-p1) var(--espacio-p1) 0;
+    padding: var(--espacio-p1) var(--margen-pagina) 0;
     visibility: hidden;
   }
 
@@ -163,23 +180,14 @@
     margin-inline-start: auto;
   }
 
-  /* Pie: tarjeta azul separada de los bordes y barra de créditos debajo */
-  .pie {
-    display: flow-root; /* el margen superior de la tarjeta queda dentro del fondo suave */
-    background-color: var(--color-fondo-suave);
-  }
-
+  /* Pie: tarjeta azul (sp-tarjeta) y barra de créditos debajo, sobre blanco */
   .pie__principal {
-    margin: var(--espacio-p4) var(--espacio-p2) 0;
-    padding: var(--espacio-p3) var(--espacio-p5);
-    border-radius: var(--radio-md);
     background-color: var(--color-primario);
   }
 
   .pie__columnas {
     display: flex;
     flex-wrap: wrap;
-    padding: var(--espacio-p1) var(--espacio-p2);
   }
 
   .pie__columna {
@@ -236,7 +244,7 @@
     margin-block-end: var(--espacio-p6);
     color: var(--color-blanco);
     font-size: var(--texto-xl);
-    font-weight: var(--peso-bold);
+    font-weight: var(--peso-medium);
     line-height: var(--interlineado-compacto);
   }
 
@@ -313,15 +321,16 @@
     height: var(--texto-lg);
   }
 
-  /* Barra de créditos: copyright a la izquierda y SCNDAL a la derecha. El relleno
-     derecho deja libre el botón flotante de WhatsApp (su margen a cada lado y su ancho). */
+  /* Barra de créditos: copyright a la izquierda y SCNDAL a la derecha, alineados
+     al borde interior de la tarjeta. A la derecha deja libre el botón flotante de
+     WhatsApp (su margen a cada lado y su ancho) si es mayor. */
   .pie__legal {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--espacio-md);
-    padding: var(--espacio-md) var(--espacio-p2);
-    padding-inline-end: calc(2 * var(--margen-whatsapp-flotante) + var(--tamano-whatsapp-flotante));
+    padding: var(--espacio-md) calc(var(--margen-pagina) + var(--relleno-tarjeta));
+    padding-inline-end: max(calc(var(--margen-pagina) + var(--relleno-tarjeta)), calc(2 * var(--margen-whatsapp-flotante) + var(--tamano-whatsapp-flotante)));
   }
 
   .pie__firma img {
@@ -730,7 +739,7 @@
     }
 
     .cabecera-fija {
-      padding: var(--espacio-p4) var(--espacio-p4) 0;
+      padding: var(--espacio-p4) var(--margen-pagina) 0;
     }
 
     /* El logo y la navegación no caben en una línea: la nav baja debajo del logo */
@@ -753,10 +762,6 @@
 
     .cabecera-fija__logo img {
       width: var(--ancho-logo-cabecera-fija-movil);
-    }
-
-    .pie__principal {
-      margin-block-start: var(--espacio-p6);
     }
 
     .pie__columna {

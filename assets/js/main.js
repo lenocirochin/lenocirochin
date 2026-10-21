@@ -35,7 +35,8 @@ function iniciarCarrusel(carrusel) {
   pista.prepend(...originales.map(clonar));
   pista.append(...originales.map(clonar));
 
-  const paso = () => pista.children[1].offsetLeft - pista.children[0].offsetLeft;
+  // Con decimales: offsetLeft redondea y el error se acumula diapositiva a diapositiva
+  const paso = () => pista.children[1].getBoundingClientRect().left - pista.children[0].getBoundingClientRect().left;
 
   const marcarIndicador = () => {
     const activo = (((indice - total) % total) + total) % total;
