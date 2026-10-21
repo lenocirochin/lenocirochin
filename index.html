@@ -1,15 +1,16 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-MX">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Firma legal &#8212; Lenoci &amp; Rochin</title>
-  <meta name="description" content="Lenoci &amp; Rochin, somos una firma legal mexicana con presencia en todo México, preparados para darle solución a tus problemas.">
+  <title>Lenoci &amp; Rochin Abogados | Despacho jurídico en Ciudad de México</title>
+  <meta name="description" content="Abogados en CDMX especializados en derecho civil, mercantil, familiar, laboral, penal, corporativo e inmobiliario. Asesoría preventiva y litigio. Agenda tu consulta.">
+  <link rel="canonical" href="https://lenocirochin.com/">
 
-  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale" content="es_MX">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Firma legal &#8212; Lenoci &amp; Rochin">
-  <meta property="og:description" content="Lenoci &amp; Rochin, somos una firma legal mexicana con presencia en todo México, preparados para darle solución a tus problemas.">
+  <meta property="og:title" content="Lenoci &amp; Rochin Abogados | Despacho jurídico en Ciudad de México">
+  <meta property="og:description" content="Abogados en CDMX especializados en derecho civil, mercantil, familiar, laboral, penal, corporativo e inmobiliario. Asesoría preventiva y litigio. Agenda tu consulta.">
   <meta property="og:url" content="https://lenocirochin.com/">
   <meta property="og:site_name" content="Lenoci &amp; Rochin">
   <meta property="og:image" content="https://lenocirochin.com/assets/img/law.jpg">
@@ -17,14 +18,18 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/jpeg">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lenoci &amp; Rochin Abogados | Despacho jurídico en Ciudad de México">
+  <meta name="twitter:description" content="Abogados en CDMX especializados en derecho civil, mercantil, familiar, laboral, penal, corporativo e inmobiliario. Asesoría preventiva y litigio. Agenda tu consulta.">
 
   <link rel="icon" href="/assets/img/cropped-lenoci-favicon-32x32.png" sizes="32x32">
   <link rel="icon" href="/assets/img/cropped-lenoci-favicon-192x192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="/assets/img/cropped-lenoci-favicon-180x180.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112.5,300;112.5,400;112.5,500;112.5,600;112.5,700&family=Work+Sans:wght@400;500&display=swap">
+  <link rel="preload" href="/assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/work-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Póster del hero, el LCP en móvil: el atributo poster no admite srcset, así que se precarga
+       aquí la variante según el ancho de pantalla y el script tras el <video> la asigna -->
+  <link rel="preload" as="image" imagesrcset="/assets/img/hero-poster-768.webp 768w, /assets/img/hero-poster-1280.webp 1280w, /assets/img/hero-poster-1920.webp 1920w" imagesizes="100vw" fetchpriority="high">
 
   <link rel="stylesheet" href="/assets/css/tokens.css">
   <link rel="stylesheet" href="/assets/css/base.css">
@@ -33,6 +38,42 @@
   <link rel="stylesheet" href="/assets/css/paginas/inicio.css">
   <script src="/assets/js/vendor/lenis.min.js" defer></script>
   <script src="/assets/js/main.js" defer></script>
+
+  <!-- TODO: completar streetAddress y postalCode con la dirección del despacho -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Lenoci & Rochin Abogados",
+    "url": "https://lenocirochin.com/",
+    "logo": "https://lenocirochin.com/assets/img/cropped-lenoci-favicon-192x192.png",
+    "image": "https://lenocirochin.com/assets/img/law.jpg",
+    "telephone": "+52 55 3972 6224",
+    "email": "contacto@lenocirochin.com",
+    "areaServed": "Ciudad de México",
+    "sameAs": [
+      "https://www.instagram.com/lenocirochinabogados/",
+      "https://www.facebook.com/LenociRochinAbogados",
+      "https://www.linkedin.com/company/lenoci-rochin"
+    ],
+    "knowsAbout": [
+      "Derecho Civil",
+      "Derecho Mercantil",
+      "Asesoría Corporativa",
+      "Asesoría Inmobiliaria",
+      "Derecho Laboral",
+      "Derecho Familiar",
+      "Derecho Penal"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "",
+      "postalCode": "",
+      "addressLocality": "Ciudad de México",
+      "addressCountry": "MX"
+    }
+  }
+  </script>
 </head>
 <body>
   <a class="salto-contenido" href="#contenido">Skip to content</a>
@@ -71,7 +112,17 @@
 
   <main id="contenido">
     <section class="hero">
-      <video class="hero__video" src="/assets/video/hero.mp4" poster="/assets/img/hero-poster.webp" preload="metadata" autoplay muted playsinline loop aria-hidden="true"></video>
+      <video class="hero__video" src="/assets/video/hero.mp4" preload="metadata" autoplay muted playsinline loop aria-hidden="true"></video>
+      <script>
+        // Misma elección que el preload del <head> (imagesizes="100vw"): la variante más
+        // pequeña que cubre el ancho de pantalla en píxeles físicos
+        (() => {
+          const video = document.currentScript.previousElementSibling;
+          const necesario = innerWidth * devicePixelRatio;
+          const ancho = [768, 1280, 1920].find((variante) => variante >= necesario) || 1920;
+          video.poster = `/assets/img/hero-poster-${ancho}.webp`;
+        })();
+      </script>
       <p class="sp-eyebrow hero__antetitulo">Despacho Jurídico en Ciudad de México.</p>
       <h1 class="hero__lema">Estrategia clara, <br>resultados contundentes</h1>
     </section>
@@ -91,7 +142,7 @@
 
     <section class="sp-tarjeta nosotros" id="nosotros">
       <div class="nosotros__imagen">
-        <img src="/assets/img/photo-1436450412740-6b988f486c6b.webp" alt="" width="2070" height="1380">
+        <img src="/assets/img/nosotros-960.webp" srcset="/assets/img/nosotros-640.webp 640w, /assets/img/nosotros-960.webp 960w, /assets/img/nosotros-1400.webp 1400w" sizes="(max-width: 1024px) max(96vw, 60vh), max(48vw, 105vh)" alt="" width="1400" height="934">
       </div>
       <div class="nosotros__contenido">
         <p class="sp-eyebrow">Quiénes somos</p>
@@ -305,7 +356,7 @@
         </div>
 
         <div class="pie__columna pie__columna--servicios">
-          <h2 class="pie__titulo">Servicios</h2>
+          <p class="pie__titulo">Servicios</p>
           <ul class="pie__lista pie__lista--servicios">
             <li><a href="#servicios">Derecho Laboral</a></li>
             <li><a href="#servicios">Derecho Penal</a></li>
@@ -318,13 +369,13 @@
         </div>
 
         <div class="pie__columna">
-          <h2 class="pie__titulo">Contáctanos</h2>
-          <h3 class="pie__subtitulo">Llámanos</h3>
+          <p class="pie__titulo">Contáctanos</p>
+          <p class="pie__subtitulo">Llámanos</p>
           <a class="pie__dato pie__dato--telefono" href="https://wa.me/525539726224" target="_blank">
             <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
             <span>55 3972 6224</span>
           </a>
-          <h3 class="pie__subtitulo pie__subtitulo--email">Email</h3>
+          <p class="pie__subtitulo pie__subtitulo--email">Email</p>
           <a class="pie__dato" href="mailto:contacto@lenocirochin.com">
             <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
             <span>contacto@lenocirochin.com</span>
@@ -332,7 +383,7 @@
         </div>
 
         <div class="pie__columna pie__columna--informacion">
-          <h2 class="pie__titulo">Información</h2>
+          <p class="pie__titulo">Información</p>
           <ul class="pie__lista pie__lista--informacion">
             <li><a href="#nosotros">Nosotros</a></li>
             <!-- Abren los popups de cookies y privacidad (aún no construidos) -->
@@ -441,8 +492,7 @@
           <span class="confirmacion__icono" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
           </span>
-          <h3 class="confirmacion__titulo" tabindex="-1" data-confirmacion-titulo>¡Gracias, <span data-confirmacion-nombre></span>!</h3>
-          <p class="confirmacion__texto">Recibimos tu solicitud. Un abogado de nuestro equipo te contactará en menos de 24 horas hábiles.</p>
+          <p class="confirmacion__texto" data-confirmacion-texto>Recibimos tu solicitud. Un abogado de nuestro equipo te contactará en menos de 24 horas hábiles.</p>
           <div class="confirmacion__acciones">
             <button class="boton-principal" type="button" data-cerrar-popup>Cerrar</button>
             <a class="confirmacion__enlace" href="https://wa.me/525539726224" target="_blank">o escríbenos por WhatsApp</a>

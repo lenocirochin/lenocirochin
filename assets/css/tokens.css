@@ -17,17 +17,14 @@
   --color-icono-suave: #E6E6E6;     /* iconos sociales del pie */
   --color-texto-claro: color-mix(in srgb, var(--color-blanco) 80%, transparent);  /* texto secundario sobre azul */
   --color-gris-claro: color-mix(in srgb, var(--color-secundario) 25%, var(--color-blanco));  /* bordes de campos */
-  --color-gris-medio: color-mix(in srgb, var(--color-secundario) 70%, var(--color-blanco));  /* placeholders y textos auxiliares */
+  --color-gris-medio: color-mix(in srgb, var(--color-secundario) 86%, var(--color-blanco));  /* placeholders y textos auxiliares; 86 %: el mínimo con 4.5:1 sobre blanco y --color-fondo-suave */
   --color-fondo-modal: color-mix(in srgb, var(--color-primario) 80%, transparent);  /* fondo tras el popup */
   --color-linea-clara: color-mix(in srgb, var(--color-blanco) 30%, transparent);  /* líneas y bordes sobre azul */
   --color-error: #FF0000;           /* mensaje del formulario de contacto */
 
   /* Familias tipográficas
-
-     Carga, solo los pesos que se usan; Archivo en ancho semiexpandido (112,5 %):
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112.5,300;112.5,400;112.5,500;112.5,600;112.5,700&family=Work+Sans:wght@400;500&display=swap"> */
+     Autoalojadas en assets/fonts y declaradas con @font-face en base.css, solo con
+     los pesos que se usan; Archivo en ancho semiexpandido (112,5 %). */
   --fuente-titulos: "Archivo", sans-serif;     /* títulos, navegación, botones y etiquetas */
   --fuente-texto: "Work Sans", sans-serif;     /* textos, listas, campos y pie */
   --ancho-fuente-titulos: 112.5%;              /* Archivo semiexpandida */

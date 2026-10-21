@@ -1,4 +1,24 @@
 @layer base {
+  /* Fuentes autoalojadas: subconjunto latino, variables solo en el eje de peso.
+     Archivo viene fijada en ancho semiexpandido (112,5 %) y pesos 400 a 700;
+     Work Sans, pesos 400 a 500. index.html precarga las dos. */
+  @font-face {
+    font-family: "Archivo";
+    font-style: normal;
+    font-weight: 400 700;
+    font-stretch: 112.5%;
+    font-display: swap;
+    src: url("/assets/fonts/archivo.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Work Sans";
+    font-style: normal;
+    font-weight: 400 500;
+    font-display: swap;
+    src: url("/assets/fonts/work-sans.woff2") format("woff2");
+  }
+
   /* Reset */
   *,
   *::before,

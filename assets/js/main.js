@@ -253,11 +253,17 @@ function iniciarFormulario(formulario) {
     actualizarProgreso();
     if (enfocar) (pasos[actual].querySelector('input:checked') || pasos[actual].querySelector('input, textarea, button'))?.focus();
   };
-  // Solo la confirmación queda visible en la columna; el título recibe el foco para que se anuncie
+  // Solo la confirmación queda visible en la columna. El título, con el primer nombre, se
+  // inserta al mostrarla y recibe el foco para que se anuncie
   const confirmar = () => {
-    confirmacion.querySelector('[data-confirmacion-nombre]').textContent = formulario.elements.Nombre.value.trim().split(/\s+/)[0];
+    const titulo = document.createElement('h3');
+    titulo.className = 'confirmacion__titulo';
+    titulo.tabIndex = -1;
+    titulo.dataset.confirmacionTitulo = '';
+    titulo.textContent = `¡Gracias, ${formulario.elements.Nombre.value.trim().split(/\s+/)[0]}!`;
+    confirmacion.querySelector('[data-confirmacion-texto]').before(titulo);
     [...columna.children].forEach((hijo) => { hijo.hidden = hijo !== confirmacion; });
-    confirmacion.querySelector('[data-confirmacion-titulo]').focus();
+    titulo.focus();
     formulario.closest('dialog')?.addEventListener('close', () => formulario.reset(), { once: true });
   };
 
@@ -300,6 +306,7 @@ function iniciarFormulario(formulario) {
     formulario.querySelectorAll('[aria-invalid]').forEach((campo) => campo.removeAttribute('aria-invalid'));
     formulario.querySelectorAll('[data-tocado]').forEach((caja) => caja.removeAttribute('data-tocado'));
     [...columna.children].forEach((hijo) => { hijo.hidden = hijo === confirmacion; });
+    confirmacion.querySelector('[data-confirmacion-titulo]')?.remove();
     setTimeout(() => mostrar(0, false));
   });
   // Solo se envía desde el último paso

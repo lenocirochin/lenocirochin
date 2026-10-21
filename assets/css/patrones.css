@@ -251,6 +251,15 @@
     height: var(--texto-base);
   }
 
+  /* Títulos de columna: son párrafos, no encabezados del documento, pero se ven
+     como títulos */
+  .pie__titulo,
+  .pie__subtitulo {
+    margin-block-end: 0;
+    font-family: var(--fuente-titulos);
+    font-stretch: var(--ancho-fuente-titulos);
+  }
+
   .pie__titulo {
     margin-block-end: var(--espacio-md);
     color: var(--color-blanco);
