@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/nosotros", "destination": "/#nosotros", "statusCode": 301 },
+    { "source": "/nosotros/", "destination": "/#nosotros", "statusCode": 301 },
+    { "source": "/servicios", "destination": "/#servicios", "statusCode": 301 },
+    { "source": "/servicios/", "destination": "/#servicios", "statusCode": 301 },
+    { "source": "/contacto", "destination": "/#contacto", "statusCode": 301 },
+    { "source": "/contacto/", "destination": "/#contacto", "statusCode": 301 }
+  ]
+}
