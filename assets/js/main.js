@@ -159,20 +159,47 @@ document.querySelectorAll('[data-popup]').forEach((popup) => {
   });
 });
 
-// TODO: definir a dónde llegan los datos del formulario de contacto.
-const ENDPOINT_FORMULARIO = '';
+const ENDPOINT_FORMULARIO = '/api/contacto';
+const WHATSAPP = 'https://wa.me/525539726224';
 
-// Envío del formulario de contacto. Mientras no haya destino, avisa en el popup y no envía nada.
+// Envío del formulario de contacto. Mientras envía, el botón queda deshabilitado;
+// el resultado se avisa en el popup y, si salió bien, el formulario vuelve al primer paso.
 async function enviarFormulario(formulario) {
   const mensaje = formulario.querySelector('[data-mensaje]');
-  if (!ENDPOINT_FORMULARIO) {
-    mensaje.textContent = 'El envío del formulario aún no está configurado. Tus datos no se han enviado.';
-    mensaje.hidden = false;
-    return;
-  }
+  const boton = formulario.querySelector('[type="submit"]');
+  const textoBoton = boton.textContent;
   const datos = new FormData(formulario);
-  datos.set('Teléfono', `+52 ${datos.get('Teléfono')}`);
-  await fetch(ENDPOINT_FORMULARIO, { method: 'POST', body: datos });
+  mensaje.hidden = true;
+  boton.disabled = true;
+  boton.textContent = 'Enviando…';
+
+  const respuesta = await fetch(ENDPOINT_FORMULARIO, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nombre: datos.get('Nombre'),
+      correo: datos.get('Correo Electrónico'),
+      telefono: datos.get('Teléfono'),
+      mensaje: datos.get('Mensaje'),
+      medio: datos.get('marketing'),
+      sitio: datos.get('sitio'),
+    }),
+  }).catch(() => null);
+
+  boton.textContent = textoBoton;
+  boton.disabled = false;
+  if (respuesta?.ok) {
+    formulario.reset();
+    mensaje.textContent = 'Gracias, recibimos tu solicitud. Te contactaremos pronto.';
+  } else {
+    const enlace = document.createElement('a');
+    enlace.href = WHATSAPP;
+    enlace.target = '_blank';
+    enlace.textContent = 'WhatsApp';
+    mensaje.replaceChildren('No pudimos enviar tu solicitud. Intenta de nuevo o escríbenos por ', enlace, '.');
+  }
+  mensaje.classList.toggle('formulario__mensaje--exito', Boolean(respuesta?.ok));
+  mensaje.hidden = false;
 }
 
 // Máscara de entrada: cada 9 de la máscara es un dígito
@@ -247,6 +274,9 @@ function iniciarFormulario(formulario) {
     if (evento.target.closest('[data-siguiente]')) mostrar(actual + 1);
     if (evento.target.closest('[data-anterior]')) mostrar(actual - 1);
   });
+  // Al reiniciarse (tras un envío correcto) vuelve al primer paso; el evento llega
+  // antes de que se borren los valores, por eso espera un turno
+  formulario.addEventListener('reset', () => setTimeout(() => mostrar(0)));
   // Solo se envía desde el último paso
   formulario.addEventListener('submit', (evento) => {
     evento.preventDefault();

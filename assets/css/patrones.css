@@ -753,6 +753,15 @@
     font-size: var(--texto-sm);
   }
 
+  .formulario__mensaje--exito {
+    color: var(--color-primario);
+  }
+
+  .formulario__mensaje a {
+    color: var(--color-primario);
+    text-decoration: underline;
+  }
+
   /* Tablet */
   @media (max-width: 1024px) {
     .pie__titulo {
