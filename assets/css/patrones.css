@@ -147,6 +147,9 @@
   .sp-tarjeta {
     margin: var(--espacio-seccion) var(--margen-pagina) 0;
     padding: var(--relleno-tarjeta);
+    /* Contenido alineado a la izquierda y de --ancho-maximo-contenido como mucho: el
+       relleno derecho absorbe el sobrante. El % se resuelve contra el ancho de la página. */
+    padding-inline-end: max(var(--relleno-tarjeta), 100% - 2 * var(--margen-pagina) - var(--relleno-tarjeta) - var(--ancho-maximo-contenido));
     border-radius: var(--radio-md);
   }
 
@@ -212,7 +215,7 @@
   }
 
   .pie__texto {
-    margin: var(--espacio-p5) var(--espacio-p15) var(--espacio-p5) 0;
+    margin: var(--espacio-md) var(--espacio-xl) var(--espacio-md) 0;
     color: var(--color-blanco);
     font-size: var(--texto-sm);
     line-height: var(--interlineado-amplio);
@@ -241,7 +244,7 @@
   }
 
   .pie__titulo {
-    margin-block-end: var(--espacio-p6);
+    margin-block-end: var(--espacio-md);
     color: var(--color-blanco);
     font-size: var(--texto-xl);
     font-weight: var(--peso-medium);
@@ -255,7 +258,7 @@
   }
 
   .pie__subtitulo--email {
-    margin-block-start: var(--espacio-p10);
+    margin-block-start: var(--espacio-lg);
   }
 
   .pie__lista {
@@ -282,7 +285,7 @@
   }
 
   .pie__lista--servicios {
-    padding-inline-end: var(--espacio-p5);
+    padding-inline-end: var(--espacio-md);
     gap: var(--espacio-lista-servicios-pie);
     letter-spacing: var(--tracking-amplio);
   }
@@ -770,7 +773,7 @@
 
     .pie__columna--marca {
       gap: var(--espacio-columna-pie-movil);
-      padding-block: var(--espacio-p5);
+      padding-block: var(--espacio-md);
     }
 
     .pie__columna--servicios,
@@ -795,11 +798,11 @@
 
     .pie__lista--informacion {
       gap: var(--espacio-lista-informacion-pie-movil);
-      padding-block: var(--espacio-p2);
+      padding-block: var(--espacio-xs);
     }
 
     .pie__dato {
-      padding-block-end: var(--espacio-p10);
+      padding-block-end: var(--espacio-lg);
     }
 
     .pie__dato--telefono svg {

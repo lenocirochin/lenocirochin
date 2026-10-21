@@ -74,8 +74,6 @@
   --espacio-p4: 4%;
   --espacio-p5: 5%;
   --espacio-p6: 6%;
-  --espacio-p10: 10%;
-  --espacio-p15: 15%;
 
   /* Grosores de línea y borde */
   --grosor-fino: 1px;
@@ -90,10 +88,12 @@
   --radio-md: 10px;
   --radio-circulo: 50%;
 
-  /* Bloques: borde exterior, relleno de tarjeta y separación entre bloques */
+  /* Bloques: borde exterior, relleno de tarjeta, separación entre bloques y ancho
+     máximo del contenido dentro de una tarjeta */
   --margen-pagina: var(--espacio-p2);
   --relleno-tarjeta: var(--espacio-xl);
   --espacio-seccion: calc(2 * var(--espacio-xl));
+  --ancho-maximo-contenido: 1280px;
 
   /* Cabecera */
   --ancho-logo-cabecera: 250px;
