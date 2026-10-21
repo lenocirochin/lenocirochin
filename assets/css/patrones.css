@@ -830,13 +830,12 @@
     /* El logo y la navegación no caben en una línea: la nav baja debajo del logo */
     .cabecera-fija__barra {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       gap: var(--espacio-md);
       padding: var(--espacio-p5);
     }
 
     .cabecera-fija__nav {
-      align-self: center;
       margin-inline-start: 0;
     }
 
