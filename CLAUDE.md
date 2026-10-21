@@ -5,7 +5,9 @@
   publicado está hecho con WordPress, Elementor y JupiterX; aquí se reconstruye en HTML,
   CSS y JavaScript puros, sin framework ni paso de build.
 - Se despliega como sitio estático en Vercel, en la cuenta del cliente.
-- Páginas: /, /nosotros/, /servicios/ y /contacto/, cada una en su carpeta con index.html.
+- Es una sola página (landing): index.html. La navegación lleva a secciones de la misma
+  página. Las URLs antiguas (/nosotros/, /servicios/, /contacto/) redirigen con 301 desde
+  vercel.json.
 
 ## Git
 - No ejecutes `git add`, `git commit`, `git push` ni ningún comando de git.
