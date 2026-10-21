@@ -16,6 +16,9 @@
   --color-texto: #212529;           /* color de texto por defecto del tema */
   --color-fondo-suave: #F4F4F4;
   --color-icono-suave: #E6E6E6;     /* iconos sociales del pie */
+  --color-texto-claro: color-mix(in srgb, var(--color-blanco) 80%, transparent);  /* texto secundario sobre azul */
+  --color-gris-claro: color-mix(in srgb, var(--color-secundario) 25%, var(--color-blanco));  /* bordes de campos */
+  --color-gris-medio: color-mix(in srgb, var(--color-secundario) 70%, var(--color-blanco));  /* placeholders y textos auxiliares */
   --color-fondo-modal: color-mix(in srgb, var(--color-primario) 80%, transparent);  /* fondo tras el popup */
   --color-linea-clara: color-mix(in srgb, var(--color-blanco) 30%, transparent);  /* divisoria de la cabecera */
   --color-error: #FF0000;           /* mensaje del formulario de contacto */
@@ -66,6 +69,7 @@
   --espacio-sm: 10px;
   --espacio-md: 20px;
   --espacio-lg: 30px;
+  --espacio-xl: 40px;
   --espacio-parrafo: 1rem;
 
   /* Espaciado relativo al ancho del contenedor (rellenos de sección) */
@@ -75,7 +79,6 @@
   --espacio-p4: 4%;
   --espacio-p5: 5%;
   --espacio-p6: 6%;
-  --espacio-p8: 8%;
   --espacio-p10: 10%;
   --espacio-p15: 15%;
 
@@ -113,10 +116,11 @@
   /* Popups */
   --ancho-popup: 1000px;
   --alto-maximo-popup: 90vh;
-  --ancho-logo-popup: 35%;
-  --ancho-campo-popup: 95%;
-  --relleno-boton-popup: 20%;               /* lateral de "Siguiente" y "Back" */
-  --relleno-boton-enviar: 70px;
+  --ancho-logo-popup: 140px;
+  --ancho-lateral-popup: 40%;
+  --desenfoque-modal: 4px;
+  --alto-minimo-toque: 44px;                /* campos y botones cómodos de pulsar */
+  --opacidad-desactivado: 0.5;
 
   /* Capas */
   --capa-cabecera: 2;

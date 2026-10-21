@@ -365,9 +365,9 @@
     height: var(--texto-2xl);
   }
 
-  /* Popup de contacto: caja centrada a dos columnas sobre un fondo azul translúcido.
-     Cambio deliberado respecto al original (pantalla completa). Si el contenido
-     pasa del alto máximo, solo se desplaza la columna del formulario. */
+  /* Popup de contacto: caja a dos columnas sobre un fondo azul translúcido y
+     desenfocado. Entra con un leve desvanecido y desplazamiento hacia arriba.
+     Si pasa del alto máximo, solo se desplaza la columna del formulario. */
   .popup {
     width: 100%;
     max-width: min(var(--ancho-popup), 100% - 2 * var(--espacio-md));
@@ -376,11 +376,24 @@
     border: 0;
     border-radius: var(--radio-md);
     background: none;
+    box-shadow: var(--sombra-flotante);
     overflow: hidden;
+  }
+
+  .popup[open] {
+    animation: entrada-popup var(--duracion-base) ease-out;
+  }
+
+  @keyframes entrada-popup {
+    from {
+      opacity: 0;
+      transform: translateY(var(--espacio-xs));
+    }
   }
 
   .popup::backdrop {
     background-color: var(--color-fondo-modal);
+    backdrop-filter: blur(var(--desenfoque-modal));
   }
 
   .popup__contenido {
@@ -389,10 +402,16 @@
     max-height: var(--alto-maximo-popup);
   }
 
+  /* Cierre sobre la columna blanca, con 44px de área de toque */
   .popup__cerrar {
     position: absolute;
-    inset-block-start: var(--espacio-md);
-    inset-inline-end: var(--espacio-md);
+    inset-block-start: var(--espacio-sm);
+    inset-inline-end: var(--espacio-sm);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--alto-minimo-toque);
+    height: var(--alto-minimo-toque);
     padding: 0;
     border: 0;
     background: none;
@@ -400,37 +419,40 @@
   }
 
   .popup__cerrar svg {
-    width: var(--texto-2xl); /* original: 27px */
-    height: var(--texto-2xl);
-  }
-
-  .popup__lateral,
-  .popup__formulario {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: var(--espacio-lg);
+    width: var(--texto-lg);
+    height: var(--texto-lg);
   }
 
   .popup__lateral {
     display: flex;
+    flex: 0 0 var(--ancho-lateral-popup);
     flex-direction: column;
     gap: var(--espacio-md);
+    padding: var(--espacio-xl);
     background-color: var(--color-primario);
-  }
-
-  .popup__formulario {
-    overflow-y: auto;
-    background-color: var(--color-blanco);
   }
 
   .popup__logo {
     width: var(--ancho-logo-popup);
   }
 
+  .popup__lema {
+    margin: 0;
+    color: var(--color-texto-claro);
+  }
+
+  /* Teléfono y correo al pie de la columna, tras una línea fina */
   .popup__datos {
     display: flex;
     flex-direction: column;
     gap: var(--espacio-sm);
+    margin-block-start: auto;
+    padding-block-start: var(--espacio-md);
+    border-block-start: var(--grosor-fino) solid var(--color-linea-clara);
+  }
+
+  .popup__datos--final {
+    display: none;
   }
 
   .popup__dato {
@@ -452,6 +474,17 @@
     height: var(--texto-base);
   }
 
+  .popup__formulario {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: var(--espacio-lg);
+    min-width: 0;
+    padding: var(--espacio-xl);
+    overflow-y: auto;
+    background-color: var(--color-blanco);
+  }
+
   /* Contorno de foco propio, solo al navegar con teclado */
   .popup :focus {
     outline: none;
@@ -463,86 +496,189 @@
   }
 
   /* Formulario de contacto por pasos */
-  .formulario__campos {
+  .formulario__progreso {
     display: flex;
     flex-direction: column;
-    gap: var(--espacio-md);
+    gap: var(--espacio-xs);
+  }
+
+  .formulario__progreso-texto {
+    margin: 0;
+    color: var(--color-gris-medio);
+    font-size: var(--texto-sm);
+  }
+
+  .formulario__progreso-barra {
+    height: var(--grosor-grueso);
+    overflow: hidden;
+    background-color: var(--color-gris-claro);
+  }
+
+  /* El JS fija --progreso (fracción de pasos completados) */
+  .formulario__progreso-relleno {
+    display: block;
+    height: 100%;
+    background-color: var(--color-acento);
+    transform: scaleX(var(--progreso));
+    transform-origin: left;
+    transition: transform var(--duracion-base);
   }
 
   .formulario__campo {
-    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-xs);
+  }
+
+  .formulario__campo + .formulario__campo {
+    margin-block-start: var(--espacio-lg);
+  }
+
+  .formulario__opciones {
     min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
 
   .formulario__etiqueta {
-    display: block;
+    padding: 0;
     color: var(--color-primario);
     font-family: var(--fuente-titulos);
     font-stretch: var(--ancho-fuente-titulos);
-    font-size: var(--texto-xl);
+    font-size: var(--texto-sm);
   }
 
+  /* Solo borde inferior; pasa a naranja al enfocar */
   .formulario__control {
-    display: block;
-    width: var(--ancho-campo-popup);
-    margin-block-start: var(--espacio-xs); /* original: 5px */
+    width: 100%;
+    min-height: var(--alto-minimo-toque);
+    padding: var(--espacio-xs) 0;
     border: 0;
-    border-block-end: var(--grosor-grueso) solid var(--color-primario);
+    border-block-end: var(--grosor-fino) solid var(--color-gris-claro);
     border-radius: var(--radio-0);
     background: none;
-    color: var(--color-primario);
-    font-size: var(--texto-lg); /* original: 21px */
-    appearance: none;
+    color: var(--color-texto);
+    transition: border-color var(--duracion-base);
   }
 
-  /* Los botones de paso miden sus rellenos sobre el ancho de su caja, como en el original */
-  .formulario__acciones {
+  .formulario__control::placeholder {
+    color: var(--color-gris-medio);
+    opacity: 1;
+  }
+
+  .formulario__control:focus-visible {
+    border-block-end-color: var(--color-acento);
+    outline: none;
+  }
+
+  .formulario__control[aria-invalid="true"] {
+    border-block-end-color: var(--color-error);
+  }
+
+  .formulario__error {
+    margin: 0;
+    color: var(--color-error);
+    font-size: var(--texto-sm);
+  }
+
+  /* Opciones como chips: la radio queda encima, invisible, para teclado y lectores */
+  /* La leyenda de un fieldset queda fuera del flex: el hueco va en los chips */
+  .formulario__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacio-sm);
+    margin-block-start: var(--espacio-sm);
+  }
+
+  .formulario__chip {
+    position: relative;
+  }
+
+  .formulario__chip input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .formulario__chip span {
     display: flex;
     align-items: center;
-    padding-block-start: var(--espacio-sm);
-  }
-
-  .formulario__boton {
-    margin: var(--espacio-p8);
-    padding: var(--espacio-p5) var(--relleno-boton-popup);
-    background-color: var(--color-acento);
+    min-height: var(--alto-minimo-toque);
+    padding: 0 var(--espacio-md);
+    border: var(--grosor-fino) solid var(--color-gris-claro);
+    border-radius: var(--radio-sm);
     color: var(--color-primario);
-    font-size: var(--texto-md);
-    font-weight: var(--peso-bold);
+    transition: background-color var(--duracion-base), border-color var(--duracion-base), color var(--duracion-base);
   }
 
-  .formulario__boton:hover {
-    background-color: var(--color-secundario);
+  .formulario__chip:hover span {
+    border-color: var(--color-primario);
   }
 
-  .formulario__boton--anterior:hover {
+  .formulario__chip input:checked + span {
+    border-color: var(--color-primario);
     background-color: var(--color-primario);
+    color: var(--color-blanco);
+  }
+
+  .formulario__chip input:focus-visible + span {
+    outline: var(--grosor-grueso) solid var(--color-acento);
+    outline-offset: var(--grosor-grueso);
+  }
+
+  /* "Atrás" a la izquierda como enlace; el botón principal siempre a la derecha */
+  .formulario__acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--espacio-md);
+    margin-block-start: var(--espacio-xl);
+  }
+
+  .formulario__atras {
+    min-height: var(--alto-minimo-toque);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-primario);
+    font-weight: var(--peso-regular);
+    text-decoration: underline;
+    text-underline-offset: var(--espacio-xs);
+    transition: color var(--duracion-base);
+  }
+
+  .formulario__atras:hover {
     color: var(--color-acento);
   }
 
-  .formulario__enviar {
-    display: block;
-    width: 100%;
-    padding: var(--espacio-xs) var(--relleno-boton-enviar); /* original: 5px 70px */
+  .formulario__principal {
+    min-height: var(--alto-minimo-toque);
+    margin-inline-start: auto;
+    padding: 0 var(--espacio-lg);
     border: 0;
-    border-radius: var(--radio-md);
+    border-radius: var(--radio-sm);
     background-color: var(--color-primario);
-    color: var(--color-blanco); /* cambio deliberado: en el original, negro */
-    font-size: var(--texto-lg);
-    font-weight: var(--peso-semibold);
+    color: var(--color-blanco);
+    font-weight: var(--peso-medium);
+    transition: background-color var(--duracion-base), opacity var(--duracion-base);
   }
 
-  .formulario__enviar:hover {
-    background-color: var(--color-secundario);
-    color: var(--color-primario);
+  .formulario__principal:hover:not(:disabled) {
+    background-color: var(--color-acento);
+  }
+
+  .formulario__principal:disabled {
+    opacity: var(--opacidad-desactivado);
+    cursor: not-allowed;
   }
 
   .formulario__mensaje {
     margin: var(--espacio-md) 0 0;
-    padding: var(--espacio-md);
-    border: var(--grosor-fino) solid var(--color-error);
     color: var(--color-error);
-    text-align: center;
+    font-size: var(--texto-sm);
   }
 
   /* Tablet */
@@ -562,10 +698,6 @@
     .pie__dato--telefono svg {
       width: var(--texto-base);
       height: var(--texto-base);
-    }
-
-    .pie__lista--servicios {
-      display: none;
     }
 
     /* Cuatro columnas no caben: dos por fila */
@@ -695,7 +827,8 @@
       align-items: flex-start;
     }
 
-    /* Popup a pantalla completa: arriba el logo y el título, debajo el formulario */
+    /* Popup a pantalla completa: franja superior con logo y título; el formulario
+       se desplaza con los botones fijos al final y el contacto pasa abajo */
     .popup {
       max-width: none;
       max-height: none;
@@ -709,22 +842,43 @@
       height: 100%;
     }
 
-    .popup__lateral,
-    .popup__formulario {
+    .popup__lateral {
       flex: none;
+      gap: var(--espacio-sm);
+      padding: var(--espacio-md) var(--espacio-lg);
     }
 
-    .popup__formulario {
-      flex: 1 1 auto;
-      min-height: 0;
-    }
-
-    .popup__datos {
+    .popup__lema,
+    .popup__lateral .popup__datos {
       display: none;
     }
 
     .popup__cerrar {
       fill: var(--color-blanco);
+    }
+
+    .popup__formulario {
+      flex: 1 1 auto;
+      min-height: 0;
+      padding: var(--espacio-lg);
+    }
+
+    .popup__datos--final {
+      display: flex;
+      margin-block-start: 0;
+      border-block-start-color: var(--color-gris-claro);
+    }
+
+    .popup__datos--final .popup__dato {
+      color: var(--color-primario);
+      fill: var(--color-primario);
+    }
+
+    .formulario__acciones {
+      position: sticky;
+      inset-block-end: 0;
+      padding-block: var(--espacio-sm);
+      background-color: var(--color-blanco);
     }
   }
 }

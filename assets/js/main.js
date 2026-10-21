@@ -175,24 +175,47 @@ document.querySelectorAll('[data-mascara]').forEach((campo) => {
   campo.addEventListener('input', () => aplicarMascara(campo));
 });
 
-// Formulario por pasos: "Siguiente" se activa cuando los campos del paso son válidos, como en el original
+// Formulario por pasos: "Siguiente" se activa cuando los campos del paso son válidos, como en el original.
+// Muestra el progreso ("Paso X de N") y, al salir de un campo inválido, su mensaje de error debajo.
 function iniciarFormulario(formulario) {
   const pasos = [...formulario.querySelectorAll('[data-paso]')];
+  const progreso = formulario.parentElement.querySelector('[data-progreso]');
   let actual = 0;
 
   const esValido = () => [...pasos[actual].querySelectorAll('input, textarea, select')].every((campo) => campo.checkValidity());
   const actualizarBotones = () => {
     pasos[actual].querySelectorAll('[data-siguiente]').forEach((boton) => { boton.disabled = !esValido(); });
   };
+  const actualizarProgreso = () => {
+    if (!progreso) return;
+    progreso.querySelector('[data-progreso-texto]').textContent = `Paso ${actual + 1} de ${pasos.length}`;
+    progreso.style.setProperty('--progreso', (actual + 1) / pasos.length);
+  };
+  // El texto del error es el del navegador, en el idioma del visitante
+  const mostrarError = (campo) => {
+    const error = campo.closest('[data-campo]')?.querySelector('[data-error]');
+    if (!error) return;
+    const valido = campo.checkValidity();
+    error.textContent = valido ? '' : campo.validationMessage;
+    error.hidden = valido;
+    campo.setAttribute('aria-invalid', String(!valido));
+  };
   const mostrar = (indice) => {
     pasos[actual].hidden = true;
     actual = indice;
     pasos[actual].hidden = false;
     actualizarBotones();
-    pasos[actual].querySelector('input, textarea, select, button')?.focus();
+    actualizarProgreso();
+    (pasos[actual].querySelector('input:checked') || pasos[actual].querySelector('input, textarea, select, button'))?.focus();
   };
 
-  formulario.addEventListener('input', actualizarBotones);
+  formulario.addEventListener('input', (evento) => {
+    if (evento.target.getAttribute('aria-invalid') === 'true') mostrarError(evento.target);
+    actualizarBotones();
+  });
+  formulario.addEventListener('focusout', (evento) => {
+    if (evento.target.matches('.formulario__control')) mostrarError(evento.target);
+  });
   formulario.addEventListener('click', (evento) => {
     if (evento.target.closest('[data-siguiente]')) mostrar(actual + 1);
     if (evento.target.closest('[data-anterior]')) mostrar(actual - 1);
@@ -203,6 +226,7 @@ function iniciarFormulario(formulario) {
     if (actual === pasos.length - 1) enviarFormulario(formulario);
   });
   actualizarBotones();
+  actualizarProgreso();
 }
 
 document.querySelectorAll('[data-formulario]').forEach(iniciarFormulario);
