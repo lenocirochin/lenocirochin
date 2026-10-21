@@ -20,7 +20,7 @@
   /* Principios, Equipo y Servicios */
   --espacio-15: 15px;
   --ancho-foto-equipo: 264px;
-  --ancho-texto-principios: 65ch;
+  --ancho-texto-parrafo: 65ch;
   /* Encuadre de cada ilustración de Servicios en el formato 16:9 apilado */
   --encuadre-penal: center 65%;
   --encuadre-laboral: center 50%;
@@ -162,6 +162,7 @@
 }
 
 .nosotros__texto {
+  max-width: var(--ancho-texto-parrafo);
   margin: 0;
   color: var(--color-texto);
   font-size: var(--texto-md);
@@ -177,7 +178,7 @@
 }
 
 .principios__texto {
-  max-width: var(--ancho-texto-principios);
+  max-width: var(--ancho-texto-parrafo);
   margin: 0;
 }
 
