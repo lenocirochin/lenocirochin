@@ -18,6 +18,9 @@
   --alto-nosotros: 100vh;
   --alto-imagen-nosotros-movil: 50vh;
   --proporcion-imagen-servicio-apilada: 16 / 9;  /* tablet y móvil */
+  --alto-minimo-cta: 60vh;
+  --ancho-contenido-cta: 600px;
+  --color-velo-cta: color-mix(in srgb, var(--color-primario) 85%, transparent);
 
   /* Secciones traídas de las páginas Nosotros y Servicios del original */
   --color-marino-profundo: #051B34;
@@ -34,9 +37,6 @@
   --relleno-texto-principios: 25%;
   --ancho-foto-equipo: 264px;
   --alto-foto-equipo: 250px;
-  --ancho-titulo-solicitud: 34%;          /* cabe "Solicita Atención" en una línea (347px) desde 1025px */
-  --ancho-titulo-solicitud-tablet: 50%;
-  --alto-boton-solicitud: 60px;
 }
 
 /* Carrusel */
@@ -194,8 +194,7 @@
 }
 
 .principios__contenido,
-.equipo__contenido,
-.solicitud__contenido {
+.equipo__contenido {
   max-width: var(--ancho-contenido);
   margin-inline: auto;
 }
@@ -304,47 +303,93 @@
   text-align: center;
 }
 
-/* Solicitud de atención */
-.solicitud {
-  padding: var(--espacio-p4) 0;
-  background-color: var(--color-primario);
-}
-
-.solicitud__contenido {
+/* Llamada final: tarjeta con la foto del hero bajo un velo azul y el contenido a
+   la izquierda. Mismo margen lateral y radio que la tarjeta del pie.
+   Cambio deliberado respecto al original. */
+.cta {
+  position: relative;
   display: flex;
   align-items: center;
+  min-height: var(--alto-minimo-cta);
+  margin: var(--espacio-p4) var(--espacio-p2);
+  overflow: hidden;
+  border-radius: var(--radio-md);
 }
 
-.solicitud__titulo {
-  flex: 0 0 var(--ancho-titulo-solicitud);
-  line-height: var(--interlineado-ajustado);
-}
-
-.solicitud__accion {
-  flex: 1 1 0;
-}
-
-.solicitud__accion-interior {
-  padding: 0 var(--espacio-p5);
-}
-
-.boton-solicitud {
+.cta__fondo {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: var(--alto-boton-solicitud);
-  padding: var(--espacio-sm) var(--espacio-lg);
-  border: var(--grosor-grueso) solid var(--color-blanco);
-  border-radius: var(--radio-sm);
-  background: none;
-  color: var(--color-blanco);
-  font-size: var(--texto-lg);
-  font-weight: var(--peso-semibold);
-  line-height: var(--interlineado-titulo);
+  height: 100%;
+  object-fit: cover;
 }
 
-.boton-solicitud:hover {
-  border-color: transparent;
+.cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-velo-cta);
+}
+
+.cta__contenido {
+  position: relative;
+  z-index: var(--capa-contenido);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-md);
+  max-width: calc(var(--ancho-contenido-cta) + 4 * var(--espacio-xl));
+  padding: var(--espacio-xl) calc(2 * var(--espacio-xl));
+}
+
+.cta__antetitulo {
+  margin: 0;
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-stretch: var(--ancho-fuente-titulos);
+  font-size: var(--texto-sm);
+}
+
+.cta__texto {
+  margin: 0;
+  color: var(--color-texto-claro);
+  font-size: var(--texto-md);
+  line-height: var(--interlineado-texto);
+}
+
+.cta__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-md) var(--espacio-lg);
+  margin-block-start: var(--espacio-sm);
+}
+
+/* Mismo botón principal que el del modal, en blanco */
+.cta__boton {
+  min-height: var(--alto-minimo-toque);
+  padding: 0 var(--espacio-lg);
+  border: 0;
+  border-radius: var(--radio-sm);
   background-color: var(--color-blanco);
   color: var(--color-primario);
+  font-weight: var(--peso-medium);
+  transition: background-color var(--duracion-base), color var(--duracion-base);
+}
+
+.cta__boton:hover {
+  background-color: var(--color-acento);
+  color: var(--color-blanco);
+}
+
+.cta__enlace {
+  color: var(--color-blanco);
+  text-decoration: underline;
+  text-underline-offset: var(--espacio-xs);
+  transition: color var(--duracion-base);
+}
+
+.cta__enlace:hover {
+  color: var(--color-acento);
 }
 
 /* Servicios: sección azul con un área por tarjeta en un carrusel automático.
@@ -524,16 +569,13 @@
     width: 100%;
   }
 
-  .solicitud {
-    padding: var(--espacio-100) var(--espacio-lg);
+  /* El mínimo de 60vh es solo de escritorio */
+  .cta {
+    min-height: 0;
   }
 
-  .solicitud__titulo {
-    flex-basis: var(--ancho-titulo-solicitud-tablet);
-  }
-
-  .solicitud__accion-interior {
-    padding: 0;
+  .cta__contenido {
+    padding: var(--espacio-xl);
   }
 
   .servicios {
@@ -608,7 +650,6 @@
     font-size: var(--texto-xl); /* original: 22px */
   }
 
-  .solicitud__contenido,
   .equipo__miembros {
     flex-direction: column;
   }
@@ -631,13 +672,18 @@
     padding: 0 0 var(--espacio-50);
   }
 
-  .solicitud__titulo {
-    flex-basis: auto;
-    padding-block-end: var(--espacio-lg);
+  /* El botón a todo el ancho y el enlace de WhatsApp debajo */
+  .cta {
+    margin-block: var(--espacio-p6);
   }
 
-  .solicitud__accion {
-    width: 100%;
+  .cta__contenido {
+    padding: var(--espacio-xl) var(--espacio-lg);
+  }
+
+  .cta__acciones {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   /* Los controles centrados */

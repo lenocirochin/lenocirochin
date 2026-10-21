@@ -301,13 +301,15 @@
       </div>
     </section>
 
-    <section class="solicitud" id="contacto">
-      <div class="solicitud__contenido">
-        <h2 class="sp-titulo-seccion sp-titulo-seccion--claro solicitud__titulo">Solicita Atención <br>Personalizada</h2>
-        <div class="solicitud__accion">
-          <div class="solicitud__accion-interior">
-            <button class="boton-solicitud" type="button" data-abrir-popup="popup-contacto">Enviar solicitud</button>
-          </div>
+    <section class="cta" id="contacto">
+      <img class="cta__fondo" src="/assets/img/hero-poster.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+      <div class="cta__contenido">
+        <p class="cta__antetitulo">Atención personalizada</p>
+        <h2 class="sp-titulo-seccion sp-titulo-seccion--claro">Hablemos de tu caso</h2>
+        <p class="cta__texto">Agenda una primera conversación con nuestro equipo y recibe una estrategia clara desde el inicio.</p>
+        <div class="cta__acciones">
+          <button class="cta__boton" type="button" data-abrir-popup="popup-contacto">Enviar solicitud</button>
+          <a class="cta__enlace" href="https://wa.me/525539726224" target="_blank">o escríbenos por WhatsApp</a>
         </div>
       </div>
     </section>
@@ -416,19 +418,19 @@
       </div>
       <div class="popup__formulario">
         <div class="formulario__progreso" data-progreso>
-          <p class="formulario__progreso-texto" aria-live="polite" data-progreso-texto>Paso 1 de 5</p>
+          <p class="formulario__progreso-texto" aria-live="polite" data-progreso-texto>Paso 1 de 4</p>
           <div class="formulario__progreso-barra"><span class="formulario__progreso-relleno"></span></div>
         </div>
         <form class="formulario" novalidate data-formulario>
           <div class="formulario__paso" data-paso>
               <div class="formulario__campo" data-campo>
                 <label class="formulario__etiqueta" for="contacto-nombre">Déjanos tu nombre completo*</label>
-                <input class="formulario__control" id="contacto-nombre" name="Nombre" type="text" placeholder="Nombre y Apellido." required aria-describedby="error-nombre">
+                <input class="formulario__control" id="contacto-nombre" data-error-texto="Escribe tu nombre completo" name="Nombre" type="text" placeholder="Nombre y Apellido." required aria-describedby="error-nombre">
                 <p class="formulario__error" id="error-nombre" hidden data-error></p>
               </div>
               <div class="formulario__campo" data-campo>
                 <label class="formulario__etiqueta" for="contacto-correo">¿Cuál es tu correo electrónico?*</label>
-                <input class="formulario__control" id="contacto-correo" name="Correo Electrónico" type="email" placeholder="Correo Electrónico" required aria-describedby="error-correo">
+                <input class="formulario__control" id="contacto-correo" data-error-texto="Escribe un correo válido, por ejemplo nombre@dominio.com" name="Correo Electrónico" type="email" placeholder="Correo Electrónico" required aria-describedby="error-correo">
                 <p class="formulario__error" id="error-correo" hidden data-error></p>
               </div>
             <div class="formulario__acciones">
@@ -438,7 +440,7 @@
           <div class="formulario__paso" hidden data-paso>
               <div class="formulario__campo" data-campo>
                 <label class="formulario__etiqueta" for="contacto-telefono">Déjanos un número de teléfono.*</label>
-                <input class="formulario__control" id="contacto-telefono" name="Teléfono" type="tel" pattern="\(\+\d{2}\) \d{2}-\d{4}-\d{4}" required data-mascara="(+99) 99-9999-9999" aria-describedby="error-telefono">
+                <input class="formulario__control" id="contacto-telefono" data-error-texto="Escribe un teléfono de 10 dígitos" name="Teléfono" type="tel" pattern="\(\+\d{2}\) \d{2}-\d{4}-\d{4}" required data-mascara="(+99) 99-9999-9999" aria-describedby="error-telefono">
                 <p class="formulario__error" id="error-telefono" hidden data-error></p>
               </div>
             <div class="formulario__acciones">
@@ -449,29 +451,27 @@
           <div class="formulario__paso" hidden data-paso>
               <div class="formulario__campo" data-campo>
                 <label class="formulario__etiqueta" for="contacto-mensaje">Déjanos saber para qué nos necesitas.*</label>
-                <textarea class="formulario__control" id="contacto-mensaje" name="Mensaje" required aria-describedby="error-mensaje"></textarea>
+                <textarea class="formulario__control" id="contacto-mensaje" data-error-texto="Cuéntanos brevemente tu caso" name="Mensaje" required aria-describedby="error-mensaje"></textarea>
                 <p class="formulario__error" id="error-mensaje" hidden data-error></p>
               </div>
             <div class="formulario__acciones">
+              <button class="formulario__atras" type="button" data-anterior>Atrás</button>
               <button class="formulario__principal" type="button" data-siguiente>Siguiente</button>
             </div>
           </div>
           <div class="formulario__paso" hidden data-paso>
-            <fieldset class="formulario__campo formulario__opciones">
+            <fieldset class="formulario__campo formulario__opciones" aria-describedby="error-medio" data-campo data-error-texto="Elige una opción">
               <legend class="formulario__etiqueta">¿Cómo te enteraste de nosotros?*</legend>
               <div class="formulario__chips">
-                <label class="formulario__chip"><input type="radio" name="marketing" value="Eventos" required checked><span>Eventos</span></label>
+                <label class="formulario__chip"><input type="radio" name="marketing" value="Eventos" required><span>Eventos</span></label>
                 <label class="formulario__chip"><input type="radio" name="marketing" value="Redes sociales"><span>Redes sociales</span></label>
                 <label class="formulario__chip"><input type="radio" name="marketing" value="Google"><span>Google</span></label>
                 <label class="formulario__chip"><input type="radio" name="marketing" value="Recomendación"><span>Recomendación</span></label>
               </div>
+              <p class="formulario__error" id="error-medio" hidden data-error></p>
             </fieldset>
             <div class="formulario__acciones">
-              <button class="formulario__principal" type="button" data-siguiente>Siguiente</button>
-            </div>
-          </div>
-          <div class="formulario__paso" hidden data-paso>
-            <div class="formulario__acciones">
+              <button class="formulario__atras" type="button" data-anterior>Atrás</button>
               <button class="formulario__principal" type="submit">Enviar</button>
             </div>
           </div>

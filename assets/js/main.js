@@ -184,19 +184,20 @@ function iniciarFormulario(formulario) {
 
   const esValido = () => [...pasos[actual].querySelectorAll('input, textarea, select')].every((campo) => campo.checkValidity());
   const actualizarBotones = () => {
-    pasos[actual].querySelectorAll('[data-siguiente]').forEach((boton) => { boton.disabled = !esValido(); });
+    pasos[actual].querySelectorAll('[data-siguiente], [type="submit"]').forEach((boton) => { boton.disabled = !esValido(); });
   };
   const actualizarProgreso = () => {
     if (!progreso) return;
     progreso.querySelector('[data-progreso-texto]').textContent = `Paso ${actual + 1} de ${pasos.length}`;
     progreso.style.setProperty('--progreso', (actual + 1) / pasos.length);
   };
-  // El texto del error es el del navegador, en el idioma del visitante
+  // Cada campo (o grupo de opciones) lleva su texto de error en data-error-texto
   const mostrarError = (campo) => {
-    const error = campo.closest('[data-campo]')?.querySelector('[data-error]');
+    const caja = campo.closest('[data-campo]');
+    const error = caja?.querySelector('[data-error]');
     if (!error) return;
     const valido = campo.checkValidity();
-    error.textContent = valido ? '' : campo.validationMessage;
+    error.textContent = valido ? '' : (campo.dataset.errorTexto || caja.dataset.errorTexto);
     error.hidden = valido;
     campo.setAttribute('aria-invalid', String(!valido));
   };
@@ -213,8 +214,18 @@ function iniciarFormulario(formulario) {
     if (evento.target.getAttribute('aria-invalid') === 'true') mostrarError(evento.target);
     actualizarBotones();
   });
+  // Al elegir una opción se limpia el error del grupo
+  formulario.addEventListener('change', (evento) => {
+    if (evento.target.type === 'radio') {
+      formulario.querySelectorAll(`[name="${evento.target.name}"]`).forEach((opcion) => opcion.removeAttribute('aria-invalid'));
+      mostrarError(evento.target);
+    }
+  });
+  // Al salir de un campo, o del grupo de opciones sin haber elegido ninguna
   formulario.addEventListener('focusout', (evento) => {
-    if (evento.target.matches('.formulario__control')) mostrarError(evento.target);
+    const campo = evento.target;
+    if (campo.matches('.formulario__control')) mostrarError(campo);
+    if (campo.type === 'radio' && !campo.closest('[data-campo]').contains(evento.relatedTarget)) mostrarError(campo);
   });
   formulario.addEventListener('click', (evento) => {
     if (evento.target.closest('[data-siguiente]')) mostrar(actual + 1);
