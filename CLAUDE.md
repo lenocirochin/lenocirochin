@@ -32,21 +32,19 @@
     assets/css/base.css           el reset y los estilos de elemento, únicos
     assets/css/patrones.css       el vocabulario compartido, clases sp-*
     assets/css/interacciones.css  las clases que consulta el JavaScript
-  Lo propio de una página va en su hoja dentro de assets/css/paginas/
-  (inicio.css, nosotros.css, servicios.css, contacto.css), enlazada solo desde
-  esa página. No hay ni debe haber hojas globales de página: el orden de capas
-  (base, patrones, y las hojas de página fuera de toda capa) hace que una hoja de
-  página siempre pueda ajustar un patrón con una regla normal, sin !important ni
-  selectores inflados.
+  Lo propio de la página va en assets/css/paginas/inicio.css. No hay ni debe
+  haber hojas globales de página: el orden de capas (base, patrones, e inicio.css
+  fuera de toda capa) hace que inicio.css siempre pueda ajustar un patrón con una
+  regla normal, sin !important ni selectores inflados.
   El orden de capas se declara una sola vez, al inicio de tokens.css
   (`@layer base, patrones;`), y base.css y patrones.css envuelven su contenido en
-  su capa. Cada página enlaza tokens, base, patrones, interacciones y su propia
-  hoja, en ese orden.
-- Un patrón sube a patrones.css cuando lo piden dos páginas, no antes. Lo que
-  solo usa una se queda en su hoja de página por evidente que parezca.
+  su capa. index.html enlaza tokens, base, patrones, interacciones e inicio.css,
+  en ese orden.
+- Un estilo sube a patrones.css cuando lo usan dos o más componentes o secciones;
+  lo que solo usa una sección se queda en inicio.css.
 - No inventes valores fuera del sistema: usa los tokens de tokens.css. Si un
   valor no está, no lo escribas suelto: decide si toca añadirlo al sistema.
-- Si un cambio toca un patrón compartido y afectaría a otras páginas, no lo
+- Si un cambio toca un patrón compartido y afectaría a otras secciones, no lo
   toques: aplica el override acotado a la sección y repórtalo.
 
 ## Imágenes
