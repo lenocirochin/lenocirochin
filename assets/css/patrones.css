@@ -195,16 +195,17 @@
     background-color: var(--color-primario);
   }
 
+  /* Mismo hueco entre todas las columnas, también entre la marca y Servicios */
   .pie__columnas {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: var(--columnas-pie);
+    column-gap: var(--espacio-xl);
   }
 
   .pie__columna {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: var(--ancho-columna-pie);
   }
 
   .pie__columna--marca,
@@ -222,7 +223,7 @@
   }
 
   .pie__texto {
-    margin: var(--espacio-md) var(--espacio-xl) var(--espacio-md) 0;
+    margin: var(--espacio-md) 0;
     color: var(--color-blanco);
     font-size: var(--texto-sm);
     line-height: var(--interlineado-amplio);
@@ -769,11 +770,12 @@
 
     /* Cuatro columnas no caben: dos por fila */
     .pie__columnas {
-      row-gap: var(--espacio-lg);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--espacio-lg) 0;
     }
 
-    .pie__columna {
-      width: var(--ancho-columna-pie-tablet);
+    .pie__texto {
+      margin-inline-end: var(--espacio-xl);
     }
   }
 
@@ -838,8 +840,8 @@
       width: var(--ancho-logo-cabecera-fija-movil);
     }
 
-    .pie__columna {
-      width: 100%;
+    .pie__columnas {
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .pie__columna--marca {

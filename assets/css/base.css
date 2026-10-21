@@ -93,6 +93,13 @@
     text-decoration: none;
   }
 
+  /* hidden oculta siempre, aunque el elemento tenga un display propio en otra hoja.
+     El !important en la capa base gana a cualquier regla de patrones o de página;
+     es una excepción deliberada, como la de "reducir movimiento". */
+  [hidden] {
+    display: none !important;
+  }
+
   /* Destinos de ancla: el título queda visible bajo la cabecera fija */
   section[id] {
     scroll-margin-top: calc(var(--alto-cabecera-fija) + var(--espacio-md));

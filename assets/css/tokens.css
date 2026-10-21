@@ -107,8 +107,7 @@
   --alto-cabecera-fija: 63px;               /* enlaces de 43px más --espacio-sm arriba y abajo */
 
   /* Pie */
-  --ancho-columna-pie: 25%;
-  --ancho-columna-pie-tablet: 50%;
+  --columnas-pie: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr));  /* escritorio: la marca algo más ancha */
   --ancho-logo-pie: 80%;
   --ancho-firma-agencia: 200px;
   --espacio-columna-pie-movil: 25px;
