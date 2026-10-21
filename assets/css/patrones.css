@@ -553,6 +553,7 @@
     min-width: 0;
     padding: var(--espacio-xl);
     overflow-y: auto;
+    overscroll-behavior: contain; /* al llegar al final no desplaza la página de detrás */
     background-color: var(--color-blanco);
   }
 

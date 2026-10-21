@@ -110,18 +110,50 @@ if (videoHero) {
   if (sinMovimiento.matches) ajustarVideo();
 }
 
+// Desplazamiento suave con inercia (Lenis) para la rueda del ratón y el trackpad.
+// En pantallas táctiles el desplazamiento sigue siendo nativo; con "reducir
+// movimiento" Lenis no se activa.
+const DURACION_DESPLAZAMIENTO = 1.1; // segundos
+const CURVA_DESPLAZAMIENTO = (t) => 1 - (1 - t) ** 4; // salida suave
+
+const lenis = sinMovimiento.matches || !window.Lenis ? null : new Lenis({
+  duration: DURACION_DESPLAZAMIENTO,
+  easing: CURVA_DESPLAZAMIENTO,
+  syncTouch: false,
+  autoRaf: true,
+});
+
+// Enlaces a secciones: Lenis descuenta el scroll-margin-top de la sección, el mismo
+// desfase de la cabecera fija que usa el salto nativo. El resto de anclas (el
+// enlace para saltar al contenido) sigue con el comportamiento nativo.
+if (lenis) {
+  document.querySelectorAll('a[href^="#"]').forEach((enlace) => {
+    const destino = document.getElementById(enlace.hash.slice(1));
+    if (!destino?.matches('section')) return;
+    enlace.addEventListener('click', (evento) => {
+      evento.preventDefault();
+      lenis.scrollTo(destino);
+      history.pushState(null, '', enlace.hash);
+    });
+  });
+}
+
 // Popups: los abre cualquier botón con data-abrir-popup="<id del dialog>". Se cierran con su
 // botón, con Escape (nativo de <dialog>) o con un clic fuera del contenido; al cerrar, el foco
-// vuelve al botón que los abrió.
+// vuelve al botón que los abrió. Mientras están abiertos Lenis se detiene y la página
+// no se mueve; la columna del formulario lleva data-lenis-prevent para desplazarse
+// de forma nativa.
 document.querySelectorAll('[data-abrir-popup]').forEach((boton) => {
   const popup = document.getElementById(boton.dataset.abrirPopup);
   boton.addEventListener('click', () => {
     popup.showModal();
+    lenis?.stop();
     popup.addEventListener('close', () => boton.focus(), { once: true });
   });
 });
 
 document.querySelectorAll('[data-popup]').forEach((popup) => {
+  popup.addEventListener('close', () => lenis?.start());
   popup.addEventListener('click', (evento) => {
     if (evento.target === popup || evento.target.closest('[data-cerrar-popup]')) popup.close();
   });
