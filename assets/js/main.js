@@ -111,6 +111,23 @@ function iniciarCarrusel(carrusel) {
 
 document.querySelectorAll('[data-carrusel]').forEach(iniciarCarrusel);
 
+// Video del hero: con "reducir movimiento" no se reproduce y se ve solo el póster
+const videoHero = document.querySelector('.hero__video');
+
+if (videoHero) {
+  const ajustarVideo = () => {
+    if (sinMovimiento.matches) {
+      videoHero.removeAttribute('autoplay');
+      videoHero.load();
+    } else {
+      videoHero.autoplay = true;
+      videoHero.play();
+    }
+  };
+  sinMovimiento.addEventListener('change', ajustarVideo);
+  if (sinMovimiento.matches) ajustarVideo();
+}
+
 // Popups: los abre cualquier botón con data-abrir-popup="<id del dialog>". Se cierran con su
 // botón, con Escape (nativo de <dialog>) o con un clic fuera del contenido; al cerrar, el foco
 // vuelve al botón que los abrió.

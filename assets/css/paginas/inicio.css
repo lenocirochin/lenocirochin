@@ -118,7 +118,7 @@
   align-items: center;
   gap: var(--espacio-lg);
   min-height: var(--alto-banda);
-  margin: calc(-0.5 * var(--alto-banda)) var(--espacio-p4) 0;
+  margin: calc(-0.5 * var(--alto-banda)) var(--espacio-p2) 0; /* mismo margen lateral que el pie */
   padding: var(--espacio-md);
   border-radius: var(--radio-md);
   background-color: var(--color-fondo-suave);
@@ -155,7 +155,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   min-height: var(--alto-nosotros);
-  margin: var(--espacio-p4);
+  margin: var(--espacio-p4) var(--espacio-p2); /* mismo margen lateral que el pie */
   overflow: hidden;
   border-radius: var(--radio-sm);
 }
@@ -581,7 +581,6 @@
     flex-direction: column;
     align-items: stretch;
     gap: var(--espacio-sm);
-    margin-inline: var(--espacio-p6);
   }
 
   .banda__texto {
@@ -598,7 +597,7 @@
   .nosotros {
     grid-template-columns: minmax(0, 1fr);
     min-height: 0;
-    margin: var(--espacio-p6);
+    margin-block: var(--espacio-p6);
   }
 
   .nosotros__imagen {

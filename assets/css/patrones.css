@@ -179,7 +179,7 @@
   }
 
   .pie__principal {
-    margin: var(--espacio-p4);
+    margin: var(--espacio-p4) var(--espacio-p2) 0; /* lateral: mitad del anterior (4 %) */
     padding: var(--espacio-p3) var(--espacio-p5);
     border-radius: var(--radio-md);
     background-color: var(--color-primario);
@@ -251,7 +251,6 @@
   }
 
   .pie__subtitulo {
-    margin-inline-start: var(--espacio-p5);
     color: var(--color-blanco);
     font-size: var(--texto-lg);
     font-weight: var(--peso-regular);
@@ -293,7 +292,6 @@
 
   .pie__lista--informacion {
     gap: var(--espacio-xs);
-    padding-inline-start: var(--espacio-p5);
     letter-spacing: var(--tracking-extra);
   }
 
@@ -326,12 +324,15 @@
     height: var(--texto-lg);
   }
 
+  /* Barra de créditos: copyright a la izquierda y SCNDAL a la derecha. El relleno
+     derecho deja libre el botón flotante de WhatsApp (su margen, su ancho y un hueco). */
   .pie__legal {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--espacio-md);
-    padding: 0 var(--espacio-p4) var(--espacio-p4);
+    padding: var(--espacio-md) var(--espacio-p2);
+    padding-inline-end: calc(2 * var(--espacio-md) + var(--texto-2xl) + 2 * var(--espacio-sm));
   }
 
   .pie__firma img {
@@ -340,7 +341,6 @@
 
   .pie__copyright {
     margin: 0;
-    text-align: end;
     font-size: var(--texto-sm);
     font-weight: var(--peso-medium);
     line-height: var(--interlineado-titulo);
@@ -555,10 +555,6 @@
       margin-block-end: var(--espacio-lg);
     }
 
-    .pie__subtitulo {
-      margin-inline-start: var(--sangria-subtitulo-pie);
-    }
-
     .pie__subtitulo--email {
       margin-block-start: 0;
     }
@@ -570,6 +566,15 @@
 
     .pie__lista--servicios {
       display: none;
+    }
+
+    /* Cuatro columnas no caben: dos por fila */
+    .pie__columnas {
+      row-gap: var(--espacio-lg);
+    }
+
+    .pie__columna {
+      width: 50%;
     }
   }
 
@@ -639,7 +644,7 @@
     }
 
     .pie__principal {
-      margin: var(--espacio-p6);
+      margin-block-start: var(--espacio-p6);
     }
 
     .pie__columna {
@@ -647,9 +652,8 @@
     }
 
     .pie__columna--marca {
-      align-items: center;
       gap: var(--espacio-columna-pie-movil);
-      padding: var(--espacio-p5);
+      padding-block: var(--espacio-p5);
     }
 
     .pie__columna--servicios,
@@ -657,15 +661,10 @@
       display: none;
     }
 
-    .pie__logo img {
-      margin-inline: auto;
-    }
-
     .pie__texto {
       margin: 0;
       font-size: var(--texto-base);
       line-height: var(--interlineado-texto);
-      text-align: center;
     }
 
     .pie__titulo,
@@ -675,20 +674,14 @@
 
     .pie__lista {
       font-size: var(--texto-xs);
-      text-align: center;
     }
 
     .pie__lista--informacion {
       gap: var(--espacio-lista-informacion-pie-movil);
-      padding: var(--espacio-p2);
-    }
-
-    .pie__boton-enlace {
-      text-align: center;
+      padding-block: var(--espacio-p2);
     }
 
     .pie__dato {
-      justify-content: center;
       padding-block-end: var(--espacio-p10);
     }
 
@@ -699,11 +692,7 @@
 
     .pie__legal {
       flex-direction: column;
-      padding: 0 var(--espacio-p6) var(--espacio-p6);
-    }
-
-    .pie__copyright {
-      text-align: center;
+      align-items: flex-start;
     }
 
     /* Popup a pantalla completa: arriba el logo y el título, debajo el formulario */
