@@ -11,8 +11,8 @@
   --alto-logo-banda: 60px;
   --ancho-banda: 80%;                      /* escritorio y tablet; la única tarjeta más estrecha que las demás */
   --alto-banda: calc(var(--texto-sm) * var(--interlineado-base) + var(--espacio-sm) + var(--alto-logo-banda) + 2 * (var(--relleno-tarjeta) + var(--grosor-fino)));  /* texto, separación, logos, relleno y borde */
-  --alto-nosotros: 100vh;
-  --alto-imagen-nosotros-movil: 50vh;
+  --alto-nosotros: 70vh;                  /* alto mínimo en escritorio */
+  --alto-imagen-nosotros-apilada: 40vh;   /* tablet y móvil */
   --alto-minimo-cta: 60vh;
   --ancho-contenido-cta: 600px;
   --color-velo-cta: color-mix(in srgb, var(--color-primario) 85%, transparent);
@@ -166,12 +166,24 @@
   line-height: var(--interlineado-base);
 }
 
+.nosotros__boton {
+  align-self: flex-start;
+  margin-block-start: var(--espacio-sm); /* sumado al hueco de --espacio-md: --espacio-lg */
+}
+
 /* Principios */
+/* Principios: encabezado centrado sobre el blanco y, debajo, la tarjeta con los principios */
 .principios {
+  margin-block-start: var(--espacio-seccion);
+}
+
+.principios__encabezado {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--espacio-md);
-  background-color: var(--color-fondo-suave);
+  padding-inline: calc(var(--margen-pagina) + var(--relleno-tarjeta));
+  text-align: center;
 }
 
 .principios__texto {
@@ -183,7 +195,13 @@
 .principios__lista {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--espacio-lg);
+  gap: var(--espacio-xl);
+  margin-block-start: var(--espacio-xl);
+  padding: calc(2 * var(--espacio-xl));
+  /* Centrada bajo el encabezado: el sobrante del tope de contenido se reparte a
+     ambos lados. Los % se resuelven contra el ancho de la página. */
+  padding-inline: max(calc(2 * var(--espacio-xl)), (100% - 2 * var(--margen-pagina) - var(--ancho-maximo-contenido)) / 2);
+  background-color: var(--color-fondo-suave);
 }
 
 .principio {
@@ -454,6 +472,16 @@
     --carrusel-por-vista: 3;
   }
 
+  /* La foto arriba y el texto debajo, sin alto mínimo */
+  .nosotros {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .nosotros__imagen {
+    height: var(--alto-imagen-nosotros-apilada);
+  }
+
   .principios__lista {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -490,19 +518,13 @@
     --carrusel-separacion: var(--espacio-lg);
   }
 
-  /* La foto arriba y el texto debajo, sin alto mínimo */
-  .nosotros {
-    grid-template-columns: minmax(0, 1fr);
-    min-height: 0;
-  }
-
-  .nosotros__imagen {
-    height: var(--alto-imagen-nosotros-movil);
-  }
-
   .principios__lista,
   .equipo__miembros {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .principios__lista {
+    padding: var(--relleno-tarjeta);
   }
 
   /* El botón a todo el ancho y el enlace de WhatsApp debajo */
