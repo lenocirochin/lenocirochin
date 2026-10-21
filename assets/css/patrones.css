@@ -151,13 +151,12 @@
   }
 
   /* Tarjeta: todo bloque con fondo propio. Mismo borde exterior, radio y relleno
-     en toda la página, y --espacio-seccion por encima */
+     en toda la página. Por encima, el margen de página: es el espacio entre dos
+     tarjetas seguidas; tras un bloque sin fondo la página lo amplía. El contenido
+     queda centrado y de --ancho-maximo-contenido como mucho. */
   .sp-tarjeta {
-    margin: var(--espacio-seccion) var(--margen-pagina) 0;
-    padding: var(--relleno-tarjeta);
-    /* Contenido alineado a la izquierda y de --ancho-maximo-contenido como mucho: el
-       relleno derecho absorbe el sobrante. El % se resuelve contra el ancho de la página. */
-    padding-inline-end: max(var(--relleno-tarjeta), 100% - 2 * var(--margen-pagina) - var(--relleno-tarjeta) - var(--ancho-maximo-contenido));
+    margin: var(--margen-pagina) var(--margen-pagina) 0;
+    padding: var(--relleno-tarjeta) var(--relleno-lateral-tarjeta);
     border-radius: var(--radio-md);
   }
 
@@ -340,8 +339,8 @@
     justify-content: space-between;
     align-items: center;
     gap: var(--espacio-md);
-    padding: var(--espacio-md) calc(var(--margen-pagina) + var(--relleno-tarjeta));
-    padding-inline-end: max(calc(var(--margen-pagina) + var(--relleno-tarjeta)), calc(2 * var(--margen-whatsapp-flotante) + var(--tamano-whatsapp-flotante)));
+    padding: var(--espacio-md) calc(var(--margen-pagina) + var(--relleno-lateral-tarjeta));
+    padding-inline-end: max(calc(var(--margen-pagina) + var(--relleno-lateral-tarjeta)), calc(2 * var(--margen-whatsapp-flotante) + var(--tamano-whatsapp-flotante)));
   }
 
   .pie__firma img {

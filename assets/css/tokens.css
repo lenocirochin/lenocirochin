@@ -89,12 +89,15 @@
   --radio-circulo: 50%;
   --radio-pastilla: 999px;
 
-  /* Bloques: borde exterior, relleno de tarjeta, separación entre bloques y ancho
-     máximo del contenido dentro de una tarjeta */
+  /* Bloques: borde exterior (también el espacio entre dos tarjetas seguidas), relleno
+     de tarjeta y ancho máximo del contenido dentro de una tarjeta */
   --margen-pagina: var(--espacio-p2);
   --relleno-tarjeta: var(--espacio-xl);
-  --espacio-seccion: calc(2 * var(--espacio-xl));
   --ancho-maximo-contenido: 1280px;
+  /* Relleno lateral de una tarjeta a ancho completo: reparte a ambos lados lo que
+     sobra de --ancho-maximo-contenido. Sus % se resuelven contra el ancho de la página
+     allí donde se usa, así que vale también para alinear bloques sin fondo. */
+  --relleno-lateral-tarjeta: max(var(--relleno-tarjeta), (100% - 2 * var(--margen-pagina) - var(--ancho-maximo-contenido)) / 2);
 
   /* Cabecera */
   --ancho-logo-cabecera: 250px;
@@ -144,6 +147,5 @@
   :root {
     --alto-cabecera-fija: 130px;
     --relleno-tarjeta: var(--espacio-lg);
-    --espacio-seccion: var(--espacio-xl);
   }
 }

@@ -49,7 +49,7 @@
   align-items: flex-start;
   gap: var(--espacio-md);
   min-height: var(--alto-hero);
-  padding: var(--espacio-p6) calc(var(--margen-pagina) + var(--relleno-tarjeta));
+  padding: var(--espacio-p6) calc(var(--margen-pagina) + var(--relleno-lateral-tarjeta));
   /* El lema queda siempre por encima de la parte de la banda que monta sobre el hero */
   padding-block-end: max(var(--espacio-p6), calc(var(--alto-banda) / 2 + var(--espacio-lg)));
   overflow: hidden;
@@ -174,7 +174,7 @@
 /* Principios */
 /* Principios: encabezado centrado sobre el blanco y, debajo, la tarjeta con los principios */
 .principios {
-  margin-block-start: var(--espacio-seccion);
+  margin-block-start: var(--espacio-xl);
 }
 
 .principios__encabezado {
@@ -182,7 +182,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--espacio-md);
-  padding-inline: calc(var(--margen-pagina) + var(--relleno-tarjeta));
+  padding-inline: calc(var(--margen-pagina) + var(--relleno-lateral-tarjeta));
   text-align: center;
 }
 
@@ -240,8 +240,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio-lg);
-  margin-block-start: var(--espacio-seccion);
-  padding-inline: calc(var(--margen-pagina) + var(--relleno-tarjeta));
+  margin-block-start: var(--espacio-xl);
+  padding-inline: calc(var(--margen-pagina) + var(--relleno-lateral-tarjeta));
 }
 
 .equipo__miembros {
@@ -279,11 +279,13 @@
 
 /* Llamada final: tarjeta con la foto del hero bajo un velo azul y el contenido a
    la izquierda */
+/* Tras Servicios, que no tiene fondo: --espacio-xl en lugar del margen de página */
 .cta {
   position: relative;
   display: flex;
   align-items: center;
   min-height: var(--alto-minimo-cta);
+  margin-block-start: var(--espacio-xl);
   overflow: hidden;
 }
 
@@ -307,8 +309,12 @@
   z-index: var(--capa-contenido);
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--espacio-md);
+  width: 100%;
   max-width: var(--ancho-contenido-cta);
+  margin-inline: auto;
+  text-align: center;
 }
 
 .cta__texto {
@@ -321,6 +327,7 @@
 .cta__acciones {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   gap: var(--espacio-md) var(--espacio-lg);
   margin-block-start: var(--espacio-sm);
@@ -367,8 +374,8 @@
 /* Servicios: sobre el blanco de la página, más estrecha que las tarjetas.
    Encabezado a dos columnas (1/3 y 2/3) y rejilla de áreas separadas por líneas. */
 .servicios {
-  width: min(var(--ancho-servicios), 100% - 2 * (var(--margen-pagina) + var(--relleno-tarjeta)));
-  margin: var(--espacio-seccion) auto 0;
+  width: min(var(--ancho-servicios), 100% - 2 * (var(--margen-pagina) + var(--relleno-lateral-tarjeta)));
+  margin: var(--espacio-xl) auto 0;
 }
 
 .servicios__encabezado {
@@ -504,14 +511,13 @@
 @media (max-width: 767px) {
   .hero {
     min-height: var(--alto-hero-movil);
-    padding: 0 calc(var(--margen-pagina) + var(--relleno-tarjeta)) max(var(--espacio-hero-movil), calc(var(--alto-banda) / 2 + var(--espacio-lg)));
+    padding: 0 calc(var(--margen-pagina) + var(--relleno-lateral-tarjeta)) max(var(--espacio-hero-movil), calc(var(--alto-banda) / 2 + var(--espacio-lg)));
   }
 
   /* Al 80 % los logos quedarían diminutos: vuelve al ancho común */
   .banda {
     width: auto;
     margin-inline: var(--margen-pagina);
-    padding-inline: var(--relleno-tarjeta);
   }
 
   .banda__carrusel {
@@ -527,10 +533,11 @@
     padding: var(--relleno-tarjeta);
   }
 
-  /* El botón a todo el ancho y el enlace de WhatsApp debajo */
+  /* El botón a todo el ancho y el enlace de WhatsApp debajo, centrado */
   .cta__acciones {
     flex-direction: column;
     align-items: stretch;
+    align-self: stretch;
   }
 
   .servicios__encabezado,
