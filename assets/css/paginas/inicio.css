@@ -9,6 +9,7 @@
   --capa-contenido: 1;
   --separacion-logos-banda: 50px;
   --alto-logo-banda: 60px;
+  --alto-logo-gendra: 24px;                /* sin aire alrededor: alto óptico de los demás logos, que sí lo traen */
   --ancho-banda: 80%;                      /* escritorio y tablet; la única tarjeta más estrecha que las demás */
   --alto-banda: calc(var(--texto-sm) * var(--interlineado-base) + var(--espacio-sm) + var(--alto-logo-banda) + 2 * (var(--relleno-tarjeta) + var(--grosor-fino)));  /* texto, separación, logos, relleno y borde */
   --alto-nosotros: 70vh;                  /* alto mínimo en escritorio */
@@ -125,6 +126,11 @@
 .banda__carrusel img {
   width: auto;
   max-height: 100%;
+}
+
+.banda__carrusel .banda__logo-gendra {
+  height: var(--alto-logo-gendra);
+  object-fit: contain;
 }
 
 /* Nosotros: tarjeta a dos columnas; la foto llega al borde y el relleno va en el texto */
