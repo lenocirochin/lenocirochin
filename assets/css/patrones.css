@@ -1,9 +1,6 @@
 /*
- * Patrones compartidos por todas las páginas: enlace de salto, cabecera,
- * cabecera fija, navegación y pie.
- * Los comentarios "original: …" marcan valores del sitio publicado que se
- * ajustaron al token más cercano (diferencia de 4px o menos) o que no tienen
- * token propio.
+ * Patrones compartidos por todas las páginas: enlace de salto, cabeceras,
+ * navegación, título de sección, pie, botón de WhatsApp y popup de contacto.
  */
 
 @layer patrones {
@@ -23,9 +20,8 @@
     white-space: nowrap;
   }
 
-  /* Cabecera sobre el hero.
-     Cambio deliberado respecto al original: sin menú modal; la navegación va
-     centrada debajo del logo. */
+  /* Cabecera sobre el hero: logo centrado, botón a la derecha y la navegación
+     debajo, centrada */
   .cabecera {
     position: absolute;
     inset-block-start: 0;
@@ -52,7 +48,7 @@
 
   .cabecera__logo {
     grid-column: 2;
-    padding-block: var(--espacio-p1); /* original: 0.5% */
+    padding-block: var(--espacio-p1);
   }
 
   .cabecera__logo img {
@@ -76,7 +72,7 @@
   }
 
   .boton-contacto {
-    padding: var(--espacio-sm) var(--espacio-md); /* original: 12px 24px */
+    padding: var(--espacio-sm) var(--espacio-md);
     border: 0;
     border-radius: var(--radio-sm);
     background-color: var(--color-blanco);
@@ -90,22 +86,20 @@
     background-color: var(--color-acento);
   }
 
-  /* Navegación de las dos cabeceras: tipografía y color del antiguo menú
-     modal, con un solo tamaño en todas las pantallas */
+  /* Navegación de las dos cabeceras, con un solo tamaño en todas las pantallas */
   .nav-principal__lista {
     display: flex;
   }
 
   .nav-principal__enlace {
+    position: relative;
     display: block;
     padding: var(--espacio-xs) var(--espacio-md);
     color: var(--color-blanco);
     font-family: var(--fuente-titulos);
     font-stretch: var(--ancho-fuente-titulos);
     font-size: var(--texto-md);
-    font-weight: var(--peso-regular);
     white-space: nowrap;
-    position: relative;
   }
 
   /* Línea inferior que crece de izquierda a derecha, alineada con el texto */
@@ -133,8 +127,6 @@
     font-stretch: var(--ancho-fuente-titulos);
     font-size: var(--texto-3xl);
     font-weight: var(--peso-medium);
-    letter-spacing: normal;
-    text-align: start;
   }
 
   .sp-titulo-seccion--claro {
@@ -171,15 +163,14 @@
     margin-inline-start: auto;
   }
 
-  /* Pie: tarjeta azul separada de los bordes y barra de créditos debajo.
-     Cambio deliberado respecto al original. */
+  /* Pie: tarjeta azul separada de los bordes y barra de créditos debajo */
   .pie {
     display: flow-root; /* el margen superior de la tarjeta queda dentro del fondo suave */
     background-color: var(--color-fondo-suave);
   }
 
   .pie__principal {
-    margin: var(--espacio-p4) var(--espacio-p2) 0; /* lateral: mitad del anterior (4 %) */
+    margin: var(--espacio-p4) var(--espacio-p2) 0;
     padding: var(--espacio-p3) var(--espacio-p5);
     border-radius: var(--radio-md);
     background-color: var(--color-primario);
@@ -216,14 +207,13 @@
     margin: var(--espacio-p5) var(--espacio-p15) var(--espacio-p5) 0;
     color: var(--color-blanco);
     font-size: var(--texto-sm);
-    font-weight: var(--peso-regular);
     line-height: var(--interlineado-amplio);
     letter-spacing: var(--tracking-amplio);
   }
 
   .redes {
     display: flex;
-    gap: var(--espacio-xs); /* original: 6px */
+    gap: var(--espacio-xs);
   }
 
   .redes__enlace {
@@ -253,7 +243,6 @@
   .pie__subtitulo {
     color: var(--color-blanco);
     font-size: var(--texto-lg);
-    font-weight: var(--peso-regular);
     line-height: var(--interlineado-compacto);
   }
 
@@ -316,7 +305,7 @@
   .pie__dato svg {
     width: var(--texto-base);
     height: var(--texto-base);
-    margin-inline-end: var(--espacio-sm); /* original: 14px en el email */
+    margin-inline-end: var(--espacio-sm);
   }
 
   .pie__dato--telefono svg {
@@ -325,14 +314,14 @@
   }
 
   /* Barra de créditos: copyright a la izquierda y SCNDAL a la derecha. El relleno
-     derecho deja libre el botón flotante de WhatsApp (su margen, su ancho y un hueco). */
+     derecho deja libre el botón flotante de WhatsApp (su margen a cada lado y su ancho). */
   .pie__legal {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--espacio-md);
     padding: var(--espacio-md) var(--espacio-p2);
-    padding-inline-end: calc(2 * var(--espacio-md) + var(--texto-2xl) + 2 * var(--espacio-sm));
+    padding-inline-end: calc(2 * var(--margen-whatsapp-flotante) + var(--tamano-whatsapp-flotante));
   }
 
   .pie__firma img {
@@ -350,8 +339,8 @@
      quedan encima porque <dialog> abierto con showModal va en la capa superior. */
   .whatsapp-flotante {
     position: fixed;
-    inset-block-end: var(--espacio-md);
-    inset-inline-end: var(--espacio-md);
+    inset-block-end: var(--margen-whatsapp-flotante);
+    inset-inline-end: var(--margen-whatsapp-flotante);
     z-index: var(--capa-flotante);
     display: flex;
     padding: var(--espacio-sm);
@@ -582,8 +571,8 @@
     font-size: var(--texto-sm);
   }
 
-  /* Opciones como chips: la radio queda encima, invisible, para teclado y lectores */
-  /* La leyenda de un fieldset queda fuera del flex: el hueco va en los chips */
+  /* Opciones como chips: la radio queda encima, invisible, para teclado y lectores.
+     La leyenda del fieldset queda fuera del flex, así que el hueco va en los chips. */
   .formulario__chips {
     display: flex;
     flex-wrap: wrap;
@@ -644,7 +633,6 @@
     border: 0;
     background: none;
     color: var(--color-primario);
-    font-weight: var(--peso-regular);
     text-decoration: underline;
     text-underline-offset: var(--espacio-xs);
     transition: color var(--duracion-base);
@@ -683,10 +671,6 @@
 
   /* Tablet */
   @media (max-width: 1024px) {
-    .pie__texto {
-      font-size: var(--texto-sm); /* original: 15px */
-    }
-
     .pie__titulo {
       margin-block-end: var(--espacio-lg);
     }
@@ -706,7 +690,7 @@
     }
 
     .pie__columna {
-      width: 50%;
+      width: var(--ancho-columna-pie-tablet);
     }
   }
 
@@ -729,15 +713,11 @@
       padding-inline: 0;
     }
 
-    .cabecera__nav {
-      grid-row: 2;
-    }
-
     .cabecera__accion {
       grid-column: 1;
       grid-row: 3;
       align-items: stretch;
-      margin-block-start: var(--espacio-sm); /* con el hueco de la rejilla, los 20px de antes */
+      margin-block-start: var(--espacio-sm); /* sumado al hueco de la rejilla */
       padding: 0;
     }
 
@@ -818,7 +798,7 @@
     }
 
     .pie__dato--telefono svg {
-      width: var(--texto-lg); /* original: 22px */
+      width: var(--texto-lg);
       height: var(--texto-lg);
     }
 

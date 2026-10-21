@@ -1,5 +1,4 @@
-// Cabecera fija: aparece al pasar 500px de desplazamiento, como en el tema original
-// (JupiterX añade la clase jupiterx-header-sticked con ese mismo umbral)
+// Cabecera fija: aparece al pasar 500px de desplazamiento
 const cabeceraFija = document.querySelector('[data-cabecera-fija]');
 const DESPLAZAMIENTO_CABECERA = 500;
 
@@ -156,10 +155,12 @@ async function enviarFormulario(formulario) {
     mensaje.hidden = false;
     return;
   }
-  await fetch(ENDPOINT_FORMULARIO, { method: 'POST', body: new FormData(formulario) });
+  const datos = new FormData(formulario);
+  datos.set('Teléfono', `+52 ${datos.get('Teléfono')}`);
+  await fetch(ENDPOINT_FORMULARIO, { method: 'POST', body: datos });
 }
 
-// Máscara de entrada, como en el original: cada 9 de la máscara es un dígito
+// Máscara de entrada: cada 9 de la máscara es un dígito
 function aplicarMascara(campo) {
   const digitos = campo.value.replace(/\D/g, '');
   let valor = '';
@@ -175,14 +176,14 @@ document.querySelectorAll('[data-mascara]').forEach((campo) => {
   campo.addEventListener('input', () => aplicarMascara(campo));
 });
 
-// Formulario por pasos: "Siguiente" se activa cuando los campos del paso son válidos, como en el original.
+// Formulario por pasos: "Siguiente" se activa cuando los campos del paso son válidos.
 // Muestra el progreso ("Paso X de N") y, al salir de un campo inválido, su mensaje de error debajo.
 function iniciarFormulario(formulario) {
   const pasos = [...formulario.querySelectorAll('[data-paso]')];
   const progreso = formulario.parentElement.querySelector('[data-progreso]');
   let actual = 0;
 
-  const esValido = () => [...pasos[actual].querySelectorAll('input, textarea, select')].every((campo) => campo.checkValidity());
+  const esValido = () => [...pasos[actual].querySelectorAll('input, textarea')].every((campo) => campo.checkValidity());
   const actualizarBotones = () => {
     pasos[actual].querySelectorAll('[data-siguiente], [type="submit"]').forEach((boton) => { boton.disabled = !esValido(); });
   };
@@ -207,7 +208,7 @@ function iniciarFormulario(formulario) {
     pasos[actual].hidden = false;
     actualizarBotones();
     actualizarProgreso();
-    (pasos[actual].querySelector('input:checked') || pasos[actual].querySelector('input, textarea, select, button'))?.focus();
+    (pasos[actual].querySelector('input:checked') || pasos[actual].querySelector('input, textarea, button'))?.focus();
   };
 
   formulario.addEventListener('input', (evento) => {

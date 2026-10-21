@@ -1,29 +1,28 @@
 @layer base, patrones;
 
 /*
- * Valores de diseño extraídos del CSS publicado en lenocirochin.com
- * (kit de Elementor 7, plantillas 20, 32, 506, 517, 609 y 1162, y tema JupiterX).
- * Solo se declaran los valores que el sitio usa.
+ * Valores de diseño del sitio: la única fuente de verdad.
+ * Solo se declaran los valores que se usan.
  */
 
 :root {
   /* Colores */
   --color-primario: #173248;        /* fondo de cabecera, pie y popup; texto de botones */
-  --color-secundario: #54595F;      /* hover de botones del formulario */
+  --color-secundario: #54595F;      /* gris base de los grises del formulario */
   --color-acento: #FF914D;          /* hover de enlaces, iconos y botones */
   --color-blanco: #FFFFFF;
   --color-negro: #000000;
-  --color-texto: #212529;           /* color de texto por defecto del tema */
+  --color-texto: #212529;           /* texto por defecto */
   --color-fondo-suave: #F4F4F4;
   --color-icono-suave: #E6E6E6;     /* iconos sociales del pie */
   --color-texto-claro: color-mix(in srgb, var(--color-blanco) 80%, transparent);  /* texto secundario sobre azul */
   --color-gris-claro: color-mix(in srgb, var(--color-secundario) 25%, var(--color-blanco));  /* bordes de campos */
   --color-gris-medio: color-mix(in srgb, var(--color-secundario) 70%, var(--color-blanco));  /* placeholders y textos auxiliares */
   --color-fondo-modal: color-mix(in srgb, var(--color-primario) 80%, transparent);  /* fondo tras el popup */
-  --color-linea-clara: color-mix(in srgb, var(--color-blanco) 30%, transparent);  /* divisoria de la cabecera */
+  --color-linea-clara: color-mix(in srgb, var(--color-blanco) 30%, transparent);  /* líneas y bordes sobre azul */
   --color-error: #FF0000;           /* mensaje del formulario de contacto */
 
-  /* Familias tipográficas (cambio deliberado respecto al original)
+  /* Familias tipográficas
 
      Carga, solo los pesos que se usan; Archivo en ancho semiexpandido (112,5 %):
      <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,13 +47,11 @@
   --peso-light: 300;
   --peso-regular: 400;
   --peso-medium: 500;
-  --peso-semibold: 600;
   --peso-bold: 700;
 
   /* Interlineado */
-  --interlineado-titulo: 1;         /* títulos de Elementor */
+  --interlineado-titulo: 1;         /* títulos y botones */
   --interlineado-compacto: 1.2;      /* títulos del pie */
-  --interlineado-ajustado: 1.3;
   --interlineado-base: 1.5;
   --interlineado-texto: 1.6;
   --interlineado-amplio: 1.7;
@@ -87,7 +84,7 @@
   --grosor-grueso: 2px;
 
   /* Sombras */
-  --sombra-flotante: 0 4px 24px color-mix(in srgb, var(--color-negro) 8%, transparent);  /* cabecera fija */
+  --sombra-flotante: 0 4px 24px color-mix(in srgb, var(--color-negro) 8%, transparent);  /* cabecera fija y popup */
 
   /* Radios */
   --radio-0: 0;
@@ -107,6 +104,7 @@
 
   /* Pie */
   --ancho-columna-pie: 25%;
+  --ancho-columna-pie-tablet: 50%;
   --ancho-logo-pie: 80%;
   --ancho-firma-agencia: 200px;
   --espacio-columna-pie-movil: 25px;
@@ -122,6 +120,10 @@
   --alto-minimo-toque: 44px;                /* campos y botones cómodos de pulsar */
   --opacidad-desactivado: 0.5;
 
+  /* Botón flotante de WhatsApp */
+  --margen-whatsapp-flotante: var(--espacio-md);
+  --tamano-whatsapp-flotante: calc(var(--texto-2xl) + 2 * var(--espacio-sm));  /* ícono más su relleno */
+
   /* Capas */
   --capa-cabecera: 2;
   --capa-flotante: 3;               /* botón de WhatsApp */
@@ -133,7 +135,7 @@
   /* Transiciones */
   --duracion-base: 0.3s;
   --duracion-lenta: 0.5s;
-  --duracion-minima: 0.01ms;        /* "reducir movimiento": casi instantáneo, pero los eventos de fin siguen llegando */           /* botón de contacto, cabecera fija y carruseles */
+  --duracion-minima: 0.01ms;        /* "reducir movimiento": casi instantáneo, pero los eventos de fin siguen llegando */
 }
 
 /* En móvil la cabecera fija tiene dos filas: logo arriba y navegación debajo */

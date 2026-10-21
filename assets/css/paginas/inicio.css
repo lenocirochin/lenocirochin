@@ -1,9 +1,4 @@
-/*
- * Página de inicio.
- * Los comentarios "original: …" marcan valores del sitio publicado que se
- * ajustaron al token más cercano (diferencia de 4px o menos) o que no tienen
- * token propio.
- */
+/* Página de inicio */
 
 /* Valores propios de esta página */
 :root {
@@ -22,7 +17,7 @@
   --ancho-contenido-cta: 600px;
   --color-velo-cta: color-mix(in srgb, var(--color-primario) 85%, transparent);
 
-  /* Secciones traídas de las páginas Nosotros y Servicios del original */
+  /* Nosotros, Principios y Equipo */
   --color-marino-profundo: #051B34;
   --color-fondo-principios: #F5F7FF;
   --color-cargo-equipo: #3B4855;
@@ -105,12 +100,11 @@
   font-family: var(--fuente-titulos);
   font-stretch: var(--ancho-fuente-titulos);
   font-size: var(--texto-6xl);
-  font-weight: var(--peso-regular);
 }
 
 /* Banda de logos: tarjeta del ancho de la de Nosotros que monta sobre el hero la
-   mitad de su alto. Sigue en el flujo, así que la sección siguiente empieza
-   justo debajo de la parte que sobresale. Cambio deliberado respecto al original. */
+   mitad de su alto. Es la única superposición del diseño. Sigue en el flujo, así
+   que la sección siguiente empieza justo debajo de la parte que sobresale. */
 .banda {
   position: relative;
   z-index: var(--capa-contenido);
@@ -149,13 +143,12 @@
   max-height: 100%;
 }
 
-/* Nosotros: tarjeta a dos columnas, foto y texto.
-   Cambio deliberado respecto al original; el margen es el de la tarjeta del pie. */
+/* Nosotros: tarjeta a dos columnas, foto y texto, con el margen lateral del pie */
 .nosotros {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   min-height: var(--alto-nosotros);
-  margin: var(--espacio-p4) var(--espacio-p2); /* mismo margen lateral que el pie */
+  margin: var(--espacio-p4) var(--espacio-p2);
   overflow: hidden;
   border-radius: var(--radio-sm);
 }
@@ -184,7 +177,7 @@
 .nosotros__texto {
   margin: 0;
   color: var(--color-marino-profundo);
-  font-size: var(--texto-md); /* original: 17px */
+  font-size: var(--texto-md);
   line-height: var(--interlineado-base);
 }
 
@@ -193,7 +186,7 @@
   padding: var(--espacio-p5) 0;
 }
 
-.principios__contenido,
+.principios__tarjeta,
 .equipo__contenido {
   max-width: var(--ancho-contenido);
   margin-inline: auto;
@@ -296,7 +289,7 @@
   text-align: center;
 }
 
-/* El margen inferior reproduce el bloque vacío de redes sociales del original */
+/* Espacio bajo el cargo antes del final de la tarjeta */
 .miembro__cargo {
   margin: 0 0 var(--espacio-md);
   color: var(--color-cargo-equipo);
@@ -304,14 +297,13 @@
 }
 
 /* Llamada final: tarjeta con la foto del hero bajo un velo azul y el contenido a
-   la izquierda. Mismo margen lateral y radio que la tarjeta del pie.
-   Cambio deliberado respecto al original. */
+   la izquierda. Mismo margen lateral y radio que la tarjeta del pie. */
 .cta {
   position: relative;
   display: flex;
   align-items: center;
   min-height: var(--alto-minimo-cta);
-  margin: var(--espacio-p4) var(--espacio-p2);
+  margin: var(--espacio-p4) var(--espacio-p2) 0;
   overflow: hidden;
   border-radius: var(--radio-md);
 }
@@ -393,8 +385,8 @@
 }
 
 /* Servicios: sección azul con un área por tarjeta en un carrusel automático.
-   Cambio deliberado respecto al original (franja y pestañas). Todas las tarjetas
-   miden lo que la más alta, porque la pista estira sus diapositivas. */
+   Todas las tarjetas miden lo que la más alta, porque la pista estira sus
+   diapositivas. */
 .servicios {
   padding: var(--espacio-p5) 0;
   background-color: var(--color-primario);
@@ -647,7 +639,7 @@
   }
 
   .nosotros__texto {
-    font-size: var(--texto-xl); /* original: 22px */
+    font-size: var(--texto-xl);
   }
 
   .equipo__miembros {
@@ -674,7 +666,7 @@
 
   /* El botón a todo el ancho y el enlace de WhatsApp debajo */
   .cta {
-    margin-block: var(--espacio-p6);
+    margin-block-start: var(--espacio-p6);
   }
 
   .cta__contenido {

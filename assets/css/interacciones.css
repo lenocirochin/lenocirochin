@@ -1,6 +1,6 @@
 /* Clases de estado que activa assets/js/main.js */
 
-/* Baja desde fuera de pantalla; al ocultarse vuelve sin transición, como en el original */
+/* Baja desde fuera de pantalla; al ocultarse vuelve sin transición */
 .cabecera-fija.esta-visible {
   inset-block-start: 0;
   visibility: visible;
