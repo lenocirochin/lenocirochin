@@ -127,6 +127,10 @@
   /* Botón flotante de WhatsApp */
   --margen-whatsapp-flotante: var(--espacio-md);
   --tamano-whatsapp-flotante: calc(var(--texto-2xl) + 2 * var(--espacio-sm));  /* ícono más su relleno */
+  --ciclo-pulso-whatsapp: 4s;               /* un pulso de 1,6s (el 40 % del ciclo) y pausa hasta el siguiente */
+  --escala-pulso-whatsapp: 1.6;             /* tamaño final del anillo */
+  --escala-rebote-whatsapp: 1.08;           /* rebote del ícono al empezar cada pulso */
+  --escala-hover-whatsapp: 1.05;
 
   /* Capas */
   --capa-cabecera: 2;

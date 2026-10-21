@@ -366,11 +366,74 @@
     border-radius: var(--radio-circulo);
     background-color: var(--color-acento);
     fill: var(--color-blanco);
+    transition: transform var(--duracion-base);
   }
 
   .whatsapp-flotante svg {
     width: var(--texto-2xl);
     height: var(--texto-2xl);
+    animation: whatsapp-rebote var(--ciclo-pulso-whatsapp) ease-out infinite;
+  }
+
+  /* Anillo que sale del borde del botón, crece y se desvanece. Con transform y
+     opacidad: no ocupa espacio ni recibe clics */
+  .whatsapp-flotante::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background-color: var(--color-acento);
+    pointer-events: none;
+    animation: whatsapp-pulso var(--ciclo-pulso-whatsapp) ease-out infinite;
+  }
+
+  /* Al interactuar, con el modal abierto o con "reducir movimiento": sin animación */
+  .whatsapp-flotante:hover,
+  .whatsapp-flotante:focus-visible {
+    transform: scale(var(--escala-hover-whatsapp));
+  }
+
+  .whatsapp-flotante:hover::before,
+  .whatsapp-flotante:hover svg,
+  .whatsapp-flotante:focus-visible::before,
+  .whatsapp-flotante:focus-visible svg,
+  :root:has(.popup[open]) .whatsapp-flotante::before,
+  :root:has(.popup[open]) .whatsapp-flotante svg {
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .whatsapp-flotante::before,
+    .whatsapp-flotante svg {
+      animation: none;
+    }
+  }
+
+  /* El pulso ocupa el 40 % del ciclo (1,6s de 4s); el resto es pausa */
+  @keyframes whatsapp-pulso {
+    0% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+
+    40%,
+    100% {
+      opacity: 0;
+      transform: scale(var(--escala-pulso-whatsapp));
+    }
+  }
+
+  @keyframes whatsapp-rebote {
+    0%,
+    15%,
+    100% {
+      transform: scale(1);
+    }
+
+    7.5% {
+      transform: scale(var(--escala-rebote-whatsapp));
+    }
   }
 
   /* Popup de contacto: caja a dos columnas sobre un fondo azul translúcido y

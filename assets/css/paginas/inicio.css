@@ -375,7 +375,7 @@
    Encabezado a dos columnas (1/3 y 2/3) y rejilla de áreas separadas por líneas. */
 .servicios {
   width: min(var(--ancho-servicios), 100% - 2 * (var(--margen-pagina) + var(--relleno-lateral-tarjeta)));
-  margin: var(--espacio-xl) auto 0;
+  margin: calc(2 * var(--espacio-xl)) auto 0; /* tras Equipo, también sin fondo */
 }
 
 .servicios__encabezado {
@@ -538,6 +538,10 @@
     flex-direction: column;
     align-items: stretch;
     align-self: stretch;
+  }
+
+  .servicios {
+    margin-block-start: var(--espacio-xl);
   }
 
   .servicios__encabezado,
