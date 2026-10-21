@@ -22,6 +22,9 @@
   --ancho-foto-equipo: 264px;
   --ancho-texto-parrafo: 65ch;
   --ancho-servicios: 1140px;               /* más estrecha que las tarjetas, nunca a ancho completo */
+
+  /* Confirmación del formulario de contacto */
+  --tamano-icono-confirmacion: 64px;
 }
 
 /* Carrusel */
@@ -475,6 +478,77 @@
 }
 
 /* Tablet */
+/* Confirmación del formulario de contacto: sustituye a la columna del formulario
+   tras un envío correcto. Entra con un leve desvanecido y desplazamiento hacia
+   arriba; con "reducir movimiento" la regla global de base.css lo deja instantáneo. */
+.confirmacion {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--espacio-md);
+  text-align: center;
+  animation: entrada-confirmacion var(--duracion-base) ease-out;
+}
+
+@keyframes entrada-confirmacion {
+  from {
+    opacity: 0;
+    transform: translateY(var(--espacio-xs));
+  }
+}
+
+.confirmacion__icono {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--tamano-icono-confirmacion);
+  height: var(--tamano-icono-confirmacion);
+  border-radius: var(--radio-circulo);
+  background-color: var(--color-acento);
+  color: var(--color-blanco);
+}
+
+.confirmacion__icono svg {
+  width: calc(var(--tamano-icono-confirmacion) / 2);
+  height: calc(var(--tamano-icono-confirmacion) / 2);
+}
+
+.confirmacion__titulo {
+  margin: 0;
+  color: var(--color-primario);
+  font-size: var(--texto-2xl);
+  font-weight: var(--peso-medium);
+}
+
+.confirmacion__texto {
+  margin: 0;
+  color: var(--color-texto);
+  font-size: var(--texto-md);
+  line-height: var(--interlineado-texto);
+}
+
+.confirmacion__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--espacio-md) var(--espacio-lg);
+  margin-block-start: var(--espacio-sm);
+}
+
+.confirmacion__enlace {
+  color: var(--color-primario);
+  text-decoration: underline;
+  text-underline-offset: var(--espacio-xs);
+  transition: color var(--duracion-base);
+}
+
+.confirmacion__enlace:hover {
+  color: var(--color-acento);
+}
+
 @media (max-width: 1024px) {
   .banda__carrusel {
     --carrusel-por-vista: 3;
@@ -535,7 +609,8 @@
   }
 
   /* El botón a todo el ancho y el enlace de WhatsApp debajo, centrado */
-  .cta__acciones {
+  .cta__acciones,
+  .confirmacion__acciones {
     flex-direction: column;
     align-items: stretch;
     align-self: stretch;

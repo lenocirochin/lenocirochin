@@ -1,18 +1,13 @@
 // Función serverless de Vercel: recibe el formulario de contacto en JSON y lo envía
 // por correo con Resend. Valida los mismos campos y reglas que el formulario del sitio.
 
+const { armarCorreo } = require('./_correo');
+
 const MEDIOS = ['Eventos', 'Redes sociales', 'Google', 'Recomendación'];
 // Misma expresión que usan los navegadores para validar type="email"
 const CORREO = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 const texto = (valor) => (typeof valor === 'string' ? valor.trim() : '');
-
-const escapar = (valor) => valor
-  .replace(/&/g, '&amp;')
-  .replace(/</g, '&lt;')
-  .replace(/>/g, '&gt;')
-  .replace(/"/g, '&quot;')
-  .replace(/'/g, '&#39;');
 
 // Devuelve los campos limpios o null si alguno no cumple las reglas
 function validar(cuerpo) {
@@ -24,21 +19,6 @@ function validar(cuerpo) {
   if (!nombre || !CORREO.test(correo) || digitos.length !== 10 || !mensaje || !MEDIOS.includes(medio)) return null;
   const telefono = `+52 ${digitos.slice(0, 2)} ${digitos.slice(2, 6)} ${digitos.slice(6)}`;
   return { nombre, correo, telefono, mensaje, medio };
-}
-
-function armarCorreo({ nombre, correo, telefono, mensaje, medio }) {
-  const campos = [
-    ['Nombre', nombre],
-    ['Correo electrónico', correo],
-    ['Teléfono', telefono],
-    ['Cómo se enteró', medio],
-    ['Mensaje', mensaje],
-  ];
-  const text = campos.map(([etiqueta, valor]) => `${etiqueta}: ${valor}`).join('\n\n');
-  const html = campos
-    .map(([etiqueta, valor]) => `<p><strong>${etiqueta}:</strong><br>${escapar(valor).replace(/\n/g, '<br>')}</p>`)
-    .join('\n');
-  return { text, html };
 }
 
 module.exports = async (req, res) => {
@@ -74,7 +54,6 @@ module.exports = async (req, res) => {
       from: CONTACTO_REMITENTE,
       to: CONTACTO_DESTINO.split(',').map((destino) => destino.trim()),
       reply_to: datos.correo,
-      subject: `Nueva solicitud de contacto — ${datos.nombre}`,
       ...armarCorreo(datos),
     }),
   }).catch((error) => {

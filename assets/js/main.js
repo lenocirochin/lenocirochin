@@ -162,8 +162,8 @@ document.querySelectorAll('[data-popup]').forEach((popup) => {
 const ENDPOINT_FORMULARIO = '/api/contacto';
 const WHATSAPP = 'https://wa.me/525539726224';
 
-// Envío del formulario de contacto. Mientras envía, el botón queda deshabilitado;
-// el resultado se avisa en el popup y, si salió bien, el formulario vuelve al primer paso.
+// Envío del formulario de contacto. Mientras envía, el botón queda deshabilitado.
+// Devuelve si salió bien; si falla, lo avisa bajo el formulario.
 async function enviarFormulario(formulario) {
   const mensaje = formulario.querySelector('[data-mensaje]');
   const boton = formulario.querySelector('[type="submit"]');
@@ -188,18 +188,15 @@ async function enviarFormulario(formulario) {
 
   boton.textContent = textoBoton;
   boton.disabled = false;
-  if (respuesta?.ok) {
-    formulario.reset();
-    mensaje.textContent = 'Gracias, recibimos tu solicitud. Te contactaremos pronto.';
-  } else {
-    const enlace = document.createElement('a');
-    enlace.href = WHATSAPP;
-    enlace.target = '_blank';
-    enlace.textContent = 'WhatsApp';
-    mensaje.replaceChildren('No pudimos enviar tu solicitud. Intenta de nuevo o escríbenos por ', enlace, '.');
-  }
-  mensaje.classList.toggle('formulario__mensaje--exito', Boolean(respuesta?.ok));
+  if (respuesta?.ok) return true;
+
+  const enlace = document.createElement('a');
+  enlace.href = WHATSAPP;
+  enlace.target = '_blank';
+  enlace.textContent = 'WhatsApp';
+  mensaje.replaceChildren('No pudimos enviar tu solicitud. Intenta de nuevo o escríbenos por ', enlace, '.');
   mensaje.hidden = false;
+  return false;
 }
 
 // Máscara de entrada: cada 9 de la máscara es un dígito
@@ -219,10 +216,14 @@ document.querySelectorAll('[data-mascara]').forEach((campo) => {
 });
 
 // Formulario por pasos: "Siguiente" se activa cuando los campos del paso son válidos.
-// Muestra el progreso ("Paso X de N") y, al salir de un campo inválido, su mensaje de error debajo.
+// Muestra el progreso ("Paso X de N") y, al salir de un campo inválido, su mensaje de error
+// debajo, solo si la persona ya interactuó con él (campo "tocado"). Tras un envío correcto,
+// la columna se sustituye por la confirmación; al cerrar el popup el formulario se reinicia.
 function iniciarFormulario(formulario) {
+  const columna = formulario.parentElement;
   const pasos = [...formulario.querySelectorAll('[data-paso]')];
-  const progreso = formulario.parentElement.querySelector('[data-progreso]');
+  const progreso = columna.querySelector('[data-progreso]');
+  const confirmacion = columna.querySelector('[data-confirmacion]');
   let actual = 0;
 
   const esValido = () => [...pasos[actual].querySelectorAll('input, textarea')].every((campo) => campo.checkValidity());
@@ -244,14 +245,27 @@ function iniciarFormulario(formulario) {
     error.hidden = valido;
     campo.setAttribute('aria-invalid', String(!valido));
   };
-  const mostrar = (indice) => {
+  const mostrar = (indice, enfocar = true) => {
     pasos[actual].hidden = true;
     actual = indice;
     pasos[actual].hidden = false;
     actualizarBotones();
     actualizarProgreso();
-    (pasos[actual].querySelector('input:checked') || pasos[actual].querySelector('input, textarea, button'))?.focus();
+    if (enfocar) (pasos[actual].querySelector('input:checked') || pasos[actual].querySelector('input, textarea, button'))?.focus();
   };
+  // Solo la confirmación queda visible en la columna; el título recibe el foco para que se anuncie
+  const confirmar = () => {
+    confirmacion.querySelector('[data-confirmacion-nombre]').textContent = formulario.elements.Nombre.value.trim().split(/\s+/)[0];
+    [...columna.children].forEach((hijo) => { hijo.hidden = hijo !== confirmacion; });
+    confirmacion.querySelector('[data-confirmacion-titulo]').focus();
+    formulario.closest('dialog')?.addEventListener('close', () => formulario.reset(), { once: true });
+  };
+
+  // Un campo queda "tocado" cuando la persona escribe, pulsa una tecla o hace clic en él;
+  // el foco que pone el propio script no cuenta
+  ['input', 'keydown', 'pointerdown'].forEach((tipo) => {
+    formulario.addEventListener(tipo, (evento) => evento.target.closest('[data-campo]')?.setAttribute('data-tocado', ''));
+  });
 
   formulario.addEventListener('input', (evento) => {
     if (evento.target.getAttribute('aria-invalid') === 'true') mostrarError(evento.target);
@@ -264,23 +278,34 @@ function iniciarFormulario(formulario) {
       mostrarError(evento.target);
     }
   });
-  // Al salir de un campo, o del grupo de opciones sin haber elegido ninguna
+  // Al salir de un campo tocado, o del grupo de opciones sin haber elegido ninguna
   formulario.addEventListener('focusout', (evento) => {
     const campo = evento.target;
+    const caja = campo.closest('[data-campo]');
+    if (!caja?.hasAttribute('data-tocado')) return;
     if (campo.matches('.formulario__control')) mostrarError(campo);
-    if (campo.type === 'radio' && !campo.closest('[data-campo]').contains(evento.relatedTarget)) mostrarError(campo);
+    if (campo.type === 'radio' && !caja.contains(evento.relatedTarget)) mostrarError(campo);
   });
   formulario.addEventListener('click', (evento) => {
     if (evento.target.closest('[data-siguiente]')) mostrar(actual + 1);
     if (evento.target.closest('[data-anterior]')) mostrar(actual - 1);
   });
-  // Al reiniciarse (tras un envío correcto) vuelve al primer paso; el evento llega
-  // antes de que se borren los valores, por eso espera un turno
-  formulario.addEventListener('reset', () => setTimeout(() => mostrar(0)));
+  // Al reiniciarse quita errores, avisos y campos tocados, y vuelve al primer paso sin
+  // mover el foco. El evento llega antes de que se borren los valores: espera un turno.
+  formulario.addEventListener('reset', () => {
+    formulario.querySelectorAll('[data-error], [data-mensaje]').forEach((aviso) => {
+      aviso.textContent = '';
+      aviso.hidden = true;
+    });
+    formulario.querySelectorAll('[aria-invalid]').forEach((campo) => campo.removeAttribute('aria-invalid'));
+    formulario.querySelectorAll('[data-tocado]').forEach((caja) => caja.removeAttribute('data-tocado'));
+    [...columna.children].forEach((hijo) => { hijo.hidden = hijo === confirmacion; });
+    setTimeout(() => mostrar(0, false));
+  });
   // Solo se envía desde el último paso
-  formulario.addEventListener('submit', (evento) => {
+  formulario.addEventListener('submit', async (evento) => {
     evento.preventDefault();
-    if (actual === pasos.length - 1) enviarFormulario(formulario);
+    if (actual === pasos.length - 1 && await enviarFormulario(formulario)) confirmar();
   });
   actualizarBotones();
   actualizarProgreso();
