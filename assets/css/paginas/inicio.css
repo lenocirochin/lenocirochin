@@ -250,6 +250,11 @@
   padding-inline: calc(var(--margen-pagina) + var(--relleno-lateral-tarjeta));
 }
 
+/* Oculta con el atributo hidden: el display de arriba ganaría al del navegador */
+.equipo[hidden] {
+  display: none;
+}
+
 .equipo__miembros {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
